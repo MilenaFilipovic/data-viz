@@ -1,5 +1,7 @@
 # Data Visualization Project
-Project for Data visualization (COM-480) course @ EPFL
+Project for Data visualization (COM-480) course @ EPFL.
+
+You can access the visualization [here](https://milenafilipovic.github.io/data-viz/app/)
 
 ## Overview
 The goal of this project is to analyze the GitHub users’ behavior, explore relations among overall programming language usage and the overlaps in the different languages that programmers use. We also want to show how this changes over time, taking into account monthly activity from February 2011 to the present day. present day.  
