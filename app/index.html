@@ -27,7 +27,7 @@
     <div class="masthead">
         <h3 class="masthead-title">
             <a href="/" title="Home">Data Visualization</a>
-            <small>Analysing programmer's knowledge network</small>
+            <small>Analyzing programmer knowledge network</small>
 
             <div class="masthead-links">
 
@@ -38,7 +38,7 @@
     <div class="post">
 
         <h3>
-            Project's Summary
+            Project Summary
         </h3>
 
         <p>
@@ -47,23 +47,25 @@
         </p>
 
         <p>
-            The data was collected from <a href="http://data.githubarchive.org/">github archive</a>. The datasets are
-            by hour and the window time considered in this analysis is from 2017-08-01 until 2017-10-31,
-            just <i>PullRequest</i> events are considered and the language was extracted from <i>payload.pull_request.base.repo.language</i> field.
+            The data was collected from <a href="http://data.githubarchive.org/">github archive</a>. The datasets are divided
+            by hour and the initial time window that is considered in this analysis is between 2017-08-01 until 2017-10-31.
+            Only the <i>PullRequest</i> events are considered and the programming language of the repository was extracted from the <i>payload.pull_request.base.repo.language</i> field.
         </p>
 
         <p>
-            The to extract and aggregate the data is available <a href="https://github.com/MilenaFilipovic/data-viz/tree/master/grab_data">here</a> and more informations about this dataset's metadada can be found in <a href="https://developer.github.com/v3/pulls/">here</a>.
+            The code to extract and aggregate the data is available
+            <a href="https://github.com/MilenaFilipovic/data-viz/tree/master/grab_data">here</a>
+            and more information about this dataset's metadata can be found <a href="https://developer.github.com/v3/pulls/">here</a>.
         </p>
 
         <p>
-            As we have around 250 different languages in the dataset, for time analysis it will be just considered the first
-            15 languages based in the amount of opened pull requests. This decision was taken due to the type of visualization
-            that we would like to explore and it'll be reviewed in the stage of this project.
+            As we have around 250 different languages in the dataset, for our initial analysis we will just consider the 15 most frequently used ones
+            based on the amount of opened pull requests. This decision was taken due to the type of visualization
+            that we would like to explore and it will be demonstrated in this stage of the project.
         </p>
 
         <p>
-            The amount of space that each language occupies in the chart is relative to the number of unique contributors
+            The amount of space that each language occupies in the chart is proportional to the number of unique contributors
             and the edges represents the number of common unique contributors.
         </p>
 
@@ -78,11 +80,11 @@
             Next Iteration
         </h3>
 
-        <p>For the next iteration of this project, we'll consider the following improvements:</p>
+        <p>For the next iteration of this project, we will consider the following improvements:</p>
 
 
         <ul>
-            <li>For each language include information about
+            <li>For each language include some statistics about:
                 <ul>
                     <li>Number of merged pull requests</li>
                     <li>Average time to close a pull request</li>
@@ -90,13 +92,14 @@
                     <li>Number of commits</li>
                     <li>Number of followers/watchers</li>
                 </ul>
-                and also compare those metrics with the geral average.
+                We will also compare those metrics with the general average of all observed languages.
             </li>
             <p></p>
-            <li>Apply log transformation to include more languages in the chart</li>
-            <li>Think about how to include more languages in the visualization and this might imply change the type of chart</li>
-            <li>The number of common actors for each combinations of languages is very small and might be hard to
-                compare, so we'll try to come up with another metrics to mesure the connections</li>
+            <li></li>
+            <li>Think about how to include more languages in the visualization; Potentially apply log transformation to include more languages in the chart
+              or think about changing the type of chart alltogether</li>
+            <li>The number of common actors for each combination of languages is very small and might be hard to
+                compare, so we will try to come up with another metric to mesure the connections</li>
         </ul>
 
 
