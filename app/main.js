@@ -1,15 +1,17 @@
 const networkDataFile = 'data/network_50_2017-08-01_2017-10-31__processedat_2017-12-04.csv';
 const languagesDataFile = 'data/langues_50_2017-08-01_2017-10-31__processedat_2017-12-04.csv';
+const statisticsDataFile = 'data/agg_stats_2017-08-01_2017-10-31__processedat_2017-11-23.csv';
+const geralDataFile = 'data/agg_general_2017-08-01_2017-10-31__processedat_2017-11-23.csv';
 
 const w = 900,
-      h = 800,
-      rInner = h / 2.6,
-      rOut = rInner - 20,
-      padding = 0.01
+    h = 800,
+    rInner = h / 2.6,
+    rOut = rInner - 20,
+    padding = 0.02;
 
 const margin = {top: 20, right: 20, bottom: 20, left: 20},
-      width = w - margin.left - margin.right,
-      height = h - margin.top - margin.bottom;
+    width = w - margin.left - margin.right,
+    height = h - margin.top - margin.bottom;
 
 
 function getMatrixCommonActors(data) {
@@ -42,11 +44,34 @@ function getMatrixCommonActors(data) {
 }
 
 
-function rowConverter(d) {
+function rowConverterNetwork(d) {
     return {
         language1: d.language1,
         language2: d.language2,
         common_actors: parseFloat(d.common_actors)
+    }
+}
+
+
+function rowConverterStatistics(d) {
+    return {
+        statistic: d.column,
+        metric: d.metric,
+        cohort: d.cohort,
+        language: d.language,
+        value: d.value != "" ? parseFloat(d.value) : 0
+
+    }
+}
+
+
+function rowConverterStatGeral(d) {
+    return {
+        cohort: d.cohort,
+        language: d.language,
+        number_prs: parseFloat(d.number_prs),
+        number_actors: parseFloat(d['actor.display_login'])
+
     }
 }
 
@@ -81,8 +106,8 @@ function drawChord(matrix, labels, generalMetrics) {
         })
         .style("opacity", 0.5)
         .attr("d", d3.arc().innerRadius(rOut).outerRadius(rInner))
-        .on("mouseover", fade(0.05, "visible"))
-        .on("mousemove", fade(0.05, "visible"))
+        .on("mouseover", fade(0.00, "visible"))
+        .on("mousemove", fade(0.00, "visible"))
         .on("mouseout", fade(1, "hidden"));
 
 
@@ -96,7 +121,7 @@ function drawChord(matrix, labels, generalMetrics) {
             return d.source.index != d.target.index;
         })
         .style("fill", function (d) {
-                return "lightgray";
+            return "lightgray";
         })
         .attr("d", d3.ribbon().radius(rOut))
         .style("opacity", 1);
@@ -118,15 +143,19 @@ function drawChord(matrix, labels, generalMetrics) {
 
 
     g.append("text")
-        .each(function(d) { d.angle = (d.startAngle + d.endAngle) / 2; })
+        .each(function (d) {
+            d.angle = (d.startAngle + d.endAngle) / 2;
+        })
         .attr("class", "labels")
         .attr("dy", ".35em")
-        .attr("transform", function(d) {
+        .attr("transform", function (d) {
             return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")"
                 + "translate(" + (rInner + 5) + ")"
                 + (d.angle > Math.PI ? "rotate(180)" : "");
         })
-        .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
+        .style("text-anchor", function (d) {
+            return d.angle > Math.PI ? "end" : null;
+        })
         .text(function (d, i) {
             return labels[i];
         });
@@ -162,17 +191,49 @@ function drawChord(matrix, labels, generalMetrics) {
 }
 
 
-d3.csv(languagesDataFile, function (error, languages) {
-    if (error) throw error;
+function monthlyPRs(language, d) {
+    return d.filter(x => x['language'] == language)
+}
 
-    d3.csv(networkDataFile, rowConverter, function (error, data) {
-        if (error) throw error;
 
-        console.log(languages)
-        let matrix = getMatrixCommonActors(data);
-        let logMatrix = matrix.map(row => row.map(x => x!=0 ? Math.log(x): 0));
+d3.queue()
+    .defer(d3.csv, languagesDataFile)
+    .defer(d3.csv, networkDataFile)
+    .defer(d3.csv, geralDataFile)
+    .defer(d3.csv, statisticsDataFile)
+    .await(function(error, languages, network, geralStats, stats) {
 
+        network = network.map(rowConverterNetwork);
+        stats = stats.map(rowConverterStatistics);
+        geralStats = geralStats.map(rowConverterStatGeral)
+        console.log(geralStats)
+
+        let matrix = getMatrixCommonActors(network);
+        let logMatrix = matrix.map(row => row.map(x => x > 15 ? Math.log(x) : 0));
         drawChord(logMatrix, languages['columns'])
 
     });
-});
+
+
+// d3.csv(languagesDataFile, function (error, languages) {
+//     if (error) throw error;
+//
+//     d3.csv(networkDataFile, rowConverterNetwork, function (error, network) {
+//
+//         if (error) throw error;
+//
+//         d3.csv(statisticsDataFile, rowConverterStatistics, function (error, statistics) {
+//
+//             if (error) throw error;
+//
+//             console.log(monthlyPRs("Python", statistics));
+//
+//             let matrix = getMatrixCommonActors(network);
+//             let logMatrix = matrix.map(row => row.map(x => x > 15 ? Math.log(x) : 0));
+//
+//             drawChord(logMatrix, languages['columns'])
+//
+//         });
+//
+//     });
+// });
