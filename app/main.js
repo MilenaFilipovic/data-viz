@@ -3,10 +3,9 @@ const languagesDataFile = 'data/langues_50_2017-08-01_2017-10-31__processedat_20
 
 const w = 900,
       h = 800,
-      rInner = h / 2.4,
+      rInner = h / 2.6,
       rOut = rInner - 20,
-      padding = 0.01,
-      textDist = 60;
+      padding = 0.01
 
 const margin = {top: 20, right: 20, bottom: 20, left: 20},
       width = w - margin.left - margin.right,
@@ -78,7 +77,7 @@ function drawChord(matrix, labels, generalMetrics) {
             return fill(d.index);
         })
         .style("stroke", function (d) {
-            return fill(d.index);
+            return "black";
         })
         .style("opacity", 0.5)
         .attr("d", d3.arc().innerRadius(rOut).outerRadius(rInner))
@@ -97,7 +96,7 @@ function drawChord(matrix, labels, generalMetrics) {
             return d.source.index != d.target.index;
         })
         .style("fill", function (d) {
-                return fill(d.source.index);
+                return "lightgray";
         })
         .attr("d", d3.ribbon().radius(rOut))
         .style("opacity", 1);
@@ -119,18 +118,15 @@ function drawChord(matrix, labels, generalMetrics) {
 
 
     g.append("text")
+        .each(function(d) { d.angle = (d.startAngle + d.endAngle) / 2; })
         .attr("class", "labels")
-        .style("text-anchor", "middle")
-        .attr("xlink:href", "#wavy")
-        .attr("startOffset", "50%")
-        .each(function (d) {
-            d.angle = ((d.startAngle + d.endAngle) / 2);
-        })
-        .attr("transform", function (d) {
+        .attr("dy", ".35em")
+        .attr("transform", function(d) {
             return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")"
-                + "translate(" + (Math.min(width, height) / 2 - textDist) + ")"
-                + "rotate(90)"
+                + "translate(" + (rInner + 5) + ")"
+                + (d.angle > Math.PI ? "rotate(180)" : "");
         })
+        .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
         .text(function (d, i) {
             return labels[i];
         });
