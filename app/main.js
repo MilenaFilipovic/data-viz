@@ -1,5 +1,5 @@
-const networkDataFile = 'data/network_15_2017-08-01_2017-10-31__processedat_2017-11-27.csv';
-const languagesDataFile = 'data/langues_15_2017-08-01_2017-10-31__processedat_2017-11-27.csv';
+const networkDataFile = 'data/network_50_2017-08-01_2017-10-31__processedat_2017-12-04.csv';
+const languagesDataFile = 'data/langues_50_2017-08-01_2017-10-31__processedat_2017-12-04.csv';
 
 const w = 900,
       h = 800,
@@ -145,9 +145,16 @@ function drawChord(matrix, labels, generalMetrics) {
                 .transition()
                 .style("opacity", opacity);
 
+            // svg.selectAll("g.chord path")
+            //     .filter(function (d) {
+            //         return d.target.index == i;
+            //     })
+            //     .transition()
+            //     .style("fill", "grey");
+
             if (showInfos == "visible") {
                 let language = labels[i];
-                metricsBox.text("Coucou! I'm " + language + "+ details soon!!")
+                metricsBox.text("Coucou! I'm " + language + " + details soon!!")
             }
             metricsBox
                 .style("color", "red")
@@ -165,7 +172,11 @@ d3.csv(languagesDataFile, function (error, languages) {
     d3.csv(networkDataFile, rowConverter, function (error, data) {
         if (error) throw error;
 
-        drawChord(getMatrixCommonActors(data), languages['columns'])
+        console.log(languages)
+        let matrix = getMatrixCommonActors(data);
+        let logMatrix = matrix.map(row => row.map(x => x!=0 ? Math.log(x): 0));
+
+        drawChord(logMatrix, languages['columns'])
 
     });
 });

@@ -15,7 +15,7 @@ from datetime import datetime
 from grab_data import helpers
 
 COLS = ['payload.pull_request.base.repo.language', 'actor.id', 'created_at']
-TOP_LANGUES = 300
+TOP_LANGUES = 40
 
 
 def create_new_cols(df):
