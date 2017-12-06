@@ -14,7 +14,7 @@ if [[ $DECISION == "y" ]]
         bash bootstrap-python-env.sh
         source $ENVPATH/bin/activate
 
-        for i in 2017-06-{01..30}; do
+        for i in 2017-11-{16..30}; do
                 echo day: $i
                 python3 $FILEPATH $i $i
         done
