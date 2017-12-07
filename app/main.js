@@ -214,13 +214,22 @@ d3.queue()
 
     });
 
+  //d3.select('#month_picker').call(d3.slider().value(1).min(7).max(11).step(1).on("slide", function(evt, value) {
+//     d3.select('#slider3text').text(value);
+//   }));
+
+   /*d3.select('#month_picker').call(d3.slider().value(1).min(7).max(11).step(1).on("slide", function(evt, value) {
+      d3.select('#slider3text').text(value);
+    }));
+    */
+
     //'data/network_50_2017-07.csv';
     //'data/languages_50_2017-07.csv';
 
-function get_monthly_chord(){
-  let date = this.value;
+function get_monthly_chord( date_picked){
+  let date = date_picked.value;
   alert(date.substring(2,4) +'-' + date.substring(0,2));
-
+  d3.select("#chord").selectAll("*").remove();
   d3.queue()
       .defer(d3.csv, 'data/languages_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv')
       .defer(d3.csv, 'data/network_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv')
@@ -237,11 +246,20 @@ function get_monthly_chord(){
           drawChord(matrix, languages['columns'])
 
       });
-}
+    }
 
-    document.getElementById('july17').addEventListener('change', get_monthly_chord(),false);
-    document.getElementById('august17').addEventListener('change', get_monthly_chord(),false);
 
+
+
+
+    document.getElementById('july17').addEventListener('change', function(){
+      get_monthly_chord(this);
+      }
+      ,false);
+    document.getElementById('august17').addEventListener('change', function(){
+      get_monthly_chord(this);
+      }
+      ,false);
 // d3.csv(languagesDataFile, function (error, languages) {
 //     if (error) throw error;
 //
