@@ -1,5 +1,5 @@
-const networkDataFile = 'data/network_50_2017-07-01_2017-07-31__processedat_2017-12-05.csv';
-const languagesDataFile = 'data/langues_50_2017-07-01_2017-07-31__processedat_2017-12-05.csv';
+const networkDataFile = 'data/network_50_2017-07.csv';
+const languagesDataFile = 'data/languages_50_2017-07.csv';
 const statisticsDataFile = 'data/agg_stats_2017-07-01_2017-11-30__processedat_2017-12-05.csv';
 const geralDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-05.csv';
 
@@ -216,7 +216,24 @@ d3.queue()
 
 
     document.getElementById('july17').addEventListener('change', function() {
-      alert(this.value); },
+      alert(this.value);
+      d3.queue()
+          .defer(d3.csv, '')
+          .defer(d3.csv, networkDataFile)
+          .defer(d3.csv, geralDataFile)
+          .defer(d3.csv, statisticsDataFile)
+          .await(function(error, languages, network, geralStats, stats) {
+
+              network = network.map(rowConverterNetwork);
+              stats = stats.map(rowConverterStatistics);
+              geralStats = geralStats.map(rowConverterStatGeral)
+              console.log(geralStats)
+
+              let matrix = getMatrixCommonActors(network);
+              let logMatrix = matrix.map(row => row.map(x => x > 15 ? Math.log(x) : 0));
+              drawChord(matrix, languages['columns'])
+
+          });},
        false
     );
     document.getElementById('august17').addEventListener('change', function() {
