@@ -93,7 +93,7 @@ function drawChord(matrix, labels, generalMetrics) {
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 
-    svg.append("svg:g")
+    let tmp = svg.append("svg:g")
         .selectAll("path")
         .data(chord(matrix).groups)
         .enter()
@@ -229,7 +229,9 @@ get_monthly_chord(17,7);
 function get_monthly_chord(year_picked, month_picked){
   let date = ((month_picked < 10)?'0'+ month_picked:month_picked) + year_picked ;
   d3.select("#date_picker-value").text('Month '+ month_picked + ' of year 20' + year_picked);
-  d3.select("#chord").selectAll("*").remove();
+  d3.select("#chord")
+    .selectAll("*")
+    .remove();
   d3.queue()
       .defer(d3.csv, 'data/languages_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv')
       .defer(d3.csv, 'data/network_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv')
