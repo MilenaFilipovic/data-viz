@@ -214,32 +214,33 @@ d3.queue()
 
     });
 
+    //'data/network_50_2017-07.csv';
+    //'data/languages_50_2017-07.csv';
 
-    document.getElementById('july17').addEventListener('change', function() {
-      alert(this.value);
-      d3.queue()
-          .defer(d3.csv, '')
-          .defer(d3.csv, networkDataFile)
-          .defer(d3.csv, geralDataFile)
-          .defer(d3.csv, statisticsDataFile)
-          .await(function(error, languages, network, geralStats, stats) {
+function get_monthly_chord(){
+  let date = this.value;
+  alert(date.substring(2,4) +'-' + date.substring(0,2));
 
-              network = network.map(rowConverterNetwork);
-              stats = stats.map(rowConverterStatistics);
-              geralStats = geralStats.map(rowConverterStatGeral)
-              console.log(geralStats)
+  d3.queue()
+      .defer(d3.csv, 'data/languages_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv')
+      .defer(d3.csv, 'data/network_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv')
+      .defer(d3.csv, geralDataFile)
+      .defer(d3.csv, statisticsDataFile)
+      .await(function(error, languages, network, geralStats, stats) {
 
-              let matrix = getMatrixCommonActors(network);
-              let logMatrix = matrix.map(row => row.map(x => x > 15 ? Math.log(x) : 0));
-              drawChord(matrix, languages['columns'])
+          network = network.map(rowConverterNetwork);
+          stats = stats.map(rowConverterStatistics);
+          geralStats = geralStats.map(rowConverterStatGeral)
+          console.log(geralStats)
 
-          });},
-       false
-    );
-    document.getElementById('august17').addEventListener('change', function() {
-      alert(this.value); },
-     false
-    );
+          let matrix = getMatrixCommonActors(network);
+          drawChord(matrix, languages['columns'])
+
+      });
+}
+
+    document.getElementById('july17').addEventListener('change', get_monthly_chord(),false);
+    document.getElementById('august17').addEventListener('change', get_monthly_chord(),false);
 
 // d3.csv(languagesDataFile, function (error, languages) {
 //     if (error) throw error;
