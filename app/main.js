@@ -94,7 +94,7 @@ function drawChord(matrix, labels, generalMetrics) {
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 
-    svg.append("svg:g")
+    let tmp = svg.append("svg:g")
         .selectAll("path")
         .data(chord(matrix).groups)
         .enter()
@@ -205,7 +205,7 @@ function monthlyPRs(language, d) {
     return d.filter(x => x['language'] == language)
 }
 
-
+/*
 d3.queue()
     .defer(d3.csv, languagesDataFile)
     .defer(d3.csv, networkDataFile)
@@ -223,23 +223,25 @@ d3.queue()
         drawChord(matrix, languages['columns'])
 
     });
-
-  //d3.select('#month_picker').call(d3.slider().value(1).min(7).max(11).step(1).on("slide", function(evt, value) {
-//     d3.select('#slider3text').text(value);
-//   }));
-
-   /*d3.select('#month_picker').call(d3.slider().value(1).min(7).max(11).step(1).on("slide", function(evt, value) {
-      d3.select('#slider3text').text(value);
-    }));
-    */
-
+*/
     //'data/network_50_2017-07.csv';
     //'data/languages_50_2017-07.csv';
 
-function get_monthly_chord(date_picked){
-  let date = date_picked.value;
-  alert(date.substring(2,4) +'-' + date.substring(0,2));
-  d3.select("#chord").selectAll("*").remove();
+  d3.select("#date_picker")
+        .attr("min", 7)
+        .attr("max", 11)
+        .attr("step", 1).on("input", function() {
+        get_monthly_chord(17, this.value);
+});
+d3.select("#date_picker").attr("value", 7);
+get_monthly_chord(17,7);
+
+function get_monthly_chord(year_picked, month_picked){
+  let date = ((month_picked < 10)?'0'+ month_picked:month_picked) + year_picked ;
+  d3.select("#date_picker-value").text('Month '+ month_picked + ' of year 20' + year_picked);
+  d3.select("#chord")
+    .selectAll("*")
+    .remove();
   d3.queue()
       .defer(d3.csv, 'data/languages_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv')
       .defer(d3.csv, 'data/network_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv')
@@ -257,11 +259,7 @@ function get_monthly_chord(date_picked){
 
       });
     }
-
-
-
-
-
+/*
     document.getElementById('july17').addEventListener('change', function(){
       get_monthly_chord(this);
       }
@@ -270,6 +268,7 @@ function get_monthly_chord(date_picked){
       get_monthly_chord(this);
       }
       ,false);
+      */
 // d3.csv(languagesDataFile, function (error, languages) {
 //     if (error) throw error;
 //
