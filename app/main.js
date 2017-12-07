@@ -182,6 +182,10 @@ function drawChord(matrix, labels, generalMetrics) {
       let index = filteredLanguages.indexOf(language);
       filteredLanguages.splice(index, 1);
       update_filters();
+      let filters = d3.select('#filtered_languages')
+                .selectAll('li')
+                .data(filteredLanguages);
+      filters.exit().remove();
       load_chords();
 
     }
@@ -200,9 +204,9 @@ function drawChord(matrix, labels, generalMetrics) {
                   .attr("type", "checkbox")
                   .attr("id", function(d,i) { return 'a'+i; })
                   .attr("value", function(d,i) { return d; })
-                  .on("click", function(){return_language(this.value)});
+                  .on("click", function(d, i){return_language(d)});
       // Exit
-      filters.exit().remove();
+      //filters.exit().remove();
     }
 
     function fade(opacity, showInfos) {
