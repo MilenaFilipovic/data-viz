@@ -1,5 +1,5 @@
-const networkDataFile = 'data/network_50_2017-07.csv';
-const languagesDataFile = 'data/languages_50_2017-07.csv';
+let networkDataFile = 'data/network_50_2017-07.csv';
+let languagesDataFile = 'data/languages_50_2017-07.csv';
 const statisticsDataFile = 'data/agg_stats_2017-07-01_2017-11-30__processedat_2017-12-05.csv';
 const geralDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-05.csv';
 
@@ -19,7 +19,9 @@ function getMatrixCommonActors(data) {
     // This function is a simplified version of https://gist.github.com/eesur/0e9820fb577370a13099#file-mapper-js-L4
     let mmap = {}, matrix = [], counter = 0;
     let values = _.uniq(_.pluck(data, "language1"));
-
+    values = values.filter( function(el) {
+             return !filteredLanguages.includes(el);
+             } );
     values.map(function (v) {
         if (!mmap[v]) {
             mmap[v] = {name: v, id: counter++, data: data}
@@ -30,7 +32,7 @@ function getMatrixCommonActors(data) {
         if (!matrix[a.id]) matrix[a.id] = [];
         _.each(mmap, function (b) {
             let recs = _.filter(data, function (row) {
-                return (row.language1 === a.name && row.language2 === b.name);
+                return (row.language1 === a.name && row.language2 === b.name && !filteredLanguages.includes(a.name) && !filteredLanguages.includes(b.name));
             });
 
             if (!recs[0]) {
@@ -78,6 +80,11 @@ function rowConverterStatGeral(d) {
 
 
 function drawChord(matrix, labels, generalMetrics) {
+
+   labels = labels.filter( function(el) {
+            return !filteredLanguages.includes(el);
+            } );
+    console.log(labels)
     let fill = d3.scaleOrdinal(d3.schemeCategory20);
     let chord = d3.chord().padAngle(padding).sortGroups(d3.descending);
 
@@ -162,13 +169,12 @@ function drawChord(matrix, labels, generalMetrics) {
         })
         .on("click", removeLanguage);
 
-        function removeLanguage(d) {
+        function removeLanguage(d, i) {
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
-                filteredLanguages.push(d.id);
-                alert(d.id);
-                //$scope.addFilter(d._id);
-                //resetChords();
+                filteredLanguages.push(labels[i]);
+                alert(labels[i]);
+                load_chords();
         }
 
     function fade(opacity, showInfos) {
@@ -224,8 +230,6 @@ d3.queue()
 
     });
 */
-    //'data/network_50_2017-07.csv';
-    //'data/languages_50_2017-07.csv';
 
   d3.select("#date_picker")
         .attr("min", 7)
@@ -236,39 +240,33 @@ d3.queue()
 d3.select("#date_picker").attr("value", 7);
 get_monthly_chord(17,7);
 
-function get_monthly_chord(year_picked, month_picked){
-  let date = ((month_picked < 10)?'0'+ month_picked:month_picked) + year_picked ;
-  d3.select("#date_picker-value").text('Month '+ month_picked + ' of year 20' + year_picked);
+function load_chords(){
   d3.select("#chord")
     .selectAll("*")
     .remove();
   d3.queue()
-      .defer(d3.csv, 'data/languages_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv')
-      .defer(d3.csv, 'data/network_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv')
-      .defer(d3.csv, geralDataFile)
-      .defer(d3.csv, statisticsDataFile)
-      .await(function(error, languages, network, geralStats, stats) {
+    .defer(d3.csv, languagesDataFile)
+    .defer(d3.csv, networkDataFile)
+    .defer(d3.csv, geralDataFile)
+    .defer(d3.csv, statisticsDataFile)
+    .await(function(error, languages, network, geralStats, stats) {
+    network = network.map(rowConverterNetwork);
+    stats = stats.map(rowConverterStatistics);
+    geralStats = geralStats.map(rowConverterStatGeral)
+    console.log(geralStats)
+    let matrix = getMatrixCommonActors(network);
+    drawChord(matrix, languages['columns'])
+    });
+}
 
-          network = network.map(rowConverterNetwork);
-          stats = stats.map(rowConverterStatistics);
-          geralStats = geralStats.map(rowConverterStatGeral)
-          console.log(geralStats)
+function get_monthly_chord(year_picked, month_picked){
+  let date = ((month_picked < 10)?'0'+ month_picked:month_picked) + year_picked ;
+  d3.select("#date_picker-value").text('Month '+ month_picked + ' of year 20' + year_picked);
+  languagesDataFile = 'data/languages_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv';
+  networkDataFile = 'data/network_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv';
+  load_chords();
+  }
 
-          let matrix = getMatrixCommonActors(network);
-          drawChord(matrix, languages['columns'])
-
-      });
-    }
-/*
-    document.getElementById('july17').addEventListener('change', function(){
-      get_monthly_chord(this);
-      }
-      ,false);
-    document.getElementById('august17').addEventListener('change', function(){
-      get_monthly_chord(this);
-      }
-      ,false);
-      */
 // d3.csv(languagesDataFile, function (error, languages) {
 //     if (error) throw error;
 //
