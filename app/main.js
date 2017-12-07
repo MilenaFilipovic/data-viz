@@ -1,7 +1,7 @@
-const networkDataFile = 'data/network_50_2017-08-01_2017-10-31__processedat_2017-12-04.csv';
-const languagesDataFile = 'data/langues_50_2017-08-01_2017-10-31__processedat_2017-12-04.csv';
-const statisticsDataFile = 'data/agg_stats_2017-08-01_2017-10-31__processedat_2017-11-23.csv';
-const geralDataFile = 'data/agg_general_2017-08-01_2017-10-31__processedat_2017-11-23.csv';
+const networkDataFile = 'data/network_50_2017-07-01_2017-07-31__processedat_2017-12-05.csv';
+const languagesDataFile = 'data/langues_50_2017-07-01_2017-07-31__processedat_2017-12-05.csv';
+const statisticsDataFile = 'data/agg_stats_2017-07-01_2017-11-30__processedat_2017-12-05.csv';
+const geralDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-05.csv';
 
 const w = 900,
     h = 800,
@@ -210,10 +210,19 @@ d3.queue()
 
         let matrix = getMatrixCommonActors(network);
         let logMatrix = matrix.map(row => row.map(x => x > 15 ? Math.log(x) : 0));
-        drawChord(logMatrix, languages['columns'])
+        drawChord(matrix, languages['columns'])
 
     });
 
+
+    document.getElementById('july17').addEventListener('change', function() {
+      alert(this.value); },
+       false
+    );
+    document.getElementById('august17').addEventListener('change', function() {
+      alert(this.value); },
+     false
+    );
 
 // d3.csv(languagesDataFile, function (error, languages) {
 //     if (error) throw error;
