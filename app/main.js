@@ -174,8 +174,36 @@ function drawChord(matrix, labels, generalMetrics) {
                 d3.event.stopPropagation();
                 filteredLanguages.push(labels[i]);
                 alert(labels[i]);
+                update_filters();
                 load_chords();
         }
+
+  function return_language(language){
+      let index = filteredLanguages.indexOf(language);
+      filteredLanguages.splice(index, 1);
+      update_filters();
+      load_chords();
+
+    }
+    function update_filters(){
+      let filters = d3.select('#filtered_languages')
+                .selectAll('li')
+                .data(filteredLanguages);
+      // Enter
+      filters.enter()
+              .append('li')
+              .append('label')
+                  .attr('for',function(d,i){ return 'a'+i; })
+                  .text(function(d) { return d; })
+              .append("input")
+                  .attr("checked", true)
+                  .attr("type", "checkbox")
+                  .attr("id", function(d,i) { return 'a'+i; })
+                  .attr("value", function(d,i) { return d; })
+                  .on("click", function(){return_language(this.value)});
+      // Exit
+      filters.exit().remove();
+    }
 
     function fade(opacity, showInfos) {
         return function (g, i) {
@@ -231,18 +259,9 @@ d3.queue()
     });
 */
 
-  d3.select("#date_picker")
-        .attr("min", 7)
-        .attr("max", 11)
-        .attr("step", 1).on("input", function() {
-        get_monthly_chord(17, this.value);
-});
-d3.select("#date_picker").attr("value", 7);
-get_monthly_chord(17,7);
-
 function load_chords(){
-  d3.select("#chord")
-    .selectAll("*")
+d3.select("#chord")
+  .selectAll("*")
     .remove();
   d3.queue()
     .defer(d3.csv, languagesDataFile)
@@ -266,6 +285,16 @@ function get_monthly_chord(year_picked, month_picked){
   networkDataFile = 'data/network_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv';
   load_chords();
   }
+
+  d3.select("#date_picker")
+        .attr("min", 7)
+        .attr("max", 11)
+        .attr("step", 1).on("input", function() {
+        get_monthly_chord(17, this.value);
+  });
+  d3.select("#date_picker").attr("value", 7);
+  get_monthly_chord(17,7);
+  d3.select("#clear_button").style("opacity", 0);
 
 // d3.csv(languagesDataFile, function (error, languages) {
 //     if (error) throw error;
