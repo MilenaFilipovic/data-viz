@@ -13,6 +13,7 @@ const margin = {top: 20, right: 20, bottom: 20, left: 20},
     width = w - margin.left - margin.right,
     height = h - margin.top - margin.bottom;
 
+filteredLanguages = [];
 
 function getMatrixCommonActors(data) {
     // This function is a simplified version of https://gist.github.com/eesur/0e9820fb577370a13099#file-mapper-js-L4
@@ -158,8 +159,17 @@ function drawChord(matrix, labels, generalMetrics) {
         })
         .text(function (d, i) {
             return labels[i];
-        });
+        })
+        .on("click", removeLanguage);
 
+        function removeLanguage(d) {
+                d3.event.preventDefault();
+                d3.event.stopPropagation();
+                filteredLanguages.push(d.id);
+                alert(d.id);
+                //$scope.addFilter(d._id);
+                //resetChords();
+        }
 
     function fade(opacity, showInfos) {
         return function (g, i) {
@@ -226,7 +236,7 @@ d3.queue()
     //'data/network_50_2017-07.csv';
     //'data/languages_50_2017-07.csv';
 
-function get_monthly_chord( date_picked){
+function get_monthly_chord(date_picked){
   let date = date_picked.value;
   alert(date.substring(2,4) +'-' + date.substring(0,2));
   d3.select("#chord").selectAll("*").remove();
