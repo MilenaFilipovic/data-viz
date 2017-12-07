@@ -78,7 +78,7 @@ function rowConverterStatGeral(d) {
 
 function drawChord(matrix, labels, generalMetrics) {
     let fill = d3.scaleOrdinal(d3.schemeCategory20);
-    let chord = d3.chord().padAngle(padding);
+    let chord = d3.chord().padAngle(padding).sortGroups(d3.descending);
 
     let metricsBox = d3.select("#chord")
         .append("div")
