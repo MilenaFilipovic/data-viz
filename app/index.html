@@ -17,6 +17,14 @@
     </title>
 
     <link rel="stylesheet" href="css/poole.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="css/chord.css">
     <link rel="stylesheet" href="css/slider.css">
     <link rel="stylesheet" href="css/button.css">
@@ -70,22 +78,32 @@
             The amount of space that each language occupies in the chart is proportional to the number of unique contributors
             and the edges represents the number of common unique contributors.
         </p>
+        <div class="row">
+          <div class="container" id="month_picker">
+            <label for="date_picker"
+              style="display: inline-block; width: 100%;">
+              <span id="date_picker-value">…</span>
+            </label>
+            <input type="range" min="1" max="150" class = 'slider' id="date_picker">
+          </div>
+        </div>
 
         <div id="chord"></div>
-        <aside class="large-3 small-4 columns">
-          <h5>Filters</h5>
-          <button class="button btn" id ="clear_button" opacity="False">Clear filtered languages</button>
-          <div class="panel">
-            <ul id="filtered_languages"></ul>
-          </div>
-        </aside>
-        <div id="month_picker">
-          <label for="date_picker"
-            style="display: inline-block; width: 100%;">
-            <span id="date_picker-value">…</span>
-          </label>
-          <input type="range" min="1" max="150" class = 'slider' id="date_picker">
+
+        <div class="row">
+            <div class="jumbotron col-md-6">
+              <h5 class="display-5">Filters</h5>
+              <button class="button btn" id ="clear_button" opacity="False">Clear filtered languages</button>
+                <ul class="list-group" id="filtered_languages"></ul>
+            </div>
+            <div class="col-md-6">
+              <p>Remove languages from the graph by simply clicking on them!
+                If you want to return a language that is found in the filtered list, just uncheck the checkbox next to it.
+              </p>
+            </div>
         </div>
+
+
         <!--<script type="text/javascript" src="bundle.js"></script>-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js" charset="utf-8"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" charset="utf-8"></script>
