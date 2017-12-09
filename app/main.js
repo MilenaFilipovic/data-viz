@@ -178,16 +178,15 @@ function drawChord(matrix, labels, generalMetrics) {
                 load_chords();
         }
 
-  function return_language(language){
+  function return_language(language, i){
       let index = filteredLanguages.indexOf(language);
       filteredLanguages.splice(index, 1);
-      update_filters();
-      let filters = d3.select('#filtered_languages')
-                .selectAll('li')
-                .data(filteredLanguages);
-      filters.exit().remove();
-      load_chords();
+      //filters.exit().remove();
 
+      d3.select('#'+language).remove();
+      update_filters();
+      load_chords();
+      console.log(filteredLanguages)
     }
     function update_filters(){
       if (filteredLanguages.length > 0){
@@ -202,8 +201,10 @@ function drawChord(matrix, labels, generalMetrics) {
       filters.enter()
               .append('li')
               .attr('class', 'list-group-item')
-              .attr("id", function(d,i) { return 'a'+i; })
-              .on("click", function(d, i){return_language(d)})
+              .attr("id", function(d,i) { return d; })
+              .on("click", function(d, i){
+                            return_language(d);
+                          })
               .text(function(d) { return d; });
 
 
@@ -222,7 +223,7 @@ function drawChord(matrix, labels, generalMetrics) {
                   .on("click", function(d, i){return_language(d)});
       */
       // Exit
-      //filters.exit().remove();
+      filters.exit().remove();
     }
 
     function fade(opacity, showInfos) {
