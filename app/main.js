@@ -190,6 +190,11 @@ function drawChord(matrix, labels, generalMetrics) {
 
     }
     function update_filters(){
+      if (filteredLanguages.length > 0){
+        d3.select("#clear_button").style("opacity", 1);
+      }else{
+        d3.select("#clear_button").style("opacity", 0);
+      }
       let filters = d3.select('#filtered_languages')
                 .selectAll('li')
                 .data(filteredLanguages);
