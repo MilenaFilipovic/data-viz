@@ -178,16 +178,14 @@ function drawChord(matrix, labels, generalMetrics) {
                 load_chords();
         }
 
-  function return_language(language){
+  function return_language(language, i){
       let index = filteredLanguages.indexOf(language);
       filteredLanguages.splice(index, 1);
+      d3.select('#filtered_languages').select('a'+i).remove();
+      //filters.exit().remove();
       update_filters();
-      let filters = d3.select('#filtered_languages')
-                .selectAll('li')
-                .data(filteredLanguages);
-      filters.exit().remove();
       load_chords();
-
+      console.log(filteredLanguages)
     }
     function update_filters(){
       let filters = d3.select('#filtered_languages')
@@ -195,18 +193,18 @@ function drawChord(matrix, labels, generalMetrics) {
                 .data(filteredLanguages);
       // Enter
       filters.enter()
-              .append('li')
-              .append('label')
-                  .attr('for',function(d,i){ return 'a'+i; })
-                  .text(function(d) { return d; })
-              .append("input")
-                  .attr("checked", true)
-                  .attr("type", "checkbox")
-                  .attr("id", function(d,i) { return 'a'+i; })
-                  .attr("value", function(d,i) { return d; })
-                  .on("click", function(d, i){return_language(d)});
+             .append('li')
+             .append('label')
+             .attr('for',function(d,i){ return 'a'+i; })
+             .text(function(d) { return d; })
+             .append("input")
+             .attr("checked", true)
+             .attr("type", "checkbox")
+             .attr("id", function(d,i) { return 'a'+i; })
+             .attr("value", function(d,i) { return d; })
+             .on("click", function(d, i){return_language(d, i)});
       // Exit
-      //filters.exit().remove();
+      filters.exit().remove();
     }
 
     function fade(opacity, showInfos) {
