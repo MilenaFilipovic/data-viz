@@ -15,6 +15,27 @@ const margin = {top: 20, right: 20, bottom: 20, left: 20},
 
 filteredLanguages = [];
 
+d3.select("#date_picker")
+      .attr("min", 7)
+      .attr("max", 11)
+      .attr("step", 1).on("input", function() {
+      get_monthly_chord(17, this.value);
+});
+d3.select("#date_picker").attr("value", 7);
+get_monthly_chord(17,7);
+d3.select("#clear_button")
+  .style("opacity", 0)
+  .on("click", returnAllLanguages);
+
+function returnAllLanguages(){
+    filteredLanguages.length = 0;
+    d3.select('#filtered_languages')
+              .selectAll('li')
+              .remove();
+    d3.select("#clear_button").style("opacity", 0);
+    loadChords();
+  }
+
 function getMatrixCommonActors(data) {
     // This function is a simplified version of https://gist.github.com/eesur/0e9820fb577370a13099#file-mapper-js-L4
     let mmap = {}, matrix = [], counter = 0;
@@ -173,22 +194,24 @@ function drawChord(matrix, labels, generalMetrics) {
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
                 filteredLanguages.push(labels[i]);
-                alert(labels[i]);
-                update_filters();
-                load_chords();
+                //alert(labels[i]);
+                updateFilters();
+                loadChords();
         }
 
-  function return_language(language, i){
+  function returnLanguage(language, i){
       let index = filteredLanguages.indexOf(language);
       filteredLanguages.splice(index, 1);
       //filters.exit().remove();
 
       d3.select('#'+language).remove();
-      update_filters();
-      load_chords();
+      updateFilters();
+      loadChords();
       console.log(filteredLanguages)
     }
-    function update_filters(){
+
+
+    function updateFilters(){
       if (filteredLanguages.length > 0){
         d3.select("#clear_button").style("opacity", 1);
       }else{
@@ -203,25 +226,9 @@ function drawChord(matrix, labels, generalMetrics) {
               .attr('class', 'list-group-item')
               .attr("id", function(d,i) { return d; })
               .on("click", function(d, i){
-                            return_language(d);
+                            returnLanguage(d);
                           })
               .text(function(d) { return d; });
-
-
-      /*
-      filters.enter()
-              .append('li')
-              .attr('class', 'list-group-item')
-              .append('label')
-                  .attr('for',function(d,i){ return 'a'+i; })
-                  .text(function(d) { return d; })
-              .append("input")
-                  .attr("checked", true)
-                  .attr("type", "checkbox")
-                  .attr("id", function(d,i) { return 'a'+i; })
-                  .attr("value", function(d,i) { return d; })
-                  .on("click", function(d, i){return_language(d)});
-      */
       // Exit
       filters.exit().remove();
     }
@@ -280,7 +287,7 @@ d3.queue()
     });
 */
 
-function load_chords(){
+function loadChords(){
 d3.select("#chord")
   .selectAll("*")
     .remove();
@@ -304,18 +311,10 @@ function get_monthly_chord(year_picked, month_picked){
   d3.select("#date_picker-value").text('Month '+ month_picked + ' of year 20' + year_picked);
   languagesDataFile = 'data/languages_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv';
   networkDataFile = 'data/network_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv';
-  load_chords();
+  loadChords();
   }
 
-  d3.select("#date_picker")
-        .attr("min", 7)
-        .attr("max", 11)
-        .attr("step", 1).on("input", function() {
-        get_monthly_chord(17, this.value);
-  });
-  d3.select("#date_picker").attr("value", 7);
-  get_monthly_chord(17,7);
-  d3.select("#clear_button").style("opacity", 0);
+
 
 // d3.csv(languagesDataFile, function (error, languages) {
 //     if (error) throw error;
