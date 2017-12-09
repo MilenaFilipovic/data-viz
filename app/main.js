@@ -193,16 +193,27 @@ function drawChord(matrix, labels, generalMetrics) {
                 .data(filteredLanguages);
       // Enter
       filters.enter()
-             .append('li')
-             .append('label')
-             .attr('for',function(d,i){ return 'a'+i; })
-             .text(function(d) { return d; })
-             .append("input")
-             .attr("checked", true)
-             .attr("type", "checkbox")
-             .attr("id", function(d,i) { return 'a'+i; })
-             .attr("value", function(d,i) { return d; })
-             .on("click", function(d, i){return_language(d, i)});
+              .append('li')
+              .attr('class', 'list-group-item')
+              .attr("id", function(d,i) { return 'a'+i; })
+              .on("click", function(d, i){return_language(d)})
+              .text(function(d) { return d; });
+
+
+      /*
+      filters.enter()
+              .append('li')
+              .attr('class', 'list-group-item')
+              .append('label')
+                  .attr('for',function(d,i){ return 'a'+i; })
+                  .text(function(d) { return d; })
+              .append("input")
+                  .attr("checked", true)
+                  .attr("type", "checkbox")
+                  .attr("id", function(d,i) { return 'a'+i; })
+                  .attr("value", function(d,i) { return d; })
+                  .on("click", function(d, i){return_language(d)});
+      */
       // Exit
       filters.exit().remove();
     }
