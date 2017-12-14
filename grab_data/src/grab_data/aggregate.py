@@ -15,7 +15,6 @@ COLS_GENERAL_METRICS = ['payload.pull_request.changed_files', 'payload.pull_requ
                         'payload.pull_request.merged', 'payload.pull_request.comments',
                         'payload.pull_request.number', 'payload.pull_request.base.repo.open_issues_count',
                         'days_open_merged', 'creator_merge']
-METRICS = ['mean', 'std', '25%', '50%', '75%']
 LANGUE_COL = ['payload.pull_request.base.repo.language', 'cohort']
 
 
@@ -50,8 +49,19 @@ def aggregate_stats_metrics(df):
                                                     'level_1': 'metric',
                                                     'payload.pull_request.base.repo.language': 'language',
                                                     0: 'value'}))
-    return (agg_by_language[agg_by_language['metric']
-            .apply(lambda x: x in METRICS)])
+    agg_all_languages = pd.DataFrame(df[COLS_GENERAL_METRICS + ['cohort']]
+                                     .groupby(['cohort'])
+                                     .describe(percentiles=[0, 0.01, 0.05, 0.25, 0.5, 0.75, 0.95, 0.99, 1])
+                                     .unstack(1)
+                                     .reset_index()
+                                     .rename(columns={'level_0': 'column',
+                                                      'level_1': 'metric',
+                                                      0: 'value'}))
+    agg_all_languages['language'] = 'all'
+
+    agg_by_language = pd.concat([agg_all_languages, agg_by_language])
+
+    return agg_by_language
 
 
 def aggregate_general_metrics(df):
@@ -91,6 +101,7 @@ if __name__ == '__main__':
 
     # General statistics by language and cohort
     agg_by_stats = aggregate_stats_metrics(df)
+    import pdb; pdb.set_trace()
     file_stats_data = os.path.join(helpers.DATA_FOLDER, 'agg_stats_{s}_{e}__processedat_{n}.csv'
                                    .format(s=start_date, e=end_date, n=datetime.now().strftime('%Y-%m-%d')))
     agg_by_stats.to_csv(file_stats_data, index=False)

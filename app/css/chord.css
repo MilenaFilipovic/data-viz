@@ -24,7 +24,7 @@ div.metrics-box {
     right: 10%;
     border-radius: 8px;
     border: 1px solid;
-    margin: 10px 0px;
+    margin: 0px 0px;
     padding: 10px 10px 10px 10px;
     border-color: #9a9a9a;
     /*background-repeat: no-repeat;*/
@@ -38,12 +38,25 @@ div.metrics-box {
     font-family: 'Courgette', sans-serif;
 }
 
-.bar {
-    fill: steelblue;
+.metrics-title {
+    font: 30px sans-serif;
+    font-weight: bold;
 }
 
-.bar:hover {
-    fill: brown;
+.legend-box {
+    display: inline-block;
+    height: 8px;
+    width: 18px;
+    border-radius: 8px;
+}
+
+.legend-text {
+    font: 14px sans-serif;
+}
+
+.space {
+    height: 30px;
+    font-weight: bold;
 }
 
 .axis--x path {

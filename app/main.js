@@ -2,8 +2,8 @@
 // const languagesDataFile = 'data/langues_50_2017-08-01_2017-10-31__processedat_2017-12-04.csv';
 const languagesDataFile = 'data/langues_50_2017-11-01_2017-11-30__processedat_2017-12-09.csv';
 const networkDataFile = 'data/network_50_2017-11-01_2017-11-30__processedat_2017-12-09.csv';
-const statisticsDataFile = 'data/agg_stats_2017-08-01_2017-10-31__processedat_2017-11-23.csv';
-const geralDataFile = 'data/agg_general_2017-08-01_2017-10-31__processedat_2017-11-23.csv';
+const statisticsDataFile = 'data/agg_stats_2017-07-01_2017-11-30__processedat_2017-12-14.csv';
+const geralDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-14.csv';
 
 const wChord = 900,
     hChord = 900,
@@ -12,13 +12,15 @@ const wChord = 900,
     paddingChord = 0.02;
 
 const wMetrics = 200, hMetrics = 200;
-const marginMetrics = {top: 20, right: 20, bottom: 20, left: 23},
+const marginMetrics = {top: 20, right: 20, bottom: 20, left: 25},
     widthMetrics = wMetrics - marginMetrics.left - marginMetrics.right,
     heightMetrics = hMetrics - marginMetrics.top - marginMetrics.bottom;
 
 const marginChord = {top: 20, right: 20, bottom: 20, left: 20},
     widthChord = wChord - marginChord.left - marginChord.right,
     heightChord = hChord - marginChord.top - marginChord.bottom;
+
+const lookupLegendColors = {'Mean of language': '#000080', 'Mean of all': '#FF4500'};
 
 
 const lookupColorLanguage = {
@@ -32,7 +34,11 @@ const lookupColorLanguage = {
     'declarative': "#fa9fb5"
 };
 
-const aggMetrics = ["days_open_merged", "payload.pull_request.base.repo.open_issues_count"];
+const aggMetrics = ["days_open_merged",
+    "payload.pull_request.base.repo.open_issues_count",
+    "payload.pull_request.changed_files",
+    // "payload.pull_request.comments",
+    "payload.pull_request.commits"];
 
 
 function getMatrixCommonActors(data) {
@@ -104,6 +110,7 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
     let metricsBox = d3.select("#chord")
         .append("div")
         .attr("class", "geral-metrics-box")
+        .attr("id", "geral-metrics-box")
         .style("visibility", "hidden");
 
     let svg = d3.select("#chord")
@@ -129,17 +136,7 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         .on("mousemove", fade(0.00, "visible"))
         .on("mouseout", fade(1, "hidden"))
         .on("click", function (d) {
-            d3.select("body")
-                .append("div")
-                .attr("id", "metrics-box")
-                .attr("class", "metrics-box")
-                .style("visibility", "visible");
-
-            let filteredStats = stats.filter(x => x['language'] == labels[d.index]['language']),
-                language = labels[d.index]['language'];
-            for (i in aggMetrics) {
-                drawMetrics(filteredStats, language, aggMetrics[i])
-            }
+            showMetrics(d)
         });
 
 
@@ -202,18 +199,73 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
 
             if (showInfos == "visible") {
                 let language = labels[i]['language'];
-                metrics = avgPrsAndActors(generalMetrics.filter(x => x['language'] == language));
-                // TODO: improve text format
-                metricsBox.text("<h1 style='color: blue'> oi </h1>")
-                // metricsBox.text(language + "\nAvg Prs:"
-                //     + metrics['meanPrs'] + "\nAvg Uniq. Actors: "
-                //     + metrics['meanActors'] + "\nClick pour plus information");
+                let paradigm = labels[i]['paradigm'];
+                let geralMetrics = avgPrsAndActors(generalMetrics.filter(x => x['language'] == language));
+
+                var list = document.getElementById("geral-metrics-box");
+                if (list.hasChildNodes()) {
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                }
+
+                metricsBox.append("h1").text(language);
+                metricsBox.append("h1").text(paradigm);
+
+                // metricsBox.innerHTML = language + paradigm + "\nAvg Prs:"
+                //     + geralMetrics['meanPrs'] + "\nAvg Uniq. Actors: "
+                //     + geralMetrics['meanActors'] + "\nClick pour plus information"
             }
             metricsBox
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 50) + "px")
                 .style("visibility", showInfos);
         }
+    }
+
+    function showMetrics(d) {
+        d3.select("body")
+            .append("div")
+            .attr("id", "metrics-box")
+            .attr("class", "metrics-box")
+            .style("visibility", "visible");
+
+        let language = labels[d.index]['language'],
+            paradigm = labels[d.index]['paradigm'];
+
+        let titleContainer = document.createElement("div");
+        titleContainer.className = "metrics-title";
+        titleContainer.innerHTML = language;
+        titleContainer.style.color = lookupColorLanguage[paradigm];
+        document.getElementById('metrics-box').appendChild(titleContainer);
+        // mega xunxo
+        var spaceContainer = document.createElement("div");
+        spaceContainer.className = "space";
+        document.getElementById('metrics-box').appendChild(spaceContainer);
+
+        for (var key in lookupLegendColors) {
+            var boxContainer = document.createElement("div");
+            var box = document.createElement("div");
+            var label = document.createElement("span");
+            label.className = "legend-text";
+            label.innerHTML = "     " + key;
+            box.className = "legend-box";
+            box.style.backgroundColor = lookupLegendColors[key];
+            boxContainer.appendChild(box);
+            boxContainer.appendChild(label);
+            document.getElementById('metrics-box').appendChild(boxContainer);
+        }
+
+        // mega xunxo
+        var spaceContainer = document.createElement("div");
+        spaceContainer.className = "space"
+        document.getElementById('metrics-box').appendChild(spaceContainer);
+
+        let filteredStats = stats.filter(x => x['language'] == labels[d.index]['language']),
+            allStats = stats.filter(x => x['language'] == 'all');
+
+        aggMetrics.map(x => drawMetrics(filteredStats, allStats, x))
+
     }
 
     function avgPrsAndActors(geralLanguage) {
@@ -250,13 +302,4 @@ d3.queue()
                 }
             }
         });
-        //
-        // languageStats = stats.filter(x => x['language'] == 'Python')
-        //
-        // let daysOpenMerged = languageStats
-        //     .filter(x => x['statistic'] == "days_open_merged" & x['metric'] == "mean")
-        //     .map(x => [x['cohort'], x['value']]);
-        // console.log(daysOpenMerged)
-        let means = statsOfAllLanguages(stats)
-
     });
