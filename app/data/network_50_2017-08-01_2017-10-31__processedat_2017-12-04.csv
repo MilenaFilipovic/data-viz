@@ -1,0 +1,2501 @@
+language1,language2,common_actors
+JavaScript,JavaScript,80268
+JavaScript,Python,4863
+JavaScript,Java,3660
+JavaScript,HTML,9322
+JavaScript,Ruby,3175
+JavaScript,PHP,3017
+JavaScript,C++,1193
+JavaScript,Go,1322
+JavaScript,CSS,5720
+JavaScript,C#,1225
+JavaScript,TypeScript,2739
+JavaScript,C,825
+JavaScript,Shell,2090
+JavaScript,Scala,295
+JavaScript,Swift,390
+JavaScript,PowerShell,145
+JavaScript,Rust,252
+JavaScript,Objective-C,629
+JavaScript,Jupyter Notebook,286
+JavaScript,DM,9
+JavaScript,R,106
+JavaScript,Lua,117
+JavaScript,Kotlin,126
+JavaScript,Elixir,222
+JavaScript,Perl,145
+JavaScript,Vue,504
+JavaScript,Makefile,280
+JavaScript,Groovy,161
+JavaScript,Julia,18
+JavaScript,Haskell,120
+JavaScript,CoffeeScript,457
+JavaScript,TeX,126
+JavaScript,Clojure,116
+JavaScript,HCL,99
+JavaScript,OCaml,64
+JavaScript,Vim script,146
+JavaScript,XSLT,88
+JavaScript,Nix,20
+JavaScript,Matlab,26
+JavaScript,CMake,52
+JavaScript,Dart,30
+JavaScript,Erlang,43
+JavaScript,Puppet,57
+JavaScript,Emacs Lisp,61
+JavaScript,Smarty,58
+JavaScript,PLpgSQL,117
+JavaScript,Visual Basic,29
+JavaScript,Fortran,9
+JavaScript,Arduino,62
+JavaScript,F#,28
+Python,JavaScript,4863
+Python,Python,46859
+Python,Java,1939
+Python,HTML,3264
+Python,Ruby,1184
+Python,PHP,873
+Python,C++,1946
+Python,Go,1154
+Python,CSS,1704
+Python,C#,481
+Python,TypeScript,467
+Python,C,1437
+Python,Shell,2552
+Python,Scala,222
+Python,Swift,169
+Python,PowerShell,85
+Python,Rust,205
+Python,Objective-C,131
+Python,Jupyter Notebook,1078
+Python,DM,8
+Python,R,139
+Python,Lua,112
+Python,Kotlin,64
+Python,Elixir,62
+Python,Perl,197
+Python,Vue,60
+Python,Makefile,366
+Python,Groovy,161
+Python,Julia,58
+Python,Haskell,79
+Python,CoffeeScript,112
+Python,TeX,278
+Python,Clojure,68
+Python,HCL,117
+Python,OCaml,32
+Python,Vim script,114
+Python,XSLT,67
+Python,Nix,25
+Python,Matlab,97
+Python,CMake,203
+Python,Dart,20
+Python,Erlang,42
+Python,Puppet,76
+Python,Emacs Lisp,68
+Python,Smarty,57
+Python,PLpgSQL,63
+Python,Visual Basic,16
+Python,Fortran,51
+Python,Arduino,78
+Python,F#,5
+Java,JavaScript,3660
+Java,Python,1939
+Java,Java,44057
+Java,HTML,2300
+Java,Ruby,722
+Java,PHP,677
+Java,C++,826
+Java,Go,554
+Java,CSS,1090
+Java,C#,573
+Java,TypeScript,631
+Java,C,633
+Java,Shell,1320
+Java,Scala,357
+Java,Swift,268
+Java,PowerShell,32
+Java,Rust,58
+Java,Objective-C,410
+Java,Jupyter Notebook,120
+Java,DM,4
+Java,R,57
+Java,Lua,36
+Java,Kotlin,430
+Java,Elixir,20
+Java,Perl,88
+Java,Vue,39
+Java,Makefile,193
+Java,Groovy,320
+Java,Julia,1
+Java,Haskell,39
+Java,CoffeeScript,58
+Java,TeX,82
+Java,Clojure,79
+Java,HCL,31
+Java,OCaml,12
+Java,Vim script,23
+Java,XSLT,112
+Java,Nix,2
+Java,Matlab,36
+Java,CMake,22
+Java,Dart,28
+Java,Erlang,15
+Java,Puppet,21
+Java,Emacs Lisp,22
+Java,Smarty,27
+Java,PLpgSQL,36
+Java,Visual Basic,16
+Java,Fortran,6
+Java,Arduino,34
+Java,F#,4
+HTML,JavaScript,9322
+HTML,Python,3264
+HTML,Java,2300
+HTML,HTML,41524
+HTML,Ruby,2095
+HTML,PHP,1672
+HTML,C++,738
+HTML,Go,694
+HTML,CSS,4479
+HTML,C#,555
+HTML,TypeScript,945
+HTML,C,567
+HTML,Shell,1319
+HTML,Scala,210
+HTML,Swift,184
+HTML,PowerShell,57
+HTML,Rust,139
+HTML,Objective-C,157
+HTML,Jupyter Notebook,314
+HTML,DM,3
+HTML,R,265
+HTML,Lua,58
+HTML,Kotlin,73
+HTML,Elixir,94
+HTML,Perl,113
+HTML,Vue,115
+HTML,Makefile,170
+HTML,Groovy,94
+HTML,Julia,27
+HTML,Haskell,68
+HTML,CoffeeScript,136
+HTML,TeX,152
+HTML,Clojure,50
+HTML,HCL,68
+HTML,OCaml,22
+HTML,Vim script,64
+HTML,XSLT,73
+HTML,Nix,6
+HTML,Matlab,36
+HTML,CMake,48
+HTML,Dart,18
+HTML,Erlang,18
+HTML,Puppet,85
+HTML,Emacs Lisp,31
+HTML,Smarty,31
+HTML,PLpgSQL,52
+HTML,Visual Basic,13
+HTML,Fortran,11
+HTML,Arduino,50
+HTML,F#,14
+Ruby,JavaScript,3175
+Ruby,Python,1184
+Ruby,Java,722
+Ruby,HTML,2095
+Ruby,Ruby,20670
+Ruby,PHP,446
+Ruby,C++,257
+Ruby,Go,623
+Ruby,CSS,1255
+Ruby,C#,178
+Ruby,TypeScript,234
+Ruby,C,299
+Ruby,Shell,1003
+Ruby,Scala,87
+Ruby,Swift,167
+Ruby,PowerShell,41
+Ruby,Rust,101
+Ruby,Objective-C,165
+Ruby,Jupyter Notebook,41
+Ruby,DM,0
+Ruby,R,34
+Ruby,Lua,25
+Ruby,Kotlin,38
+Ruby,Elixir,178
+Ruby,Perl,83
+Ruby,Vue,33
+Ruby,Makefile,141
+Ruby,Groovy,63
+Ruby,Julia,6
+Ruby,Haskell,38
+Ruby,CoffeeScript,133
+Ruby,TeX,40
+Ruby,Clojure,60
+Ruby,HCL,99
+Ruby,OCaml,9
+Ruby,Vim script,83
+Ruby,XSLT,43
+Ruby,Nix,2
+Ruby,Matlab,9
+Ruby,CMake,17
+Ruby,Dart,9
+Ruby,Erlang,21
+Ruby,Puppet,184
+Ruby,Emacs Lisp,36
+Ruby,Smarty,25
+Ruby,PLpgSQL,19
+Ruby,Visual Basic,3
+Ruby,Fortran,3
+Ruby,Arduino,14
+Ruby,F#,3
+PHP,JavaScript,3017
+PHP,Python,873
+PHP,Java,677
+PHP,HTML,1672
+PHP,Ruby,446
+PHP,PHP,23118
+PHP,C++,250
+PHP,Go,281
+PHP,CSS,1250
+PHP,C#,264
+PHP,TypeScript,265
+PHP,C,227
+PHP,Shell,639
+PHP,Scala,24
+PHP,Swift,71
+PHP,PowerShell,26
+PHP,Rust,25
+PHP,Objective-C,58
+PHP,Jupyter Notebook,20
+PHP,DM,0
+PHP,R,12
+PHP,Lua,30
+PHP,Kotlin,17
+PHP,Elixir,28
+PHP,Perl,71
+PHP,Vue,93
+PHP,Makefile,96
+PHP,Groovy,17
+PHP,Julia,3
+PHP,Haskell,16
+PHP,CoffeeScript,54
+PHP,TeX,25
+PHP,Clojure,9
+PHP,HCL,10
+PHP,OCaml,2
+PHP,Vim script,29
+PHP,XSLT,37
+PHP,Nix,2
+PHP,Matlab,5
+PHP,CMake,11
+PHP,Dart,4
+PHP,Erlang,11
+PHP,Puppet,22
+PHP,Emacs Lisp,16
+PHP,Smarty,25
+PHP,PLpgSQL,12
+PHP,Visual Basic,14
+PHP,Fortran,1
+PHP,Arduino,9
+PHP,F#,2
+C++,JavaScript,1193
+C++,Python,1946
+C++,Java,826
+C++,HTML,738
+C++,Ruby,257
+C++,PHP,250
+C++,C++,19056
+C++,Go,283
+C++,CSS,429
+C++,C#,344
+C++,TypeScript,148
+C++,C,1512
+C++,Shell,673
+C++,Scala,60
+C++,Swift,91
+C++,PowerShell,51
+C++,Rust,115
+C++,Objective-C,98
+C++,Jupyter Notebook,184
+C++,DM,5
+C++,R,75
+C++,Lua,116
+C++,Kotlin,28
+C++,Elixir,9
+C++,Perl,75
+C++,Vue,19
+C++,Makefile,266
+C++,Groovy,21
+C++,Julia,25
+C++,Haskell,40
+C++,CoffeeScript,29
+C++,TeX,123
+C++,Clojure,19
+C++,HCL,4
+C++,OCaml,18
+C++,Vim script,34
+C++,XSLT,32
+C++,Nix,18
+C++,Matlab,40
+C++,CMake,271
+C++,Dart,25
+C++,Erlang,20
+C++,Puppet,8
+C++,Emacs Lisp,27
+C++,Smarty,5
+C++,PLpgSQL,16
+C++,Visual Basic,16
+C++,Fortran,38
+C++,Arduino,70
+C++,F#,7
+Go,JavaScript,1322
+Go,Python,1154
+Go,Java,554
+Go,HTML,694
+Go,Ruby,623
+Go,PHP,281
+Go,C++,283
+Go,Go,10491
+Go,CSS,396
+Go,C#,122
+Go,TypeScript,170
+Go,C,352
+Go,Shell,1052
+Go,Scala,68
+Go,Swift,55
+Go,PowerShell,24
+Go,Rust,107
+Go,Objective-C,61
+Go,Jupyter Notebook,27
+Go,DM,1
+Go,R,3
+Go,Lua,35
+Go,Kotlin,27
+Go,Elixir,37
+Go,Perl,58
+Go,Vue,34
+Go,Makefile,210
+Go,Groovy,85
+Go,Julia,2
+Go,Haskell,29
+Go,CoffeeScript,53
+Go,TeX,35
+Go,Clojure,26
+Go,HCL,111
+Go,OCaml,8
+Go,Vim script,58
+Go,XSLT,16
+Go,Nix,8
+Go,Matlab,4
+Go,CMake,9
+Go,Dart,9
+Go,Erlang,16
+Go,Puppet,18
+Go,Emacs Lisp,28
+Go,Smarty,68
+Go,PLpgSQL,12
+Go,Visual Basic,1
+Go,Fortran,2
+Go,Arduino,11
+Go,F#,2
+CSS,JavaScript,5720
+CSS,Python,1704
+CSS,Java,1090
+CSS,HTML,4479
+CSS,Ruby,1255
+CSS,PHP,1250
+CSS,C++,429
+CSS,Go,396
+CSS,CSS,20609
+CSS,C#,318
+CSS,TypeScript,681
+CSS,C,291
+CSS,Shell,787
+CSS,Scala,124
+CSS,Swift,118
+CSS,PowerShell,30
+CSS,Rust,95
+CSS,Objective-C,101
+CSS,Jupyter Notebook,125
+CSS,DM,2
+CSS,R,65
+CSS,Lua,40
+CSS,Kotlin,37
+CSS,Elixir,81
+CSS,Perl,59
+CSS,Vue,104
+CSS,Makefile,145
+CSS,Groovy,52
+CSS,Julia,10
+CSS,Haskell,30
+CSS,CoffeeScript,115
+CSS,TeX,81
+CSS,Clojure,41
+CSS,HCL,51
+CSS,OCaml,10
+CSS,Vim script,41
+CSS,XSLT,36
+CSS,Nix,3
+CSS,Matlab,15
+CSS,CMake,24
+CSS,Dart,23
+CSS,Erlang,13
+CSS,Puppet,58
+CSS,Emacs Lisp,25
+CSS,Smarty,21
+CSS,PLpgSQL,33
+CSS,Visual Basic,9
+CSS,Fortran,7
+CSS,Arduino,27
+CSS,F#,8
+C#,JavaScript,1225
+C#,Python,481
+C#,Java,573
+C#,HTML,555
+C#,Ruby,178
+C#,PHP,264
+C#,C++,344
+C#,Go,122
+C#,CSS,318
+C#,C#,15088
+C#,TypeScript,393
+C#,C,191
+C#,Shell,163
+C#,Scala,23
+C#,Swift,51
+C#,PowerShell,238
+C#,Rust,33
+C#,Objective-C,80
+C#,Jupyter Notebook,26
+C#,DM,8
+C#,R,10
+C#,Lua,34
+C#,Kotlin,22
+C#,Elixir,10
+C#,Perl,20
+C#,Vue,9
+C#,Makefile,28
+C#,Groovy,23
+C#,Julia,0
+C#,Haskell,9
+C#,CoffeeScript,18
+C#,TeX,23
+C#,Clojure,4
+C#,HCL,2
+C#,OCaml,5
+C#,Vim script,9
+C#,XSLT,10
+C#,Nix,0
+C#,Matlab,5
+C#,CMake,11
+C#,Dart,1
+C#,Erlang,4
+C#,Puppet,1
+C#,Emacs Lisp,3
+C#,Smarty,4
+C#,PLpgSQL,5
+C#,Visual Basic,24
+C#,Fortran,4
+C#,Arduino,11
+C#,F#,45
+TypeScript,JavaScript,2739
+TypeScript,Python,467
+TypeScript,Java,631
+TypeScript,HTML,945
+TypeScript,Ruby,234
+TypeScript,PHP,265
+TypeScript,C++,148
+TypeScript,Go,170
+TypeScript,CSS,681
+TypeScript,C#,393
+TypeScript,TypeScript,10084
+TypeScript,C,84
+TypeScript,Shell,267
+TypeScript,Scala,52
+TypeScript,Swift,52
+TypeScript,PowerShell,48
+TypeScript,Rust,43
+TypeScript,Objective-C,73
+TypeScript,Jupyter Notebook,39
+TypeScript,DM,0
+TypeScript,R,6
+TypeScript,Lua,10
+TypeScript,Kotlin,23
+TypeScript,Elixir,28
+TypeScript,Perl,8
+TypeScript,Vue,41
+TypeScript,Makefile,28
+TypeScript,Groovy,33
+TypeScript,Julia,4
+TypeScript,Haskell,19
+TypeScript,CoffeeScript,69
+TypeScript,TeX,16
+TypeScript,Clojure,6
+TypeScript,HCL,8
+TypeScript,OCaml,5
+TypeScript,Vim script,20
+TypeScript,XSLT,12
+TypeScript,Nix,2
+TypeScript,Matlab,1
+TypeScript,CMake,6
+TypeScript,Dart,6
+TypeScript,Erlang,7
+TypeScript,Puppet,1
+TypeScript,Emacs Lisp,8
+TypeScript,Smarty,15
+TypeScript,PLpgSQL,12
+TypeScript,Visual Basic,4
+TypeScript,Fortran,2
+TypeScript,Arduino,9
+TypeScript,F#,5
+C,JavaScript,825
+C,Python,1437
+C,Java,633
+C,HTML,567
+C,Ruby,299
+C,PHP,227
+C,C++,1512
+C,Go,352
+C,CSS,291
+C,C#,191
+C,TypeScript,84
+C,C,13093
+C,Shell,795
+C,Scala,39
+C,Swift,74
+C,PowerShell,29
+C,Rust,117
+C,Objective-C,115
+C,Jupyter Notebook,86
+C,DM,1
+C,R,31
+C,Lua,82
+C,Kotlin,20
+C,Elixir,21
+C,Perl,132
+C,Vue,9
+C,Makefile,326
+C,Groovy,20
+C,Julia,17
+C,Haskell,40
+C,CoffeeScript,33
+C,TeX,99
+C,Clojure,8
+C,HCL,6
+C,OCaml,22
+C,Vim script,40
+C,XSLT,15
+C,Nix,7
+C,Matlab,25
+C,CMake,64
+C,Dart,5
+C,Erlang,27
+C,Puppet,6
+C,Emacs Lisp,20
+C,Smarty,3
+C,PLpgSQL,19
+C,Visual Basic,5
+C,Fortran,33
+C,Arduino,38
+C,F#,3
+Shell,JavaScript,2090
+Shell,Python,2552
+Shell,Java,1320
+Shell,HTML,1319
+Shell,Ruby,1003
+Shell,PHP,639
+Shell,C++,673
+Shell,Go,1052
+Shell,CSS,787
+Shell,C#,163
+Shell,TypeScript,267
+Shell,C,795
+Shell,Shell,13555
+Shell,Scala,167
+Shell,Swift,97
+Shell,PowerShell,74
+Shell,Rust,115
+Shell,Objective-C,77
+Shell,Jupyter Notebook,170
+Shell,DM,2
+Shell,R,71
+Shell,Lua,74
+Shell,Kotlin,61
+Shell,Elixir,52
+Shell,Perl,169
+Shell,Vue,22
+Shell,Makefile,345
+Shell,Groovy,214
+Shell,Julia,16
+Shell,Haskell,57
+Shell,CoffeeScript,84
+Shell,TeX,87
+Shell,Clojure,53
+Shell,HCL,164
+Shell,OCaml,30
+Shell,Vim script,101
+Shell,XSLT,64
+Shell,Nix,11
+Shell,Matlab,13
+Shell,CMake,74
+Shell,Dart,3
+Shell,Erlang,38
+Shell,Puppet,70
+Shell,Emacs Lisp,46
+Shell,Smarty,79
+Shell,PLpgSQL,31
+Shell,Visual Basic,7
+Shell,Fortran,19
+Shell,Arduino,22
+Shell,F#,5
+Scala,JavaScript,295
+Scala,Python,222
+Scala,Java,357
+Scala,HTML,210
+Scala,Ruby,87
+Scala,PHP,24
+Scala,C++,60
+Scala,Go,68
+Scala,CSS,124
+Scala,C#,23
+Scala,TypeScript,52
+Scala,C,39
+Scala,Shell,167
+Scala,Scala,3100
+Scala,Swift,12
+Scala,PowerShell,4
+Scala,Rust,30
+Scala,Objective-C,15
+Scala,Jupyter Notebook,38
+Scala,DM,0
+Scala,R,5
+Scala,Lua,5
+Scala,Kotlin,17
+Scala,Elixir,5
+Scala,Perl,9
+Scala,Vue,3
+Scala,Makefile,14
+Scala,Groovy,51
+Scala,Julia,3
+Scala,Haskell,24
+Scala,CoffeeScript,6
+Scala,TeX,20
+Scala,Clojure,19
+Scala,HCL,10
+Scala,OCaml,2
+Scala,Vim script,6
+Scala,XSLT,25
+Scala,Nix,2
+Scala,Matlab,3
+Scala,CMake,0
+Scala,Dart,2
+Scala,Erlang,5
+Scala,Puppet,3
+Scala,Emacs Lisp,8
+Scala,Smarty,10
+Scala,PLpgSQL,4
+Scala,Visual Basic,2
+Scala,Fortran,1
+Scala,Arduino,0
+Scala,F#,4
+Swift,JavaScript,390
+Swift,Python,169
+Swift,Java,268
+Swift,HTML,184
+Swift,Ruby,167
+Swift,PHP,71
+Swift,C++,91
+Swift,Go,55
+Swift,CSS,118
+Swift,C#,51
+Swift,TypeScript,52
+Swift,C,74
+Swift,Shell,97
+Swift,Scala,12
+Swift,Swift,5059
+Swift,PowerShell,2
+Swift,Rust,17
+Swift,Objective-C,455
+Swift,Jupyter Notebook,12
+Swift,DM,0
+Swift,R,2
+Swift,Lua,0
+Swift,Kotlin,35
+Swift,Elixir,17
+Swift,Perl,5
+Swift,Vue,2
+Swift,Makefile,11
+Swift,Groovy,7
+Swift,Julia,0
+Swift,Haskell,2
+Swift,CoffeeScript,6
+Swift,TeX,1
+Swift,Clojure,4
+Swift,HCL,0
+Swift,OCaml,2
+Swift,Vim script,4
+Swift,XSLT,4
+Swift,Nix,0
+Swift,Matlab,1
+Swift,CMake,1
+Swift,Dart,5
+Swift,Erlang,3
+Swift,Puppet,2
+Swift,Emacs Lisp,2
+Swift,Smarty,1
+Swift,PLpgSQL,0
+Swift,Visual Basic,0
+Swift,Fortran,0
+Swift,Arduino,2
+Swift,F#,1
+PowerShell,JavaScript,145
+PowerShell,Python,85
+PowerShell,Java,32
+PowerShell,HTML,57
+PowerShell,Ruby,41
+PowerShell,PHP,26
+PowerShell,C++,51
+PowerShell,Go,24
+PowerShell,CSS,30
+PowerShell,C#,238
+PowerShell,TypeScript,48
+PowerShell,C,29
+PowerShell,Shell,74
+PowerShell,Scala,4
+PowerShell,Swift,2
+PowerShell,PowerShell,1657
+PowerShell,Rust,5
+PowerShell,Objective-C,3
+PowerShell,Jupyter Notebook,2
+PowerShell,DM,0
+PowerShell,R,1
+PowerShell,Lua,4
+PowerShell,Kotlin,2
+PowerShell,Elixir,4
+PowerShell,Perl,4
+PowerShell,Vue,0
+PowerShell,Makefile,0
+PowerShell,Groovy,6
+PowerShell,Julia,1
+PowerShell,Haskell,3
+PowerShell,CoffeeScript,2
+PowerShell,TeX,0
+PowerShell,Clojure,4
+PowerShell,HCL,2
+PowerShell,OCaml,0
+PowerShell,Vim script,2
+PowerShell,XSLT,0
+PowerShell,Nix,0
+PowerShell,Matlab,0
+PowerShell,CMake,3
+PowerShell,Dart,2
+PowerShell,Erlang,2
+PowerShell,Puppet,3
+PowerShell,Emacs Lisp,2
+PowerShell,Smarty,1
+PowerShell,PLpgSQL,3
+PowerShell,Visual Basic,3
+PowerShell,Fortran,0
+PowerShell,Arduino,1
+PowerShell,F#,7
+Rust,JavaScript,252
+Rust,Python,205
+Rust,Java,58
+Rust,HTML,139
+Rust,Ruby,101
+Rust,PHP,25
+Rust,C++,115
+Rust,Go,107
+Rust,CSS,95
+Rust,C#,33
+Rust,TypeScript,43
+Rust,C,117
+Rust,Shell,115
+Rust,Scala,30
+Rust,Swift,17
+Rust,PowerShell,5
+Rust,Rust,1909
+Rust,Objective-C,13
+Rust,Jupyter Notebook,7
+Rust,DM,1
+Rust,R,1
+Rust,Lua,9
+Rust,Kotlin,16
+Rust,Elixir,24
+Rust,Perl,8
+Rust,Vue,5
+Rust,Makefile,23
+Rust,Groovy,7
+Rust,Julia,4
+Rust,Haskell,22
+Rust,CoffeeScript,15
+Rust,TeX,24
+Rust,Clojure,17
+Rust,HCL,3
+Rust,OCaml,9
+Rust,Vim script,14
+Rust,XSLT,4
+Rust,Nix,9
+Rust,Matlab,1
+Rust,CMake,7
+Rust,Dart,2
+Rust,Erlang,9
+Rust,Puppet,0
+Rust,Emacs Lisp,10
+Rust,Smarty,3
+Rust,PLpgSQL,2
+Rust,Visual Basic,2
+Rust,Fortran,2
+Rust,Arduino,1
+Rust,F#,2
+Objective-C,JavaScript,629
+Objective-C,Python,131
+Objective-C,Java,410
+Objective-C,HTML,157
+Objective-C,Ruby,165
+Objective-C,PHP,58
+Objective-C,C++,98
+Objective-C,Go,61
+Objective-C,CSS,101
+Objective-C,C#,80
+Objective-C,TypeScript,73
+Objective-C,C,115
+Objective-C,Shell,77
+Objective-C,Scala,15
+Objective-C,Swift,455
+Objective-C,PowerShell,3
+Objective-C,Rust,13
+Objective-C,Objective-C,3618
+Objective-C,Jupyter Notebook,8
+Objective-C,DM,0
+Objective-C,R,1
+Objective-C,Lua,4
+Objective-C,Kotlin,10
+Objective-C,Elixir,11
+Objective-C,Perl,8
+Objective-C,Vue,5
+Objective-C,Makefile,27
+Objective-C,Groovy,11
+Objective-C,Julia,0
+Objective-C,Haskell,2
+Objective-C,CoffeeScript,13
+Objective-C,TeX,0
+Objective-C,Clojure,5
+Objective-C,HCL,1
+Objective-C,OCaml,1
+Objective-C,Vim script,4
+Objective-C,XSLT,6
+Objective-C,Nix,1
+Objective-C,Matlab,3
+Objective-C,CMake,4
+Objective-C,Dart,3
+Objective-C,Erlang,5
+Objective-C,Puppet,0
+Objective-C,Emacs Lisp,4
+Objective-C,Smarty,2
+Objective-C,PLpgSQL,0
+Objective-C,Visual Basic,0
+Objective-C,Fortran,0
+Objective-C,Arduino,3
+Objective-C,F#,1
+Jupyter Notebook,JavaScript,286
+Jupyter Notebook,Python,1078
+Jupyter Notebook,Java,120
+Jupyter Notebook,HTML,314
+Jupyter Notebook,Ruby,41
+Jupyter Notebook,PHP,20
+Jupyter Notebook,C++,184
+Jupyter Notebook,Go,27
+Jupyter Notebook,CSS,125
+Jupyter Notebook,C#,26
+Jupyter Notebook,TypeScript,39
+Jupyter Notebook,C,86
+Jupyter Notebook,Shell,170
+Jupyter Notebook,Scala,38
+Jupyter Notebook,Swift,12
+Jupyter Notebook,PowerShell,2
+Jupyter Notebook,Rust,7
+Jupyter Notebook,Objective-C,8
+Jupyter Notebook,Jupyter Notebook,3914
+Jupyter Notebook,DM,0
+Jupyter Notebook,R,55
+Jupyter Notebook,Lua,8
+Jupyter Notebook,Kotlin,1
+Jupyter Notebook,Elixir,3
+Jupyter Notebook,Perl,12
+Jupyter Notebook,Vue,1
+Jupyter Notebook,Makefile,16
+Jupyter Notebook,Groovy,3
+Jupyter Notebook,Julia,44
+Jupyter Notebook,Haskell,8
+Jupyter Notebook,CoffeeScript,9
+Jupyter Notebook,TeX,56
+Jupyter Notebook,Clojure,3
+Jupyter Notebook,HCL,2
+Jupyter Notebook,OCaml,4
+Jupyter Notebook,Vim script,5
+Jupyter Notebook,XSLT,6
+Jupyter Notebook,Nix,1
+Jupyter Notebook,Matlab,31
+Jupyter Notebook,CMake,26
+Jupyter Notebook,Dart,0
+Jupyter Notebook,Erlang,1
+Jupyter Notebook,Puppet,1
+Jupyter Notebook,Emacs Lisp,5
+Jupyter Notebook,Smarty,3
+Jupyter Notebook,PLpgSQL,6
+Jupyter Notebook,Visual Basic,1
+Jupyter Notebook,Fortran,16
+Jupyter Notebook,Arduino,4
+Jupyter Notebook,F#,0
+DM,JavaScript,9
+DM,Python,8
+DM,Java,4
+DM,HTML,3
+DM,Ruby,0
+DM,PHP,0
+DM,C++,5
+DM,Go,1
+DM,CSS,2
+DM,C#,8
+DM,TypeScript,0
+DM,C,1
+DM,Shell,2
+DM,Scala,0
+DM,Swift,0
+DM,PowerShell,0
+DM,Rust,1
+DM,Objective-C,0
+DM,Jupyter Notebook,0
+DM,DM,451
+DM,R,0
+DM,Lua,2
+DM,Kotlin,0
+DM,Elixir,0
+DM,Perl,1
+DM,Vue,0
+DM,Makefile,0
+DM,Groovy,0
+DM,Julia,0
+DM,Haskell,0
+DM,CoffeeScript,0
+DM,TeX,0
+DM,Clojure,0
+DM,HCL,0
+DM,OCaml,0
+DM,Vim script,0
+DM,XSLT,0
+DM,Nix,0
+DM,Matlab,0
+DM,CMake,0
+DM,Dart,0
+DM,Erlang,0
+DM,Puppet,0
+DM,Emacs Lisp,0
+DM,Smarty,0
+DM,PLpgSQL,0
+DM,Visual Basic,0
+DM,Fortran,0
+DM,Arduino,0
+DM,F#,0
+R,JavaScript,106
+R,Python,139
+R,Java,57
+R,HTML,265
+R,Ruby,34
+R,PHP,12
+R,C++,75
+R,Go,3
+R,CSS,65
+R,C#,10
+R,TypeScript,6
+R,C,31
+R,Shell,71
+R,Scala,5
+R,Swift,2
+R,PowerShell,1
+R,Rust,1
+R,Objective-C,1
+R,Jupyter Notebook,55
+R,DM,0
+R,R,2330
+R,Lua,1
+R,Kotlin,1
+R,Elixir,1
+R,Perl,9
+R,Vue,2
+R,Makefile,6
+R,Groovy,6
+R,Julia,7
+R,Haskell,1
+R,CoffeeScript,2
+R,TeX,48
+R,Clojure,2
+R,HCL,4
+R,OCaml,0
+R,Vim script,1
+R,XSLT,2
+R,Nix,0
+R,Matlab,4
+R,CMake,3
+R,Dart,0
+R,Erlang,0
+R,Puppet,1
+R,Emacs Lisp,4
+R,Smarty,2
+R,PLpgSQL,7
+R,Visual Basic,0
+R,Fortran,5
+R,Arduino,0
+R,F#,0
+Lua,JavaScript,117
+Lua,Python,112
+Lua,Java,36
+Lua,HTML,58
+Lua,Ruby,25
+Lua,PHP,30
+Lua,C++,116
+Lua,Go,35
+Lua,CSS,40
+Lua,C#,34
+Lua,TypeScript,10
+Lua,C,82
+Lua,Shell,74
+Lua,Scala,5
+Lua,Swift,0
+Lua,PowerShell,4
+Lua,Rust,9
+Lua,Objective-C,4
+Lua,Jupyter Notebook,8
+Lua,DM,2
+Lua,R,1
+Lua,Lua,1628
+Lua,Kotlin,1
+Lua,Elixir,4
+Lua,Perl,13
+Lua,Vue,0
+Lua,Makefile,23
+Lua,Groovy,4
+Lua,Julia,1
+Lua,Haskell,6
+Lua,CoffeeScript,4
+Lua,TeX,7
+Lua,Clojure,2
+Lua,HCL,1
+Lua,OCaml,2
+Lua,Vim script,7
+Lua,XSLT,2
+Lua,Nix,1
+Lua,Matlab,1
+Lua,CMake,4
+Lua,Dart,1
+Lua,Erlang,3
+Lua,Puppet,2
+Lua,Emacs Lisp,2
+Lua,Smarty,2
+Lua,PLpgSQL,1
+Lua,Visual Basic,2
+Lua,Fortran,1
+Lua,Arduino,2
+Lua,F#,0
+Kotlin,JavaScript,126
+Kotlin,Python,64
+Kotlin,Java,430
+Kotlin,HTML,73
+Kotlin,Ruby,38
+Kotlin,PHP,17
+Kotlin,C++,28
+Kotlin,Go,27
+Kotlin,CSS,37
+Kotlin,C#,22
+Kotlin,TypeScript,23
+Kotlin,C,20
+Kotlin,Shell,61
+Kotlin,Scala,17
+Kotlin,Swift,35
+Kotlin,PowerShell,2
+Kotlin,Rust,16
+Kotlin,Objective-C,10
+Kotlin,Jupyter Notebook,1
+Kotlin,DM,0
+Kotlin,R,1
+Kotlin,Lua,1
+Kotlin,Kotlin,1550
+Kotlin,Elixir,4
+Kotlin,Perl,1
+Kotlin,Vue,3
+Kotlin,Makefile,4
+Kotlin,Groovy,17
+Kotlin,Julia,0
+Kotlin,Haskell,4
+Kotlin,CoffeeScript,3
+Kotlin,TeX,2
+Kotlin,Clojure,3
+Kotlin,HCL,1
+Kotlin,OCaml,0
+Kotlin,Vim script,0
+Kotlin,XSLT,2
+Kotlin,Nix,1
+Kotlin,Matlab,2
+Kotlin,CMake,2
+Kotlin,Dart,1
+Kotlin,Erlang,2
+Kotlin,Puppet,0
+Kotlin,Emacs Lisp,2
+Kotlin,Smarty,0
+Kotlin,PLpgSQL,2
+Kotlin,Visual Basic,1
+Kotlin,Fortran,0
+Kotlin,Arduino,0
+Kotlin,F#,0
+Elixir,JavaScript,222
+Elixir,Python,62
+Elixir,Java,20
+Elixir,HTML,94
+Elixir,Ruby,178
+Elixir,PHP,28
+Elixir,C++,9
+Elixir,Go,37
+Elixir,CSS,81
+Elixir,C#,10
+Elixir,TypeScript,28
+Elixir,C,21
+Elixir,Shell,52
+Elixir,Scala,5
+Elixir,Swift,17
+Elixir,PowerShell,4
+Elixir,Rust,24
+Elixir,Objective-C,11
+Elixir,Jupyter Notebook,3
+Elixir,DM,0
+Elixir,R,1
+Elixir,Lua,4
+Elixir,Kotlin,4
+Elixir,Elixir,1303
+Elixir,Perl,3
+Elixir,Vue,3
+Elixir,Makefile,5
+Elixir,Groovy,2
+Elixir,Julia,0
+Elixir,Haskell,7
+Elixir,CoffeeScript,15
+Elixir,TeX,1
+Elixir,Clojure,12
+Elixir,HCL,3
+Elixir,OCaml,2
+Elixir,Vim script,18
+Elixir,XSLT,0
+Elixir,Nix,0
+Elixir,Matlab,0
+Elixir,CMake,0
+Elixir,Dart,0
+Elixir,Erlang,29
+Elixir,Puppet,2
+Elixir,Emacs Lisp,4
+Elixir,Smarty,0
+Elixir,PLpgSQL,0
+Elixir,Visual Basic,0
+Elixir,Fortran,0
+Elixir,Arduino,2
+Elixir,F#,1
+Perl,JavaScript,145
+Perl,Python,197
+Perl,Java,88
+Perl,HTML,113
+Perl,Ruby,83
+Perl,PHP,71
+Perl,C++,75
+Perl,Go,58
+Perl,CSS,59
+Perl,C#,20
+Perl,TypeScript,8
+Perl,C,132
+Perl,Shell,169
+Perl,Scala,9
+Perl,Swift,5
+Perl,PowerShell,4
+Perl,Rust,8
+Perl,Objective-C,8
+Perl,Jupyter Notebook,12
+Perl,DM,1
+Perl,R,9
+Perl,Lua,13
+Perl,Kotlin,1
+Perl,Elixir,3
+Perl,Perl,1573
+Perl,Vue,2
+Perl,Makefile,43
+Perl,Groovy,5
+Perl,Julia,2
+Perl,Haskell,11
+Perl,CoffeeScript,5
+Perl,TeX,8
+Perl,Clojure,5
+Perl,HCL,4
+Perl,OCaml,0
+Perl,Vim script,13
+Perl,XSLT,9
+Perl,Nix,2
+Perl,Matlab,0
+Perl,CMake,1
+Perl,Dart,1
+Perl,Erlang,3
+Perl,Puppet,10
+Perl,Emacs Lisp,10
+Perl,Smarty,7
+Perl,PLpgSQL,5
+Perl,Visual Basic,3
+Perl,Fortran,1
+Perl,Arduino,0
+Perl,F#,0
+Vue,JavaScript,504
+Vue,Python,60
+Vue,Java,39
+Vue,HTML,115
+Vue,Ruby,33
+Vue,PHP,93
+Vue,C++,19
+Vue,Go,34
+Vue,CSS,104
+Vue,C#,9
+Vue,TypeScript,41
+Vue,C,9
+Vue,Shell,22
+Vue,Scala,3
+Vue,Swift,2
+Vue,PowerShell,0
+Vue,Rust,5
+Vue,Objective-C,5
+Vue,Jupyter Notebook,1
+Vue,DM,0
+Vue,R,2
+Vue,Lua,0
+Vue,Kotlin,3
+Vue,Elixir,3
+Vue,Perl,2
+Vue,Vue,1275
+Vue,Makefile,1
+Vue,Groovy,0
+Vue,Julia,0
+Vue,Haskell,0
+Vue,CoffeeScript,7
+Vue,TeX,3
+Vue,Clojure,0
+Vue,HCL,1
+Vue,OCaml,0
+Vue,Vim script,4
+Vue,XSLT,0
+Vue,Nix,0
+Vue,Matlab,0
+Vue,CMake,0
+Vue,Dart,1
+Vue,Erlang,0
+Vue,Puppet,0
+Vue,Emacs Lisp,1
+Vue,Smarty,3
+Vue,PLpgSQL,0
+Vue,Visual Basic,1
+Vue,Fortran,0
+Vue,Arduino,0
+Vue,F#,0
+Makefile,JavaScript,280
+Makefile,Python,366
+Makefile,Java,193
+Makefile,HTML,170
+Makefile,Ruby,141
+Makefile,PHP,96
+Makefile,C++,266
+Makefile,Go,210
+Makefile,CSS,145
+Makefile,C#,28
+Makefile,TypeScript,28
+Makefile,C,326
+Makefile,Shell,345
+Makefile,Scala,14
+Makefile,Swift,11
+Makefile,PowerShell,0
+Makefile,Rust,23
+Makefile,Objective-C,27
+Makefile,Jupyter Notebook,16
+Makefile,DM,0
+Makefile,R,6
+Makefile,Lua,23
+Makefile,Kotlin,4
+Makefile,Elixir,5
+Makefile,Perl,43
+Makefile,Vue,1
+Makefile,Makefile,1925
+Makefile,Groovy,23
+Makefile,Julia,2
+Makefile,Haskell,11
+Makefile,CoffeeScript,10
+Makefile,TeX,18
+Makefile,Clojure,8
+Makefile,HCL,18
+Makefile,OCaml,6
+Makefile,Vim script,16
+Makefile,XSLT,12
+Makefile,Nix,4
+Makefile,Matlab,2
+Makefile,CMake,10
+Makefile,Dart,0
+Makefile,Erlang,10
+Makefile,Puppet,6
+Makefile,Emacs Lisp,10
+Makefile,Smarty,9
+Makefile,PLpgSQL,5
+Makefile,Visual Basic,0
+Makefile,Fortran,4
+Makefile,Arduino,1
+Makefile,F#,0
+Groovy,JavaScript,161
+Groovy,Python,161
+Groovy,Java,320
+Groovy,HTML,94
+Groovy,Ruby,63
+Groovy,PHP,17
+Groovy,C++,21
+Groovy,Go,85
+Groovy,CSS,52
+Groovy,C#,23
+Groovy,TypeScript,33
+Groovy,C,20
+Groovy,Shell,214
+Groovy,Scala,51
+Groovy,Swift,7
+Groovy,PowerShell,6
+Groovy,Rust,7
+Groovy,Objective-C,11
+Groovy,Jupyter Notebook,3
+Groovy,DM,0
+Groovy,R,6
+Groovy,Lua,4
+Groovy,Kotlin,17
+Groovy,Elixir,2
+Groovy,Perl,5
+Groovy,Vue,0
+Groovy,Makefile,23
+Groovy,Groovy,1144
+Groovy,Julia,1
+Groovy,Haskell,3
+Groovy,CoffeeScript,5
+Groovy,TeX,4
+Groovy,Clojure,1
+Groovy,HCL,16
+Groovy,OCaml,0
+Groovy,Vim script,2
+Groovy,XSLT,10
+Groovy,Nix,0
+Groovy,Matlab,0
+Groovy,CMake,2
+Groovy,Dart,1
+Groovy,Erlang,2
+Groovy,Puppet,5
+Groovy,Emacs Lisp,1
+Groovy,Smarty,18
+Groovy,PLpgSQL,4
+Groovy,Visual Basic,1
+Groovy,Fortran,0
+Groovy,Arduino,1
+Groovy,F#,0
+Julia,JavaScript,18
+Julia,Python,58
+Julia,Java,1
+Julia,HTML,27
+Julia,Ruby,6
+Julia,PHP,3
+Julia,C++,25
+Julia,Go,2
+Julia,CSS,10
+Julia,C#,0
+Julia,TypeScript,4
+Julia,C,17
+Julia,Shell,16
+Julia,Scala,3
+Julia,Swift,0
+Julia,PowerShell,1
+Julia,Rust,4
+Julia,Objective-C,0
+Julia,Jupyter Notebook,44
+Julia,DM,0
+Julia,R,7
+Julia,Lua,1
+Julia,Kotlin,0
+Julia,Elixir,0
+Julia,Perl,2
+Julia,Vue,0
+Julia,Makefile,2
+Julia,Groovy,1
+Julia,Julia,503
+Julia,Haskell,1
+Julia,CoffeeScript,4
+Julia,TeX,5
+Julia,Clojure,1
+Julia,HCL,0
+Julia,OCaml,1
+Julia,Vim script,2
+Julia,XSLT,0
+Julia,Nix,1
+Julia,Matlab,7
+Julia,CMake,4
+Julia,Dart,1
+Julia,Erlang,1
+Julia,Puppet,0
+Julia,Emacs Lisp,4
+Julia,Smarty,0
+Julia,PLpgSQL,0
+Julia,Visual Basic,1
+Julia,Fortran,3
+Julia,Arduino,0
+Julia,F#,0
+Haskell,JavaScript,120
+Haskell,Python,79
+Haskell,Java,39
+Haskell,HTML,68
+Haskell,Ruby,38
+Haskell,PHP,16
+Haskell,C++,40
+Haskell,Go,29
+Haskell,CSS,30
+Haskell,C#,9
+Haskell,TypeScript,19
+Haskell,C,40
+Haskell,Shell,57
+Haskell,Scala,24
+Haskell,Swift,2
+Haskell,PowerShell,3
+Haskell,Rust,22
+Haskell,Objective-C,2
+Haskell,Jupyter Notebook,8
+Haskell,DM,0
+Haskell,R,1
+Haskell,Lua,6
+Haskell,Kotlin,4
+Haskell,Elixir,7
+Haskell,Perl,11
+Haskell,Vue,0
+Haskell,Makefile,11
+Haskell,Groovy,3
+Haskell,Julia,1
+Haskell,Haskell,1075
+Haskell,CoffeeScript,14
+Haskell,TeX,27
+Haskell,Clojure,8
+Haskell,HCL,4
+Haskell,OCaml,6
+Haskell,Vim script,14
+Haskell,XSLT,0
+Haskell,Nix,29
+Haskell,Matlab,2
+Haskell,CMake,1
+Haskell,Dart,1
+Haskell,Erlang,1
+Haskell,Puppet,0
+Haskell,Emacs Lisp,14
+Haskell,Smarty,1
+Haskell,PLpgSQL,0
+Haskell,Visual Basic,1
+Haskell,Fortran,0
+Haskell,Arduino,0
+Haskell,F#,1
+CoffeeScript,JavaScript,457
+CoffeeScript,Python,112
+CoffeeScript,Java,58
+CoffeeScript,HTML,136
+CoffeeScript,Ruby,133
+CoffeeScript,PHP,54
+CoffeeScript,C++,29
+CoffeeScript,Go,53
+CoffeeScript,CSS,115
+CoffeeScript,C#,18
+CoffeeScript,TypeScript,69
+CoffeeScript,C,33
+CoffeeScript,Shell,84
+CoffeeScript,Scala,6
+CoffeeScript,Swift,6
+CoffeeScript,PowerShell,2
+CoffeeScript,Rust,15
+CoffeeScript,Objective-C,13
+CoffeeScript,Jupyter Notebook,9
+CoffeeScript,DM,0
+CoffeeScript,R,2
+CoffeeScript,Lua,4
+CoffeeScript,Kotlin,3
+CoffeeScript,Elixir,15
+CoffeeScript,Perl,5
+CoffeeScript,Vue,7
+CoffeeScript,Makefile,10
+CoffeeScript,Groovy,5
+CoffeeScript,Julia,4
+CoffeeScript,Haskell,14
+CoffeeScript,CoffeeScript,1254
+CoffeeScript,TeX,6
+CoffeeScript,Clojure,5
+CoffeeScript,HCL,2
+CoffeeScript,OCaml,3
+CoffeeScript,Vim script,7
+CoffeeScript,XSLT,0
+CoffeeScript,Nix,1
+CoffeeScript,Matlab,2
+CoffeeScript,CMake,1
+CoffeeScript,Dart,3
+CoffeeScript,Erlang,3
+CoffeeScript,Puppet,0
+CoffeeScript,Emacs Lisp,3
+CoffeeScript,Smarty,1
+CoffeeScript,PLpgSQL,2
+CoffeeScript,Visual Basic,1
+CoffeeScript,Fortran,0
+CoffeeScript,Arduino,3
+CoffeeScript,F#,0
+TeX,JavaScript,126
+TeX,Python,278
+TeX,Java,82
+TeX,HTML,152
+TeX,Ruby,40
+TeX,PHP,25
+TeX,C++,123
+TeX,Go,35
+TeX,CSS,81
+TeX,C#,23
+TeX,TypeScript,16
+TeX,C,99
+TeX,Shell,87
+TeX,Scala,20
+TeX,Swift,1
+TeX,PowerShell,0
+TeX,Rust,24
+TeX,Objective-C,0
+TeX,Jupyter Notebook,56
+TeX,DM,0
+TeX,R,48
+TeX,Lua,7
+TeX,Kotlin,2
+TeX,Elixir,1
+TeX,Perl,8
+TeX,Vue,3
+TeX,Makefile,18
+TeX,Groovy,4
+TeX,Julia,5
+TeX,Haskell,27
+TeX,CoffeeScript,6
+TeX,TeX,1666
+TeX,Clojure,3
+TeX,HCL,1
+TeX,OCaml,6
+TeX,Vim script,8
+TeX,XSLT,7
+TeX,Nix,2
+TeX,Matlab,12
+TeX,CMake,13
+TeX,Dart,1
+TeX,Erlang,1
+TeX,Puppet,0
+TeX,Emacs Lisp,3
+TeX,Smarty,0
+TeX,PLpgSQL,0
+TeX,Visual Basic,1
+TeX,Fortran,10
+TeX,Arduino,4
+TeX,F#,2
+Clojure,JavaScript,116
+Clojure,Python,68
+Clojure,Java,79
+Clojure,HTML,50
+Clojure,Ruby,60
+Clojure,PHP,9
+Clojure,C++,19
+Clojure,Go,26
+Clojure,CSS,41
+Clojure,C#,4
+Clojure,TypeScript,6
+Clojure,C,8
+Clojure,Shell,53
+Clojure,Scala,19
+Clojure,Swift,4
+Clojure,PowerShell,4
+Clojure,Rust,17
+Clojure,Objective-C,5
+Clojure,Jupyter Notebook,3
+Clojure,DM,0
+Clojure,R,2
+Clojure,Lua,2
+Clojure,Kotlin,3
+Clojure,Elixir,12
+Clojure,Perl,5
+Clojure,Vue,0
+Clojure,Makefile,8
+Clojure,Groovy,1
+Clojure,Julia,1
+Clojure,Haskell,8
+Clojure,CoffeeScript,5
+Clojure,TeX,3
+Clojure,Clojure,888
+Clojure,HCL,4
+Clojure,OCaml,2
+Clojure,Vim script,5
+Clojure,XSLT,1
+Clojure,Nix,2
+Clojure,Matlab,0
+Clojure,CMake,1
+Clojure,Dart,0
+Clojure,Erlang,11
+Clojure,Puppet,8
+Clojure,Emacs Lisp,19
+Clojure,Smarty,0
+Clojure,PLpgSQL,1
+Clojure,Visual Basic,0
+Clojure,Fortran,0
+Clojure,Arduino,0
+Clojure,F#,1
+HCL,JavaScript,99
+HCL,Python,117
+HCL,Java,31
+HCL,HTML,68
+HCL,Ruby,99
+HCL,PHP,10
+HCL,C++,4
+HCL,Go,111
+HCL,CSS,51
+HCL,C#,2
+HCL,TypeScript,8
+HCL,C,6
+HCL,Shell,164
+HCL,Scala,10
+HCL,Swift,0
+HCL,PowerShell,2
+HCL,Rust,3
+HCL,Objective-C,1
+HCL,Jupyter Notebook,2
+HCL,DM,0
+HCL,R,4
+HCL,Lua,1
+HCL,Kotlin,1
+HCL,Elixir,3
+HCL,Perl,4
+HCL,Vue,1
+HCL,Makefile,18
+HCL,Groovy,16
+HCL,Julia,0
+HCL,Haskell,4
+HCL,CoffeeScript,2
+HCL,TeX,1
+HCL,Clojure,4
+HCL,HCL,647
+HCL,OCaml,0
+HCL,Vim script,1
+HCL,XSLT,0
+HCL,Nix,1
+HCL,Matlab,0
+HCL,CMake,0
+HCL,Dart,0
+HCL,Erlang,0
+HCL,Puppet,20
+HCL,Emacs Lisp,1
+HCL,Smarty,17
+HCL,PLpgSQL,1
+HCL,Visual Basic,0
+HCL,Fortran,0
+HCL,Arduino,0
+HCL,F#,0
+OCaml,JavaScript,64
+OCaml,Python,32
+OCaml,Java,12
+OCaml,HTML,22
+OCaml,Ruby,9
+OCaml,PHP,2
+OCaml,C++,18
+OCaml,Go,8
+OCaml,CSS,10
+OCaml,C#,5
+OCaml,TypeScript,5
+OCaml,C,22
+OCaml,Shell,30
+OCaml,Scala,2
+OCaml,Swift,2
+OCaml,PowerShell,0
+OCaml,Rust,9
+OCaml,Objective-C,1
+OCaml,Jupyter Notebook,4
+OCaml,DM,0
+OCaml,R,0
+OCaml,Lua,2
+OCaml,Kotlin,0
+OCaml,Elixir,2
+OCaml,Perl,0
+OCaml,Vue,0
+OCaml,Makefile,6
+OCaml,Groovy,0
+OCaml,Julia,1
+OCaml,Haskell,6
+OCaml,CoffeeScript,3
+OCaml,TeX,6
+OCaml,Clojure,2
+OCaml,HCL,0
+OCaml,OCaml,372
+OCaml,Vim script,6
+OCaml,XSLT,1
+OCaml,Nix,0
+OCaml,Matlab,0
+OCaml,CMake,1
+OCaml,Dart,0
+OCaml,Erlang,2
+OCaml,Puppet,0
+OCaml,Emacs Lisp,4
+OCaml,Smarty,0
+OCaml,PLpgSQL,0
+OCaml,Visual Basic,0
+OCaml,Fortran,0
+OCaml,Arduino,0
+OCaml,F#,0
+Vim script,JavaScript,146
+Vim script,Python,114
+Vim script,Java,23
+Vim script,HTML,64
+Vim script,Ruby,83
+Vim script,PHP,29
+Vim script,C++,34
+Vim script,Go,58
+Vim script,CSS,41
+Vim script,C#,9
+Vim script,TypeScript,20
+Vim script,C,40
+Vim script,Shell,101
+Vim script,Scala,6
+Vim script,Swift,4
+Vim script,PowerShell,2
+Vim script,Rust,14
+Vim script,Objective-C,4
+Vim script,Jupyter Notebook,5
+Vim script,DM,0
+Vim script,R,1
+Vim script,Lua,7
+Vim script,Kotlin,0
+Vim script,Elixir,18
+Vim script,Perl,13
+Vim script,Vue,4
+Vim script,Makefile,16
+Vim script,Groovy,2
+Vim script,Julia,2
+Vim script,Haskell,14
+Vim script,CoffeeScript,7
+Vim script,TeX,8
+Vim script,Clojure,5
+Vim script,HCL,1
+Vim script,OCaml,6
+Vim script,Vim script,975
+Vim script,XSLT,2
+Vim script,Nix,1
+Vim script,Matlab,0
+Vim script,CMake,1
+Vim script,Dart,3
+Vim script,Erlang,2
+Vim script,Puppet,6
+Vim script,Emacs Lisp,9
+Vim script,Smarty,1
+Vim script,PLpgSQL,0
+Vim script,Visual Basic,1
+Vim script,Fortran,0
+Vim script,Arduino,1
+Vim script,F#,1
+XSLT,JavaScript,88
+XSLT,Python,67
+XSLT,Java,112
+XSLT,HTML,73
+XSLT,Ruby,43
+XSLT,PHP,37
+XSLT,C++,32
+XSLT,Go,16
+XSLT,CSS,36
+XSLT,C#,10
+XSLT,TypeScript,12
+XSLT,C,15
+XSLT,Shell,64
+XSLT,Scala,25
+XSLT,Swift,4
+XSLT,PowerShell,0
+XSLT,Rust,4
+XSLT,Objective-C,6
+XSLT,Jupyter Notebook,6
+XSLT,DM,0
+XSLT,R,2
+XSLT,Lua,2
+XSLT,Kotlin,2
+XSLT,Elixir,0
+XSLT,Perl,9
+XSLT,Vue,0
+XSLT,Makefile,12
+XSLT,Groovy,10
+XSLT,Julia,0
+XSLT,Haskell,0
+XSLT,CoffeeScript,0
+XSLT,TeX,7
+XSLT,Clojure,1
+XSLT,HCL,0
+XSLT,OCaml,1
+XSLT,Vim script,2
+XSLT,XSLT,525
+XSLT,Nix,0
+XSLT,Matlab,1
+XSLT,CMake,5
+XSLT,Dart,1
+XSLT,Erlang,2
+XSLT,Puppet,0
+XSLT,Emacs Lisp,2
+XSLT,Smarty,1
+XSLT,PLpgSQL,1
+XSLT,Visual Basic,0
+XSLT,Fortran,0
+XSLT,Arduino,0
+XSLT,F#,0
+Nix,JavaScript,20
+Nix,Python,25
+Nix,Java,2
+Nix,HTML,6
+Nix,Ruby,2
+Nix,PHP,2
+Nix,C++,18
+Nix,Go,8
+Nix,CSS,3
+Nix,C#,0
+Nix,TypeScript,2
+Nix,C,7
+Nix,Shell,11
+Nix,Scala,2
+Nix,Swift,0
+Nix,PowerShell,0
+Nix,Rust,9
+Nix,Objective-C,1
+Nix,Jupyter Notebook,1
+Nix,DM,0
+Nix,R,0
+Nix,Lua,1
+Nix,Kotlin,1
+Nix,Elixir,0
+Nix,Perl,2
+Nix,Vue,0
+Nix,Makefile,4
+Nix,Groovy,0
+Nix,Julia,1
+Nix,Haskell,29
+Nix,CoffeeScript,1
+Nix,TeX,2
+Nix,Clojure,2
+Nix,HCL,1
+Nix,OCaml,0
+Nix,Vim script,1
+Nix,XSLT,0
+Nix,Nix,216
+Nix,Matlab,0
+Nix,CMake,1
+Nix,Dart,0
+Nix,Erlang,1
+Nix,Puppet,2
+Nix,Emacs Lisp,9
+Nix,Smarty,0
+Nix,PLpgSQL,0
+Nix,Visual Basic,0
+Nix,Fortran,0
+Nix,Arduino,0
+Nix,F#,0
+Matlab,JavaScript,26
+Matlab,Python,97
+Matlab,Java,36
+Matlab,HTML,36
+Matlab,Ruby,9
+Matlab,PHP,5
+Matlab,C++,40
+Matlab,Go,4
+Matlab,CSS,15
+Matlab,C#,5
+Matlab,TypeScript,1
+Matlab,C,25
+Matlab,Shell,13
+Matlab,Scala,3
+Matlab,Swift,1
+Matlab,PowerShell,0
+Matlab,Rust,1
+Matlab,Objective-C,3
+Matlab,Jupyter Notebook,31
+Matlab,DM,0
+Matlab,R,4
+Matlab,Lua,1
+Matlab,Kotlin,2
+Matlab,Elixir,0
+Matlab,Perl,0
+Matlab,Vue,0
+Matlab,Makefile,2
+Matlab,Groovy,0
+Matlab,Julia,7
+Matlab,Haskell,2
+Matlab,CoffeeScript,2
+Matlab,TeX,12
+Matlab,Clojure,0
+Matlab,HCL,0
+Matlab,OCaml,0
+Matlab,Vim script,0
+Matlab,XSLT,1
+Matlab,Nix,0
+Matlab,Matlab,967
+Matlab,CMake,4
+Matlab,Dart,0
+Matlab,Erlang,0
+Matlab,Puppet,0
+Matlab,Emacs Lisp,1
+Matlab,Smarty,1
+Matlab,PLpgSQL,0
+Matlab,Visual Basic,0
+Matlab,Fortran,2
+Matlab,Arduino,2
+Matlab,F#,0
+CMake,JavaScript,52
+CMake,Python,203
+CMake,Java,22
+CMake,HTML,48
+CMake,Ruby,17
+CMake,PHP,11
+CMake,C++,271
+CMake,Go,9
+CMake,CSS,24
+CMake,C#,11
+CMake,TypeScript,6
+CMake,C,64
+CMake,Shell,74
+CMake,Scala,0
+CMake,Swift,1
+CMake,PowerShell,3
+CMake,Rust,7
+CMake,Objective-C,4
+CMake,Jupyter Notebook,26
+CMake,DM,0
+CMake,R,3
+CMake,Lua,4
+CMake,Kotlin,2
+CMake,Elixir,0
+CMake,Perl,1
+CMake,Vue,0
+CMake,Makefile,10
+CMake,Groovy,2
+CMake,Julia,4
+CMake,Haskell,1
+CMake,CoffeeScript,1
+CMake,TeX,13
+CMake,Clojure,1
+CMake,HCL,0
+CMake,OCaml,1
+CMake,Vim script,1
+CMake,XSLT,5
+CMake,Nix,1
+CMake,Matlab,4
+CMake,CMake,748
+CMake,Dart,1
+CMake,Erlang,1
+CMake,Puppet,1
+CMake,Emacs Lisp,3
+CMake,Smarty,0
+CMake,PLpgSQL,1
+CMake,Visual Basic,1
+CMake,Fortran,7
+CMake,Arduino,3
+CMake,F#,0
+Dart,JavaScript,30
+Dart,Python,20
+Dart,Java,28
+Dart,HTML,18
+Dart,Ruby,9
+Dart,PHP,4
+Dart,C++,25
+Dart,Go,9
+Dart,CSS,23
+Dart,C#,1
+Dart,TypeScript,6
+Dart,C,5
+Dart,Shell,3
+Dart,Scala,2
+Dart,Swift,5
+Dart,PowerShell,2
+Dart,Rust,2
+Dart,Objective-C,3
+Dart,Jupyter Notebook,0
+Dart,DM,0
+Dart,R,0
+Dart,Lua,1
+Dart,Kotlin,1
+Dart,Elixir,0
+Dart,Perl,1
+Dart,Vue,1
+Dart,Makefile,0
+Dart,Groovy,1
+Dart,Julia,1
+Dart,Haskell,1
+Dart,CoffeeScript,3
+Dart,TeX,1
+Dart,Clojure,0
+Dart,HCL,0
+Dart,OCaml,0
+Dart,Vim script,3
+Dart,XSLT,1
+Dart,Nix,0
+Dart,Matlab,0
+Dart,CMake,1
+Dart,Dart,260
+Dart,Erlang,1
+Dart,Puppet,0
+Dart,Emacs Lisp,1
+Dart,Smarty,0
+Dart,PLpgSQL,0
+Dart,Visual Basic,1
+Dart,Fortran,0
+Dart,Arduino,0
+Dart,F#,0
+Erlang,JavaScript,43
+Erlang,Python,42
+Erlang,Java,15
+Erlang,HTML,18
+Erlang,Ruby,21
+Erlang,PHP,11
+Erlang,C++,20
+Erlang,Go,16
+Erlang,CSS,13
+Erlang,C#,4
+Erlang,TypeScript,7
+Erlang,C,27
+Erlang,Shell,38
+Erlang,Scala,5
+Erlang,Swift,3
+Erlang,PowerShell,2
+Erlang,Rust,9
+Erlang,Objective-C,5
+Erlang,Jupyter Notebook,1
+Erlang,DM,0
+Erlang,R,0
+Erlang,Lua,3
+Erlang,Kotlin,2
+Erlang,Elixir,29
+Erlang,Perl,3
+Erlang,Vue,0
+Erlang,Makefile,10
+Erlang,Groovy,2
+Erlang,Julia,1
+Erlang,Haskell,1
+Erlang,CoffeeScript,3
+Erlang,TeX,1
+Erlang,Clojure,11
+Erlang,HCL,0
+Erlang,OCaml,2
+Erlang,Vim script,2
+Erlang,XSLT,2
+Erlang,Nix,1
+Erlang,Matlab,0
+Erlang,CMake,1
+Erlang,Dart,1
+Erlang,Erlang,396
+Erlang,Puppet,0
+Erlang,Emacs Lisp,6
+Erlang,Smarty,0
+Erlang,PLpgSQL,3
+Erlang,Visual Basic,1
+Erlang,Fortran,0
+Erlang,Arduino,0
+Erlang,F#,0
+Puppet,JavaScript,57
+Puppet,Python,76
+Puppet,Java,21
+Puppet,HTML,85
+Puppet,Ruby,184
+Puppet,PHP,22
+Puppet,C++,8
+Puppet,Go,18
+Puppet,CSS,58
+Puppet,C#,1
+Puppet,TypeScript,1
+Puppet,C,6
+Puppet,Shell,70
+Puppet,Scala,3
+Puppet,Swift,2
+Puppet,PowerShell,3
+Puppet,Rust,0
+Puppet,Objective-C,0
+Puppet,Jupyter Notebook,1
+Puppet,DM,0
+Puppet,R,1
+Puppet,Lua,2
+Puppet,Kotlin,0
+Puppet,Elixir,2
+Puppet,Perl,10
+Puppet,Vue,0
+Puppet,Makefile,6
+Puppet,Groovy,5
+Puppet,Julia,0
+Puppet,Haskell,0
+Puppet,CoffeeScript,0
+Puppet,TeX,0
+Puppet,Clojure,8
+Puppet,HCL,20
+Puppet,OCaml,0
+Puppet,Vim script,6
+Puppet,XSLT,0
+Puppet,Nix,2
+Puppet,Matlab,0
+Puppet,CMake,1
+Puppet,Dart,0
+Puppet,Erlang,0
+Puppet,Puppet,498
+Puppet,Emacs Lisp,0
+Puppet,Smarty,1
+Puppet,PLpgSQL,1
+Puppet,Visual Basic,0
+Puppet,Fortran,0
+Puppet,Arduino,0
+Puppet,F#,0
+Emacs Lisp,JavaScript,61
+Emacs Lisp,Python,68
+Emacs Lisp,Java,22
+Emacs Lisp,HTML,31
+Emacs Lisp,Ruby,36
+Emacs Lisp,PHP,16
+Emacs Lisp,C++,27
+Emacs Lisp,Go,28
+Emacs Lisp,CSS,25
+Emacs Lisp,C#,3
+Emacs Lisp,TypeScript,8
+Emacs Lisp,C,20
+Emacs Lisp,Shell,46
+Emacs Lisp,Scala,8
+Emacs Lisp,Swift,2
+Emacs Lisp,PowerShell,2
+Emacs Lisp,Rust,10
+Emacs Lisp,Objective-C,4
+Emacs Lisp,Jupyter Notebook,5
+Emacs Lisp,DM,0
+Emacs Lisp,R,4
+Emacs Lisp,Lua,2
+Emacs Lisp,Kotlin,2
+Emacs Lisp,Elixir,4
+Emacs Lisp,Perl,10
+Emacs Lisp,Vue,1
+Emacs Lisp,Makefile,10
+Emacs Lisp,Groovy,1
+Emacs Lisp,Julia,4
+Emacs Lisp,Haskell,14
+Emacs Lisp,CoffeeScript,3
+Emacs Lisp,TeX,3
+Emacs Lisp,Clojure,19
+Emacs Lisp,HCL,1
+Emacs Lisp,OCaml,4
+Emacs Lisp,Vim script,9
+Emacs Lisp,XSLT,2
+Emacs Lisp,Nix,9
+Emacs Lisp,Matlab,1
+Emacs Lisp,CMake,3
+Emacs Lisp,Dart,1
+Emacs Lisp,Erlang,6
+Emacs Lisp,Puppet,0
+Emacs Lisp,Emacs Lisp,625
+Emacs Lisp,Smarty,0
+Emacs Lisp,PLpgSQL,0
+Emacs Lisp,Visual Basic,1
+Emacs Lisp,Fortran,0
+Emacs Lisp,Arduino,0
+Emacs Lisp,F#,1
+Smarty,JavaScript,58
+Smarty,Python,57
+Smarty,Java,27
+Smarty,HTML,31
+Smarty,Ruby,25
+Smarty,PHP,25
+Smarty,C++,5
+Smarty,Go,68
+Smarty,CSS,21
+Smarty,C#,4
+Smarty,TypeScript,15
+Smarty,C,3
+Smarty,Shell,79
+Smarty,Scala,10
+Smarty,Swift,1
+Smarty,PowerShell,1
+Smarty,Rust,3
+Smarty,Objective-C,2
+Smarty,Jupyter Notebook,3
+Smarty,DM,0
+Smarty,R,2
+Smarty,Lua,2
+Smarty,Kotlin,0
+Smarty,Elixir,0
+Smarty,Perl,7
+Smarty,Vue,3
+Smarty,Makefile,9
+Smarty,Groovy,18
+Smarty,Julia,0
+Smarty,Haskell,1
+Smarty,CoffeeScript,1
+Smarty,TeX,0
+Smarty,Clojure,0
+Smarty,HCL,17
+Smarty,OCaml,0
+Smarty,Vim script,1
+Smarty,XSLT,1
+Smarty,Nix,0
+Smarty,Matlab,1
+Smarty,CMake,0
+Smarty,Dart,0
+Smarty,Erlang,0
+Smarty,Puppet,1
+Smarty,Emacs Lisp,0
+Smarty,Smarty,336
+Smarty,PLpgSQL,0
+Smarty,Visual Basic,0
+Smarty,Fortran,0
+Smarty,Arduino,0
+Smarty,F#,0
+PLpgSQL,JavaScript,117
+PLpgSQL,Python,63
+PLpgSQL,Java,36
+PLpgSQL,HTML,52
+PLpgSQL,Ruby,19
+PLpgSQL,PHP,12
+PLpgSQL,C++,16
+PLpgSQL,Go,12
+PLpgSQL,CSS,33
+PLpgSQL,C#,5
+PLpgSQL,TypeScript,12
+PLpgSQL,C,19
+PLpgSQL,Shell,31
+PLpgSQL,Scala,4
+PLpgSQL,Swift,0
+PLpgSQL,PowerShell,3
+PLpgSQL,Rust,2
+PLpgSQL,Objective-C,0
+PLpgSQL,Jupyter Notebook,6
+PLpgSQL,DM,0
+PLpgSQL,R,7
+PLpgSQL,Lua,1
+PLpgSQL,Kotlin,2
+PLpgSQL,Elixir,0
+PLpgSQL,Perl,5
+PLpgSQL,Vue,0
+PLpgSQL,Makefile,5
+PLpgSQL,Groovy,4
+PLpgSQL,Julia,0
+PLpgSQL,Haskell,0
+PLpgSQL,CoffeeScript,2
+PLpgSQL,TeX,0
+PLpgSQL,Clojure,1
+PLpgSQL,HCL,1
+PLpgSQL,OCaml,0
+PLpgSQL,Vim script,0
+PLpgSQL,XSLT,1
+PLpgSQL,Nix,0
+PLpgSQL,Matlab,0
+PLpgSQL,CMake,1
+PLpgSQL,Dart,0
+PLpgSQL,Erlang,3
+PLpgSQL,Puppet,1
+PLpgSQL,Emacs Lisp,0
+PLpgSQL,Smarty,0
+PLpgSQL,PLpgSQL,360
+PLpgSQL,Visual Basic,0
+PLpgSQL,Fortran,0
+PLpgSQL,Arduino,0
+PLpgSQL,F#,0
+Visual Basic,JavaScript,29
+Visual Basic,Python,16
+Visual Basic,Java,16
+Visual Basic,HTML,13
+Visual Basic,Ruby,3
+Visual Basic,PHP,14
+Visual Basic,C++,16
+Visual Basic,Go,1
+Visual Basic,CSS,9
+Visual Basic,C#,24
+Visual Basic,TypeScript,4
+Visual Basic,C,5
+Visual Basic,Shell,7
+Visual Basic,Scala,2
+Visual Basic,Swift,0
+Visual Basic,PowerShell,3
+Visual Basic,Rust,2
+Visual Basic,Objective-C,0
+Visual Basic,Jupyter Notebook,1
+Visual Basic,DM,0
+Visual Basic,R,0
+Visual Basic,Lua,2
+Visual Basic,Kotlin,1
+Visual Basic,Elixir,0
+Visual Basic,Perl,3
+Visual Basic,Vue,1
+Visual Basic,Makefile,0
+Visual Basic,Groovy,1
+Visual Basic,Julia,1
+Visual Basic,Haskell,1
+Visual Basic,CoffeeScript,1
+Visual Basic,TeX,1
+Visual Basic,Clojure,0
+Visual Basic,HCL,0
+Visual Basic,OCaml,0
+Visual Basic,Vim script,1
+Visual Basic,XSLT,0
+Visual Basic,Nix,0
+Visual Basic,Matlab,0
+Visual Basic,CMake,1
+Visual Basic,Dart,1
+Visual Basic,Erlang,1
+Visual Basic,Puppet,0
+Visual Basic,Emacs Lisp,1
+Visual Basic,Smarty,0
+Visual Basic,PLpgSQL,0
+Visual Basic,Visual Basic,369
+Visual Basic,Fortran,3
+Visual Basic,Arduino,2
+Visual Basic,F#,0
+Fortran,JavaScript,9
+Fortran,Python,51
+Fortran,Java,6
+Fortran,HTML,11
+Fortran,Ruby,3
+Fortran,PHP,1
+Fortran,C++,38
+Fortran,Go,2
+Fortran,CSS,7
+Fortran,C#,4
+Fortran,TypeScript,2
+Fortran,C,33
+Fortran,Shell,19
+Fortran,Scala,1
+Fortran,Swift,0
+Fortran,PowerShell,0
+Fortran,Rust,2
+Fortran,Objective-C,0
+Fortran,Jupyter Notebook,16
+Fortran,DM,0
+Fortran,R,5
+Fortran,Lua,1
+Fortran,Kotlin,0
+Fortran,Elixir,0
+Fortran,Perl,1
+Fortran,Vue,0
+Fortran,Makefile,4
+Fortran,Groovy,0
+Fortran,Julia,3
+Fortran,Haskell,0
+Fortran,CoffeeScript,0
+Fortran,TeX,10
+Fortran,Clojure,0
+Fortran,HCL,0
+Fortran,OCaml,0
+Fortran,Vim script,0
+Fortran,XSLT,0
+Fortran,Nix,0
+Fortran,Matlab,2
+Fortran,CMake,7
+Fortran,Dart,0
+Fortran,Erlang,0
+Fortran,Puppet,0
+Fortran,Emacs Lisp,0
+Fortran,Smarty,0
+Fortran,PLpgSQL,0
+Fortran,Visual Basic,3
+Fortran,Fortran,362
+Fortran,Arduino,0
+Fortran,F#,0
+Arduino,JavaScript,62
+Arduino,Python,78
+Arduino,Java,34
+Arduino,HTML,50
+Arduino,Ruby,14
+Arduino,PHP,9
+Arduino,C++,70
+Arduino,Go,11
+Arduino,CSS,27
+Arduino,C#,11
+Arduino,TypeScript,9
+Arduino,C,38
+Arduino,Shell,22
+Arduino,Scala,0
+Arduino,Swift,2
+Arduino,PowerShell,1
+Arduino,Rust,1
+Arduino,Objective-C,3
+Arduino,Jupyter Notebook,4
+Arduino,DM,0
+Arduino,R,0
+Arduino,Lua,2
+Arduino,Kotlin,0
+Arduino,Elixir,2
+Arduino,Perl,0
+Arduino,Vue,0
+Arduino,Makefile,1
+Arduino,Groovy,1
+Arduino,Julia,0
+Arduino,Haskell,0
+Arduino,CoffeeScript,3
+Arduino,TeX,4
+Arduino,Clojure,0
+Arduino,HCL,0
+Arduino,OCaml,0
+Arduino,Vim script,1
+Arduino,XSLT,0
+Arduino,Nix,0
+Arduino,Matlab,2
+Arduino,CMake,3
+Arduino,Dart,0
+Arduino,Erlang,0
+Arduino,Puppet,0
+Arduino,Emacs Lisp,0
+Arduino,Smarty,0
+Arduino,PLpgSQL,0
+Arduino,Visual Basic,2
+Arduino,Fortran,0
+Arduino,Arduino,840
+Arduino,F#,0
+F#,JavaScript,28
+F#,Python,5
+F#,Java,4
+F#,HTML,14
+F#,Ruby,3
+F#,PHP,2
+F#,C++,7
+F#,Go,2
+F#,CSS,8
+F#,C#,45
+F#,TypeScript,5
+F#,C,3
+F#,Shell,5
+F#,Scala,4
+F#,Swift,1
+F#,PowerShell,7
+F#,Rust,2
+F#,Objective-C,1
+F#,Jupyter Notebook,0
+F#,DM,0
+F#,R,0
+F#,Lua,0
+F#,Kotlin,0
+F#,Elixir,1
+F#,Perl,0
+F#,Vue,0
+F#,Makefile,0
+F#,Groovy,0
+F#,Julia,0
+F#,Haskell,1
+F#,CoffeeScript,0
+F#,TeX,2
+F#,Clojure,1
+F#,HCL,0
+F#,OCaml,0
+F#,Vim script,1
+F#,XSLT,0
+F#,Nix,0
+F#,Matlab,0
+F#,CMake,0
+F#,Dart,0
+F#,Erlang,0
+F#,Puppet,0
+F#,Emacs Lisp,1
+F#,Smarty,0
+F#,PLpgSQL,0
+F#,Visual Basic,0
+F#,Fortran,0
+F#,Arduino,0
+F#,F#,226
