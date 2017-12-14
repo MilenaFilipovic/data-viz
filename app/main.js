@@ -5,15 +5,21 @@ const networkDataFile = 'data/network_50_2017-11-01_2017-11-30__processedat_2017
 const statisticsDataFile = 'data/agg_stats_2017-08-01_2017-10-31__processedat_2017-11-23.csv';
 const geralDataFile = 'data/agg_general_2017-08-01_2017-10-31__processedat_2017-11-23.csv';
 
-const w = 900,
-    h = 900,
-    rInner = h / 2.6,
+const wChord = 900,
+    hChord = 900,
+    rInner = hChord / 2.6,
     rOut = rInner - 20,
-    padding = 0.02;
+    paddingChord = 0.02;
 
-const margin = {top: 20, right: 20, bottom: 20, left: 20},
-    width = w - margin.left - margin.right,
-    height = h - margin.top - margin.bottom;
+const wMetrics = 200, hMetrics = 200;
+const marginMetrics = {top: 20, right: 20, bottom: 20, left: 23},
+    widthMetrics = wMetrics - marginMetrics.left - marginMetrics.right,
+    heightMetrics = hMetrics - marginMetrics.top - marginMetrics.bottom;
+
+const marginChord = {top: 20, right: 20, bottom: 20, left: 20},
+    widthChord = wChord - marginChord.left - marginChord.right,
+    heightChord = hChord - marginChord.top - marginChord.bottom;
+
 
 const lookupColorLanguage = {
     'multi': "#31a354",
@@ -25,6 +31,8 @@ const lookupColorLanguage = {
     'functional': "#f03b20",
     'declarative': "#fa9fb5"
 };
+
+const aggMetrics = ["days_open_merged", "payload.pull_request.base.repo.open_issues_count"];
 
 
 function getMatrixCommonActors(data) {
@@ -65,12 +73,13 @@ function rowConverterNetwork(d) {
     }
 }
 
+var parseTime = d3.timeParse("%Y-%m");
 
 function rowConverterStatistics(d) {
     return {
         statistic: d.column,
         metric: d.metric,
-        cohort: d.cohort,
+        cohort: parseTime(d.cohort),
         language: d.language,
         value: d.value != "" ? parseFloat(d.value) : 0
 
@@ -90,7 +99,7 @@ function rowConverterStatGeral(d) {
 
 
 function drawChord(matrix, labels, stats, generalMetrics) { // try to improve those callings
-    let chord = d3.chord().padAngle(padding);
+    let chord = d3.chord().padAngle(paddingChord);
 
     let metricsBox = d3.select("#chord")
         .append("div")
@@ -99,10 +108,10 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
 
     let svg = d3.select("#chord")
         .append("svg:svg")
-        .attr("width", width)
-        .attr("height", height)
+        .attr("width", widthChord)
+        .attr("height", heightChord)
         .append("svg:g")
-        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+        .attr("transform", "translate(" + widthChord / 2 + "," + heightChord / 2 + ")");
 
 
     svg.append("svg:g")
@@ -120,7 +129,17 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         .on("mousemove", fade(0.00, "visible"))
         .on("mouseout", fade(1, "hidden"))
         .on("click", function (d) {
-            drawMetrics(stats.filter(x => x['language'] == labels[d.index]['language']), labels[d.index]['language'])
+            d3.select("body")
+                .append("div")
+                .attr("id", "metrics-box")
+                .attr("class", "metrics-box")
+                .style("visibility", "visible");
+
+            let filteredStats = stats.filter(x => x['language'] == labels[d.index]['language']),
+                language = labels[d.index]['language'];
+            for (i in aggMetrics) {
+                drawMetrics(filteredStats, language, aggMetrics[i])
+            }
         });
 
 
@@ -185,9 +204,10 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
                 let language = labels[i]['language'];
                 metrics = avgPrsAndActors(generalMetrics.filter(x => x['language'] == language));
                 // TODO: improve text format
-                metricsBox.text(language + "\nAvg Prs:"
-                    + metrics['meanPrs'] + "\nAvg Uniq. Actors: "
-                    + metrics['meanActors'] + "\nClick pour plus information");
+                metricsBox.text("<h1 style='color: blue'> oi </h1>")
+                // metricsBox.text(language + "\nAvg Prs:"
+                //     + metrics['meanPrs'] + "\nAvg Uniq. Actors: "
+                //     + metrics['meanActors'] + "\nClick pour plus information");
             }
             metricsBox
                 .style("left", (d3.event.pageX) + "px")
@@ -202,84 +222,6 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         metrics['meanActors'] = math.round(math.mean(geralLanguage.map(x => x['number_actors'])));
 
         return metrics
-    }
-
-    function drawMetrics(languageStats, language) {
-
-        let metrics = d3.select("body")
-            .append("div")
-            .attr("class", "metrics-box")
-            .style("visibility", "visible");
-
-        let daysOpenMerged = languageStats
-            .filter(x => x['statistic'] == "days_open_merged" & x['metric'] == "mean")
-            .map(x => [x['value'], x['value']]);
-
-        var x = d3.scaleLinear().rangeRound([0, 100]),
-            y = d3.scaleLinear().rangeRound([100, 0]);
-
-        data = [[1,2], [3, 4], [5, 6]];
-
-        n = 2
-        var x = d3.scaleLinear()
-            .range([0, 100])
-            .domain([0, n-1]);
-
-        var y = d3.scaleLinear()
-            .domain([0, 1])
-            .range([100, 0]);
-
-        g = metrics.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + 100 + ")")
-            .call(d3.axisBottom(x)); // Create an axis component with d3.axisBottom
-
-        var line = d3.line()
-            .x(function (d, i) {
-                return x(i);
-            })
-            .y(function (d) {
-                return y(d[1]);
-            });
-
-        svg.append("g")
-            .attr("class", "y axis")
-            .call(d3.axisLeft(y)); // Create an axis component with d3.axisLeft
-
-        svg.append("path")
-            .datum(data) // 10. Binds data to the line
-            .attr("class", "line") // Assign a class for styling
-            .attr("d", line); // 11. Calls the line generator
-
-
-
-
-        // g.append("g")
-        //     .attr("transform", "translate(0," + height + ")")
-        //     .call(d3.axisBottom(x))
-        //     .select(".domain")
-        //     .remove();
-        //
-        // g.append("g")
-        //     .call(d3.axisLeft(y))
-        //     .append("text")
-        //     .attr("fill", "#000")
-        //     .attr("transform", "rotate(-90)")
-        //     .attr("y", 6)
-        //     .attr("dy", "0.71em")
-        //     .attr("text-anchor", "end")
-        //     .text("Price ($)");
-        //
-        // g.append("path")
-        //     .datum(data)
-        //     .attr("fill", "none")
-        //     .attr("stroke", "steelblue")
-        //     .attr("stroke-linejoin", "round")
-        //     .attr("stroke-linecap", "round")
-        //     .attr("stroke-width", 1.5)
-        //     .attr("d", line);
-
-
     }
 }
 
@@ -297,6 +239,24 @@ d3.queue()
 
         let matrix = getMatrixCommonActors(network);
         let logMatrix = matrix.map(row => row.map(x => x > 30 ? Math.log(x) : 0));
-        drawChord(logMatrix, languages, stats, geralStats)
+        drawChord(logMatrix, languages, stats, geralStats);
+
+        document.addEventListener('click', function (event) {
+            let specifiedElement = document.getElementById("metrics-box");
+            if (specifiedElement != null) {
+                if (!specifiedElement.contains(event.target)) {
+                    console.log('click outside');
+                    // specifiedElement.remove()
+                }
+            }
+        });
+        //
+        // languageStats = stats.filter(x => x['language'] == 'Python')
+        //
+        // let daysOpenMerged = languageStats
+        //     .filter(x => x['statistic'] == "days_open_merged" & x['metric'] == "mean")
+        //     .map(x => [x['cohort'], x['value']]);
+        // console.log(daysOpenMerged)
+        let means = statsOfAllLanguages(stats)
 
     });
