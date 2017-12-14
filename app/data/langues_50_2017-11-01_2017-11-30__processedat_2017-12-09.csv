@@ -1,0 +1,51 @@
+language,paradigm
+CSS,declarative
+Elm,declarative
+HTML,declarative
+Nix,declarative
+PLpgSQL,declarative
+XSLT,declarative
+Clojure,functional
+Elixir,functional
+Erlang,functional
+Groovy,functional
+Haskell,functional
+OCaml,functional
+Arduino,imperative
+C,imperative
+Fortran,imperative
+Assembly,machine
+CoffeeScript,multi
+D,multi
+F#,multi
+Go,multi
+Julia,multi
+Lua,multi
+Matlab,multi
+Perl,multi
+R,multi
+Rust,multi
+Scala,multi
+Swift,multi
+Visual Basic,multi
+C#,oob
+Crystal,oob
+Dart,oob
+Java,oob
+JavaScript,oob
+Jupyter Notebook,oob
+Kotlin,oob
+Objective-C,oob
+Python,oob
+Ruby,oob
+Smalltalk,oob
+TypeScript,oob
+C++,procedural
+PHP,procedural
+Batchfile,scripted
+Emacs Lisp,scripted
+PowerShell,scripted
+Shell,scripted
+Vim script,scripted
+Apex,undefined
+Mathematica,undefined
