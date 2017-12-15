@@ -11,8 +11,8 @@ const wChord = 900,
     rOut = rInner - 20,
     paddingChord = 0.02;
 
-const wMetrics = 200, hMetrics = 200;
-const marginMetrics = {top: 20, right: 20, bottom: 20, left: 25},
+const wMetrics = 300, hMetrics = 300;
+const marginMetrics = {top: 30, right: 30, bottom: 30, left: 30},
     widthMetrics = wMetrics - marginMetrics.left - marginMetrics.right,
     heightMetrics = hMetrics - marginMetrics.top - marginMetrics.bottom;
 
@@ -136,7 +136,11 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         .on("mousemove", fade(0.00, "visible"))
         .on("mouseout", fade(1, "hidden"))
         .on("click", function (d) {
-            showMetrics(d)
+            closeSlideBar();
+            document.getElementById("main").style.marginLeft = "75px";
+            let containerIdToAppend = "side-menu";
+            document.getElementById(containerIdToAppend).style.width = "400px";
+            showMetrics(d, containerIdToAppend)
         });
 
 
@@ -223,13 +227,7 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         }
     }
 
-    function showMetrics(d) {
-        d3.select("body")
-            .append("div")
-            .attr("id", "metrics-box")
-            .attr("class", "metrics-box")
-            .style("visibility", "visible");
-
+    function showMetrics(d, containerIdToAppend) {
         let language = labels[d.index]['language'],
             paradigm = labels[d.index]['paradigm'];
 
@@ -237,11 +235,7 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         titleContainer.className = "metrics-title";
         titleContainer.innerHTML = language;
         titleContainer.style.color = lookupColorLanguage[paradigm];
-        document.getElementById('metrics-box').appendChild(titleContainer);
-        // mega xunxo
-        var spaceContainer = document.createElement("div");
-        spaceContainer.className = "space";
-        document.getElementById('metrics-box').appendChild(spaceContainer);
+        document.getElementById(containerIdToAppend).appendChild(titleContainer);
 
         for (var key in lookupLegendColors) {
             var boxContainer = document.createElement("div");
@@ -253,13 +247,8 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
             box.style.backgroundColor = lookupLegendColors[key];
             boxContainer.appendChild(box);
             boxContainer.appendChild(label);
-            document.getElementById('metrics-box').appendChild(boxContainer);
+            document.getElementById(containerIdToAppend).appendChild(boxContainer);
         }
-
-        // mega xunxo
-        var spaceContainer = document.createElement("div");
-        spaceContainer.className = "space"
-        document.getElementById('metrics-box').appendChild(spaceContainer);
 
         let filteredStats = stats.filter(x => x['language'] == labels[d.index]['language']),
             allStats = stats.filter(x => x['language'] == 'all');
@@ -277,6 +266,16 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
     }
 }
 
+function closeSlideBar() {
+    document.getElementById("main").style.marginLeft = "0px";
+    let list = document.getElementById("side-menu");
+    if (list.hasChildNodes()) {
+        while (list.childElementCount > 1) {
+            list.removeChild(list.lastChild);
+        }
+    }
+    document.getElementById("side-menu").style.width = 0;
+}
 
 d3.queue()
     .defer(d3.csv, languagesDataFile)
@@ -292,14 +291,4 @@ d3.queue()
         let matrix = getMatrixCommonActors(network);
         let logMatrix = matrix.map(row => row.map(x => x > 30 ? Math.log(x) : 0));
         drawChord(logMatrix, languages, stats, geralStats);
-
-        document.addEventListener('click', function (event) {
-            let specifiedElement = document.getElementById("metrics-box");
-            if (specifiedElement != null) {
-                if (!specifiedElement.contains(event.target)) {
-                    console.log('click outside');
-                    // specifiedElement.remove()
-                }
-            }
-        });
     });

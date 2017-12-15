@@ -30,7 +30,7 @@ function drawMetrics(languageStats, allStats, statistic) {
             return Math.min(a, b)
         });
 
-    let svg = d3.select("#metrics-box")
+    let svg = d3.select("#side-menu")
         .append("svg:svg")
         .attr("width", wMetrics)
         .attr("height", hMetrics)
@@ -97,7 +97,7 @@ function drawMetrics(languageStats, allStats, statistic) {
         .attr("x", (widthMetrics / 2))
         .attr("y", 0 - (marginMetrics.top / 2))
         .attr("text-anchor", "middle")
-        .style("font-size", "10px")
+        .style("font-size", "14px")
         .style("font-weight", "bold")
         .text(metricName);
 }
