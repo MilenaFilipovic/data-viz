@@ -1,14 +1,14 @@
-// const networkDataFile = 'data/network_50_2017-08-01_2017-10-31__processedat_2017-12-04.csv';
-// const languagesDataFile = 'data/langues_50_2017-08-01_2017-10-31__processedat_2017-12-04.csv';
 const languagesDataFile = 'data/langues_50_2017-11-01_2017-11-30__processedat_2017-12-09.csv';
 const networkDataFile = 'data/network_50_2017-11-01_2017-11-30__processedat_2017-12-09.csv';
 const statisticsDataFile = 'data/agg_stats_2017-07-01_2017-11-30__processedat_2017-12-14.csv';
 const geralDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-14.csv';
 
+const colorConextions = "#F0F0F0";
+
 const wChord = 900,
     hChord = 900,
     rInner = hChord / 2.6,
-    rOut = rInner - 20,
+    rOut = rInner - 30,
     paddingChord = 0.02;
 
 const wMetrics = 300, hMetrics = 300;
@@ -20,8 +20,18 @@ const marginChord = {top: 20, right: 20, bottom: 20, left: 20},
     widthChord = wChord - marginChord.left - marginChord.right,
     heightChord = hChord - marginChord.top - marginChord.bottom;
 
-const lookupLegendColors = {'Mean of language': '#000080', 'Mean of all': '#FF4500'};
+const lookupLegendColors = {
+    'Mean of Language': '#000080',
+    'Mean of all Languages': '#FF4500'};
 
+const lookupNiceParadigmNames = {'multi': 'Multi-Paradigm',
+                                 'oob': 'Object-Oriented',
+                                 'scripted': 'Scripted',
+                                 'procedural': 'Procedural',
+                                 'imperative': 'Imperative',
+                                 'functional': 'Functional',
+                                 'declarative': 'Declarative',
+                                 'undefined': 'Undefined'};
 
 const lookupColorLanguage = {
     'multi': "#31a354",
@@ -39,69 +49,6 @@ const aggMetrics = ["days_open_merged",
     "payload.pull_request.changed_files",
     // "payload.pull_request.comments",
     "payload.pull_request.commits"];
-
-
-function getMatrixCommonActors(data) {
-    // This function is a simplified version of https://gist.github.com/eesur/0e9820fb577370a13099#file-mapper-js-L4
-    let mmap = {}, matrix = [], counter = 0;
-    let values = _.uniq(_.pluck(data, "language1"));
-
-    values.map(function (v) {
-        if (!mmap[v]) {
-            mmap[v] = {name: v, id: counter++, data: data}
-        }
-    });
-
-    _.each(mmap, function (a) {
-        if (!matrix[a.id]) matrix[a.id] = [];
-        _.each(mmap, function (b) {
-            let recs = _.filter(data, function (row) {
-                return (row.language1 === a.name && row.language2 === b.name);
-            });
-
-            if (!recs[0]) {
-                matrix[a.id][b.id] = 0
-            }
-            else {
-                matrix[a.id][b.id] = +recs[0].common_actors
-            }
-        });
-    });
-    return matrix;
-}
-
-
-function rowConverterNetwork(d) {
-    return {
-        language1: d.language1,
-        language2: d.language2,
-        common_actors: parseFloat(d.common_actors)
-    }
-}
-
-var parseTime = d3.timeParse("%Y-%m");
-
-function rowConverterStatistics(d) {
-    return {
-        statistic: d.column,
-        metric: d.metric,
-        cohort: parseTime(d.cohort),
-        language: d.language,
-        value: d.value != "" ? parseFloat(d.value) : 0
-
-    }
-}
-
-
-function rowConverterStatGeral(d) {
-    return {
-        cohort: d.cohort,
-        language: d.language,
-        number_prs: d.number_prs != "" ? parseFloat(d.number_prs) : 0,
-        number_actors: d.number_actors != "" ? parseFloat(d['actor.display_login']) : 0
-
-    }
-}
 
 
 function drawChord(matrix, labels, stats, generalMetrics) { // try to improve those callings
@@ -137,10 +84,9 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         .on("mouseout", fade(1, "hidden"))
         .on("click", function (d) {
             closeSlideBar();
-            document.getElementById("main").style.marginLeft = "75px";
-            let containerIdToAppend = "side-menu";
-            document.getElementById(containerIdToAppend).style.width = "400px";
-            showMetrics(d, containerIdToAppend)
+            document.getElementById("main").style.marginLeft = "100px";
+            document.getElementById("side-menu").style.width = "400px";
+            showMetrics(d, "side-menu")
         });
 
 
@@ -153,7 +99,7 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         .filter(function (d) {
             return d.source.index != d.target.index;
         })
-        .style("fill", "#f0f0f0")
+        .style("fill", colorConextions)
         .attr("d", d3.ribbon().radius(rOut))
         .style("opacity", 1);
 
@@ -213,12 +159,19 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
                     }
                 }
 
-                metricsBox.append("h1").text(language);
-                metricsBox.append("h1").text(paradigm);
+                var p = document.createElement('p');
+                p.className = "title-geral-metrics-box";
+                p.innerHTML = language + " - " + lookupNiceParadigmNames[paradigm];
+                p.style.color = lookupColorLanguage[paradigm];
+                document.getElementById('geral-metrics-box').appendChild(p);
 
-                // metricsBox.innerHTML = language + paradigm + "\nAvg Prs:"
-                //     + geralMetrics['meanPrs'] + "\nAvg Uniq. Actors: "
-                //     + geralMetrics['meanActors'] + "\nClick pour plus information"
+                var p = document.createElement('div');
+                p.className = "title-geral-metrics-box";
+                p.innerHTML = "Avg PRs/mois: " + geralMetrics['meanPrs'] +
+                    "<br/>Avg Actors/mois: " + geralMetrics['meanActors'] +
+                    "<br/>PRs/Actors: " + math.round(geralMetrics['meanPrs'] / geralMetrics['meanActors']) +
+                    "<br/> <br/> Click to see more about";
+                document.getElementById('geral-metrics-box').appendChild(p);
             }
             metricsBox
                 .style("left", (d3.event.pageX) + "px")
@@ -236,6 +189,11 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         titleContainer.innerHTML = language;
         titleContainer.style.color = lookupColorLanguage[paradigm];
         document.getElementById(containerIdToAppend).appendChild(titleContainer);
+
+        let subtitleContainer = document.createElement("div");
+        subtitleContainer.innerHTML = paradigm;
+        subtitleContainer.style.color = lookupColorLanguage[paradigm];
+        document.getElementById(containerIdToAppend).appendChild(subtitleContainer);
 
         for (var key in lookupLegendColors) {
             var boxContainer = document.createElement("div");
@@ -283,6 +241,16 @@ d3.queue()
     .defer(d3.csv, geralDataFile)
     .defer(d3.csv, statisticsDataFile)
     .await(function (error, languages, network, geralStats, stats) {
+
+        // TODO: freeze screen in when scroll nav bar ++++
+        // TODO: bundle edges +++++
+        // TODO: draw metrics with PRs per month +
+        // TODO: order based in language size (more on `grab_data` package) +
+        // TODO: comment and improve JS code, it is a mess! ++
+        // TODO: update read me +
+        // TODO: fix issue regarding y-axis and 95% percentile ++++++
+        // TODO: insert top languages in side bar +
+        // TODO: put ranking position for each metric ++
 
         network = network.map(rowConverterNetwork);
         stats = stats.map(rowConverterStatistics);
