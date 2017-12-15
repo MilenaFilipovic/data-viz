@@ -1,5 +1,5 @@
-const languagesDataFile = 'data/langues_50_2017-11-01_2017-11-30__processedat_2017-12-09.csv';
-const networkDataFile = 'data/network_50_2017-11-01_2017-11-30__processedat_2017-12-09.csv';
+const languagesDataFile = 'data/langues_50_2017-11-01_2017-11-30__processedat_2017-12-15.csv';
+const networkDataFile = 'data/network_50_2017-11-01_2017-11-30__processedat_2017-12-15.csv';
 const statisticsDataFile = 'data/agg_stats_2017-07-01_2017-11-30__processedat_2017-12-14.csv';
 const geralDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-14.csv';
 
@@ -80,18 +80,6 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         .append("svg:path")
         .style("fill", function (d) {
             return lookupColorLanguage[labels[d.index]['paradigm']];
-        })
-        .style("stroke", "black")
-        .style("opacity", 0.5)
-        .attr("d", d3.arc().innerRadius(rOut).outerRadius(rInner))
-        .on("mouseover", fade(0.00, "visible"))
-        .on("mousemove", fade(0.00, "visible"))
-        .on("mouseout", fade(1, "hidden"))
-        .on("click", function (d) {
-            closeSlideBar();
-            document.getElementById("main").style.marginLeft = shiftMain;
-            document.getElementById("side-menu").style.width = slidBar;
-            showMetrics(d, "side-menu")
         });
 
 
@@ -121,6 +109,18 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         })
         .style("fill", function (d) {
             return lookupColorLanguage[labels[d.index]['paradigm']];
+        })
+        .style("stroke", "black")
+        .style("opacity", 0.7)
+        .attr("d", d3.arc().innerRadius(rOut).outerRadius(rInner))
+        .on("mouseover", fade(0.00, "visible"))
+        .on("mousemove", fade(0.00, "visible"))
+        .on("mouseout", fade(1, "hidden"))
+        .on("click", function (d) {
+            closeSlideBar();
+            document.getElementById("main").style.marginLeft = shiftMain;
+            document.getElementById("side-menu").style.width = slidBar;
+            showMetrics(d, "side-menu")
         });
 
 

@@ -6,6 +6,7 @@ main 2017-06-11 2017-08-11 50"""
 
 import os
 import pandas as pd
+import numpy as np
 import logging as log
 from docopt import docopt
 from datetime import datetime
@@ -125,8 +126,23 @@ if __name__ == '__main__':
 
     # careful!
     langues = langues.sort_values(['paradigm', 'language'])
-    print(langues)
-    network = network.sort_values(['paradigm1', 'language1'])
+    network = network.sort_values(['paradigm1', 'common_actors', 'language1'])
+
+    order = (network
+                  .groupby(['paradigm1', 'language1'])
+                  .max()['common_actors']
+                  .reset_index()
+                  .sort_values(['paradigm1', 'common_actors'], ascending=False))
+    order['order'] = range(order.shape[0])
+    order = order.rename(columns={'language1': 'language'})[['language', 'order']]
+
+    langues = pd.merge(langues, order, how='inner', on='language').sort_values('order')[['language', 'paradigm']]
+
+    network = pd.merge(network, order.rename(columns={'order': 'order1'}),
+                       how='inner', left_on='language1', right_on='language')
+    network = pd.merge(network, order.rename(columns={'order': 'order2'}),
+                       how='inner', left_on='language2', right_on='language')
+    network = network.sort_values(['order1', 'order2'])[['language1', 'language2', 'paradigm1', 'paradigm2', 'common_actors']]
 
     file_network_data = os.path.join(helpers.DATA_FOLDER, 'network_{t}_{s}_{e}__processedat_{n}.csv'
                                          .format(t=top_langues, s=start_date, e=end_date,
