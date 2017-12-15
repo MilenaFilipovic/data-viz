@@ -4,6 +4,8 @@ const statisticsDataFile = 'data/agg_stats_2017-07-01_2017-11-30__processedat_20
 const geralDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-14.csv';
 
 const colorConextions = "#F0F0F0";
+const slidBar = "700px";
+const shiftMain = "375px";
 
 const wChord = 900,
     hChord = 900,
@@ -11,7 +13,7 @@ const wChord = 900,
     rOut = rInner - 30,
     paddingChord = 0.02;
 
-const wMetrics = 300, hMetrics = 300;
+const wMetrics = 300, hMetrics = 200;
 const marginMetrics = {top: 30, right: 30, bottom: 30, left: 30},
     widthMetrics = wMetrics - marginMetrics.left - marginMetrics.right,
     heightMetrics = hMetrics - marginMetrics.top - marginMetrics.bottom;
@@ -22,16 +24,19 @@ const marginChord = {top: 20, right: 20, bottom: 20, left: 20},
 
 const lookupLegendColors = {
     'Mean of Language': '#000080',
-    'Mean of all Languages': '#FF4500'};
+    'Mean of all Languages': '#FF4500'
+};
 
-const lookupNiceParadigmNames = {'multi': 'Multi-Paradigm',
-                                 'oob': 'Object-Oriented',
-                                 'scripted': 'Scripted',
-                                 'procedural': 'Procedural',
-                                 'imperative': 'Imperative',
-                                 'functional': 'Functional',
-                                 'declarative': 'Declarative',
-                                 'undefined': 'Undefined'};
+const lookupNiceParadigmNames = {
+    'multi': 'Multi-Paradigm',
+    'oob': 'Object-Oriented',
+    'scripted': 'Scripted',
+    'procedural': 'Procedural',
+    'imperative': 'Imperative',
+    'functional': 'Functional',
+    'declarative': 'Declarative',
+    'undefined': 'Undefined'
+};
 
 const lookupColorLanguage = {
     'multi': "#31a354",
@@ -84,8 +89,8 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         .on("mouseout", fade(1, "hidden"))
         .on("click", function (d) {
             closeSlideBar();
-            document.getElementById("main").style.marginLeft = "100px";
-            document.getElementById("side-menu").style.width = "400px";
+            document.getElementById("main").style.marginLeft = shiftMain;
+            document.getElementById("side-menu").style.width = slidBar;
             showMetrics(d, "side-menu")
         });
 
@@ -161,7 +166,7 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
 
                 var p = document.createElement('p');
                 p.className = "title-geral-metrics-box";
-                p.innerHTML = language + " - " + lookupNiceParadigmNames[paradigm];
+                p.innerHTML = language
                 p.style.color = lookupColorLanguage[paradigm];
                 document.getElementById('geral-metrics-box').appendChild(p);
 
@@ -186,14 +191,9 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
 
         let titleContainer = document.createElement("div");
         titleContainer.className = "metrics-title";
-        titleContainer.innerHTML = language;
+        titleContainer.innerHTML = language + " - " + lookupNiceParadigmNames[paradigm];
         titleContainer.style.color = lookupColorLanguage[paradigm];
         document.getElementById(containerIdToAppend).appendChild(titleContainer);
-
-        let subtitleContainer = document.createElement("div");
-        subtitleContainer.innerHTML = paradigm;
-        subtitleContainer.style.color = lookupColorLanguage[paradigm];
-        document.getElementById(containerIdToAppend).appendChild(subtitleContainer);
 
         for (var key in lookupLegendColors) {
             var boxContainer = document.createElement("div");
@@ -242,15 +242,15 @@ d3.queue()
     .defer(d3.csv, statisticsDataFile)
     .await(function (error, languages, network, geralStats, stats) {
 
-        // TODO: freeze screen in when scroll nav bar ++++
         // TODO: bundle edges +++++
         // TODO: draw metrics with PRs per month +
         // TODO: order based in language size (more on `grab_data` package) +
         // TODO: comment and improve JS code, it is a mess! ++
         // TODO: update read me +
-        // TODO: fix issue regarding y-axis and 95% percentile ++++++
+        // TODO: fix issue regarding y-axis and 95% percentile ++++++ or insert a comment
         // TODO: insert top languages in side bar +
         // TODO: put ranking position for each metric ++
+        // TODO: nice plot of dots
 
         network = network.map(rowConverterNetwork);
         stats = stats.map(rowConverterStatistics);
