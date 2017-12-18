@@ -111,4 +111,5 @@ p.title-geral-metrics-box {
 .focus circle {
     fill: none;
     stroke: steelblue;
+    font-size: 12px;
 }
