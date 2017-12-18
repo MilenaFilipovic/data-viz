@@ -84,6 +84,14 @@ def aggregate_general_metrics(df):
                                .rename(columns={'payload.pull_request.base.repo.language': 'language',
                                                 0: 'number_distinct_actors'}))
 
+    mean_prs = count_prs.groupby('cohort').mean().reset_index()
+    mean_prs['language'] = 'all'
+    count_prs = pd.concat([mean_prs, count_prs], axis=0)
+
+    mean_actors = count_actor.groupby('cohort').mean().reset_index()
+    mean_actors['language'] = 'all'
+    count_actor = pd.concat([mean_actors, count_actor], axis=0)
+
     return count_prs.merge(count_actor, on=['language', 'cohort'], how='inner')
 
 
@@ -101,7 +109,6 @@ if __name__ == '__main__':
 
     # General statistics by language and cohort
     agg_by_stats = aggregate_stats_metrics(df)
-    import pdb; pdb.set_trace()
     file_stats_data = os.path.join(helpers.DATA_FOLDER, 'agg_stats_{s}_{e}__processedat_{n}.csv'
                                    .format(s=start_date, e=end_date, n=datetime.now().strftime('%Y-%m-%d')))
     agg_by_stats.to_csv(file_stats_data, index=False)

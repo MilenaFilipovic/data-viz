@@ -1,7 +1,7 @@
 const languagesDataFile = 'data/langues_50_2017-11-01_2017-11-30__processedat_2017-12-15.csv';
 const networkDataFile = 'data/network_50_2017-11-01_2017-11-30__processedat_2017-12-15.csv';
-const statisticsDataFile = 'data/agg_stats_2017-07-01_2017-11-30__processedat_2017-12-14.csv';
-const geralDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-14.csv';
+const statisticsDataFile = 'data/agg_stats_2017-07-01_2017-11-30__processedat_2017-12-18.csv';
+const geralDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-18.csv';
 
 const colorConextions = "#F0F0F0";
 const slidBar = "700px";
@@ -13,8 +13,8 @@ const wChord = 900,
     rOut = rInner - 30,
     paddingChord = 0.02;
 
-const wMetrics = 300, hMetrics = 200;
-const marginMetrics = {top: 30, right: 30, bottom: 30, left: 30},
+const wMetrics = 320, hMetrics = 200;
+const marginMetrics = {top: 30, right: 30, bottom: 30, left: 40},
     widthMetrics = wMetrics - marginMetrics.left - marginMetrics.right,
     heightMetrics = hMetrics - marginMetrics.top - marginMetrics.bottom;
 
@@ -52,9 +52,7 @@ const lookupColorLanguage = {
 const aggMetrics = ["days_open_merged",
     "payload.pull_request.base.repo.open_issues_count",
     "payload.pull_request.changed_files",
-    // "payload.pull_request.comments",
     "payload.pull_request.commits"];
-
 
 function drawChord(matrix, labels, stats, generalMetrics) { // try to improve those callings
     let chord = d3.chord().padAngle(paddingChord);
@@ -211,8 +209,28 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         let filteredStats = stats.filter(x => x['language'] == labels[d.index]['language']),
             allStats = stats.filter(x => x['language'] == 'all');
 
-        aggMetrics.map(x => drawMetrics(filteredStats, allStats, x))
+        let top5Languages = getTopCorrLanguages(matrix[d.index], 5);
+        let languagesCorr = document.createElement("div");
+        languagesCorr.innerHTML = 'Top Correlated Languages: ' + top5Languages;
+        languagesCorr.style.color = lookupColorLanguage[paradigm];
+        document.getElementById(containerIdToAppend).appendChild(languagesCorr);
 
+
+        drawGeralMetrics(generalMetrics, 'number_prs', language);
+        drawGeralMetrics(generalMetrics, 'number_actors', language);
+        aggMetrics.map(x => drawMetrics(filteredStats, allStats, x))
+    }
+
+    function getTopCorrLanguages(conections, ntop) {
+        let topLanguagesPositions = _.zip(new Array(conections.length).fill().map((e, i) => i), conections)
+            .sort(function (a, b) {
+                return a[1] - b[1]
+            }).reverse().slice(1, ntop).map(x => x[0]);
+        let topLanguages = [];
+        for (i in topLanguagesPositions) {
+            topLanguages.push(labels.map(x => x['language'])[topLanguagesPositions[i]])
+        }
+        return topLanguages
     }
 
     function avgPrsAndActors(geralLanguage) {
@@ -243,11 +261,8 @@ d3.queue()
     .await(function (error, languages, network, geralStats, stats) {
 
         // TODO: bundle edges +++++
-        // TODO: draw metrics with PRs per month +
-        // TODO: order based in language size (more on `grab_data` package) +
-        // TODO: comment and improve JS code, it is a mess! ++
+        // TODO: comment and impr ove JS code, it is a mess! ++
         // TODO: update read me +
-        // TODO: fix issue regarding y-axis and 95% percentile ++++++ or insert a comment
         // TODO: insert top languages in side bar +
         // TODO: put ranking position for each metric ++
         // TODO: nice plot of dots

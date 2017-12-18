@@ -3,7 +3,11 @@ const lookupNiceVariableNames = {'days_open_merged': 'Mean of days between open 
                                  'payload.pull_request.changed_files': 'Mean of Changed files per PR',
                                  'payload.pull_request.comments': 'Mean of comments per PR',
                                  'payload.pull_request.number': "Mean of PR's number",
-                                 'payload.pull_request.commits': 'Mean of commits per PR'};
+                                 'payload.pull_request.commits': 'Mean of commits per PR',
+                                 'number_prs': 'Total of open PRs',
+                                 'number_actors': 'Total de unique Actors',
+//    PUT NUMBER OF CLOSED / MERGED PRS
+};
 
 
 function drawMetrics(languageStats, allStats, statistic) {
@@ -18,17 +22,15 @@ function drawMetrics(languageStats, allStats, statistic) {
         .filter(x => x['statistic'] == statistic & x['metric'] == 'mean')
         .map(x => [x['cohort'], x['value']]);
 
-    let yMax = allStats.filter(x => x['statistic'] == statistic & x['metric'] == '95%')
-        .map(x => x['value'])
+    let yMax = filteredStats.concat(geralMean).map(x => x[1])
         .reduce(function (a, b) {
-            return Math.max(a,b)
+            return Math.max(a,b) + 10
         });
 
-    let yMin = allStats.filter(x => x['statistic'] == statistic & x['metric'] == '5%')
-        .map(x => x['value'])
+    let yMin = math.max(0, filteredStats.concat(geralMean).map(x => x[1])
         .reduce(function (a, b) {
-            return Math.min(a, b)
-        });
+            return Math.min(a, b) - 10
+        }));
 
     let svg = d3.select("#side-menu")
         .append("svg:svg")
@@ -145,3 +147,104 @@ function drawMetrics(languageStats, allStats, statistic) {
         .style("font-weight", "bold")
         .text(metricName);
 }
+
+
+function drawGeralMetrics(geralStatistcs, statistic, language) {
+
+    let metricName = lookupNiceVariableNames[statistic];
+
+    let filteredStats = geralStatistcs
+        .filter(x => x['language'] == language)
+        .map(x => [x['cohort'], x[statistic]]);
+
+    let geralMean = geralStatistcs
+        .filter(x => x['language'] == 'all')
+        .map(x => [x['cohort'], x[statistic]]);
+
+    let yMax = filteredStats.concat(geralMean).map(x => x[1])
+        .reduce(function (a, b) {
+            return Math.max(a,b) + 10
+        });
+
+    let yMin = filteredStats.concat(geralMean).map(x => x[1])
+        .reduce(function (a, b) {
+            return Math.min(a, b) - 10
+        });
+
+    let svg = d3.select("#side-menu")
+        .append("svg:svg")
+        .attr("width", wMetrics)
+        .attr("height", hMetrics)
+        .append("svg:g");
+
+    g = svg.append("g")
+        .attr("transform", "translate(" + marginMetrics.left + "," + marginMetrics.top + ")");
+
+    let x = d3.scaleTime()
+        .rangeRound([0, widthMetrics]);
+
+    let y = d3.scaleLinear()
+        .domain([yMin, yMax])
+        .rangeRound([heightMetrics, 0]);
+
+    x.domain(d3.extent(filteredStats, function (d) {
+        return d[0];
+    }));
+
+    let nObs = filteredStats.length;
+    g.append("g")
+        .attr("transform", "translate(0," + heightMetrics + ")")
+        .call(d3.axisBottom(x)
+            .ticks(nObs + 1)
+            .tickFormat(d3.timeFormat("%b"))
+        );
+
+    let line = d3.line()
+        .x(function (d) {
+            return x(d[0]);
+        })
+        .y(function (d) {
+            return y(d[1]);
+        });
+
+    g.append("g")
+        .call(d3.axisLeft(y).ticks(nObs + 2))
+        .append("text")
+        .attr("fill", "#000")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 10)
+        .attr("dy", "0.71em");
+
+    g.append("path")
+        .datum(filteredStats)
+        .attr("fill", "none")
+        .attr("stroke", lookupLegendColors['Mean of Language'])
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 1.5)
+        .attr("d", line);
+
+    g.append("path")
+        .datum(geralMean)
+        .attr("fill", "none")
+        .attr("stroke", lookupLegendColors['Mean of all Languages'])
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .style("stroke-dasharray", ("3, 3"))
+        .attr("stroke-width", 1.2)
+        .attr("d", line);
+
+    var focus = g.append("g")
+        .attr("class", "focus")
+        .style("display", "none");
+
+    g.append("text")
+        .attr("x", (widthMetrics / 2))
+        .attr("y", 0 - (marginMetrics.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "14px")
+        .style("font-weight", "bold")
+        .text(metricName);
+}
+
+

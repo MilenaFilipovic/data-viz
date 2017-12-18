@@ -52,7 +52,7 @@ function rowConverterStatistics(d) {
 
 function rowConverterStatGeral(d) {
     return {
-        cohort: d.cohort,
+        cohort: parseTime(d.cohort),
         language: d.language,
         number_prs: d.number_prs != "" ? parseFloat(d.number_prs) : 0,
         number_actors: d.number_actors != "" ? parseFloat(d['actor.display_login']) : 0
