@@ -193,6 +193,19 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         titleContainer.style.color = lookupColorLanguage[paradigm];
         document.getElementById(containerIdToAppend).appendChild(titleContainer);
 
+        let top5Languages = getTopCorrLanguages(matrix[d.index], 5);
+        let languagesCorr = document.createElement("div");
+        languagesCorr.className = "text-top-languages";
+        let languagesHTML = 'Top Correlated Languages: ';
+        for (i in top5Languages) {
+            let lang = top5Languages[i];
+            let param = labels.filter(x => x['language'] == lang).map(x => x['paradigm']);
+            languagesHTML += "<span style=\"color:" + lookupColorLanguage[param] + "\">" + lang + ", </span>"
+        }
+        languagesHTML = languagesHTML.slice(0, -9); // works, but it is not good!
+        languagesCorr.innerHTML = languagesHTML;
+        document.getElementById(containerIdToAppend).appendChild(languagesCorr);
+
         for (var key in lookupLegendColors) {
             var boxContainer = document.createElement("div");
             var box = document.createElement("div");
@@ -209,12 +222,6 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         let filteredStats = stats.filter(x => x['language'] == labels[d.index]['language']),
             allStats = stats.filter(x => x['language'] == 'all');
 
-        let top5Languages = getTopCorrLanguages(matrix[d.index], 5);
-        let languagesCorr = document.createElement("div");
-        languagesCorr.innerHTML = 'Top Correlated Languages: ' + top5Languages;
-        languagesCorr.style.color = lookupColorLanguage[paradigm];
-        document.getElementById(containerIdToAppend).appendChild(languagesCorr);
-
 
         drawGeralMetrics(generalMetrics, 'number_prs', language);
         drawGeralMetrics(generalMetrics, 'number_actors', language);
@@ -225,7 +232,7 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         let topLanguagesPositions = _.zip(new Array(conections.length).fill().map((e, i) => i), conections)
             .sort(function (a, b) {
                 return a[1] - b[1]
-            }).reverse().slice(1, ntop).map(x => x[0]);
+            }).reverse().slice(1, ntop + 1).map(x => x[0]);
         let topLanguages = [];
         for (i in topLanguagesPositions) {
             topLanguages.push(labels.map(x => x['language'])[topLanguagesPositions[i]])
