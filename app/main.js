@@ -267,12 +267,6 @@ d3.queue()
     .defer(d3.csv, statisticsDataFile)
     .await(function (error, languages, network, geralStats, stats) {
 
-        // TODO: bundle edges +++++
-        // TODO: comment and impr ove JS code, it is a mess! ++
-        // TODO: update read me +
-        // TODO: put ranking position for each metric ++
-        // TODO: nice plot of dots
-
         network = network.map(rowConverterNetwork);
         stats = stats.map(rowConverterStatistics);
         geralStats = geralStats.map(rowConverterStatGeral);
