@@ -14,7 +14,7 @@ const wChord = 900,
     paddingChord = 0.02;
 
 const wMetrics = 320, hMetrics = 200;
-const marginMetrics = {top: 30, right: 30, bottom: 30, left: 40},
+const marginMetrics = {top: 30, right: 30, bottom: 30, left: 45},
     widthMetrics = wMetrics - marginMetrics.left - marginMetrics.right,
     heightMetrics = hMetrics - marginMetrics.top - marginMetrics.bottom;
 
@@ -270,7 +270,6 @@ d3.queue()
         // TODO: bundle edges +++++
         // TODO: comment and impr ove JS code, it is a mess! ++
         // TODO: update read me +
-        // TODO: insert top languages in side bar +
         // TODO: put ranking position for each metric ++
         // TODO: nice plot of dots
 

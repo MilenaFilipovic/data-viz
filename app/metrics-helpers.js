@@ -22,8 +22,8 @@ function drawMetrics(languageStats, allStats, statistic) {
         .filter(x => x['statistic'] == statistic & x['metric'] == 'mean')
         .map(x => [x['cohort'], x['value']]);
 
-    let yMax = math.max(filteredStats.concat(geralMean).map(x => x[1])) + 20,
-        yMin = math.max(0, math.min(filteredStats.concat(geralMean).map(x => x[1])) - 20);
+    let yMax = 1.2*math.max(filteredStats.concat(geralMean).map(x => x[1])),
+        yMin = 0.8*math.max(math.min(filteredStats.concat(geralMean).map(x => x[1])), 0);
 
     let svg = d3.select("#side-menu")
         .append("svg:svg")
@@ -156,8 +156,8 @@ function drawGeralMetrics(geralStatistcs, statistic, language) {
         .filter(x => x['language'] == 'all')
         .map(x => [x['cohort'], x[statistic]]);
 
-    let yMax = math.max(filteredStats.concat(geralMean).map(x => x[1])) + 20,
-        yMin = math.max(0, math.min(filteredStats.concat(geralMean).map(x => x[1])) - 20);
+    let yMax = 1.2*math.max(filteredStats.concat(geralMean).map(x => x[1])),
+        yMin = 0.8*math.max(0, math.min(filteredStats.concat(geralMean).map(x => x[1])) - 1000);
 
     let svg = d3.select("#side-menu")
         .append("svg:svg")
