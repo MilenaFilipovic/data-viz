@@ -11,6 +11,13 @@ const lookupNiceVariableNames = {'days_open_merged': 'Mean of days between open 
 
 
 function drawMetrics(languageStats, allStats, statistic) {
+    /**
+     * Draw charts in side bar
+     *
+     * @param {array} languageStats - array with aggregate statistics for a specify language
+     * @param {array} allStats - array with aggregate statistics of all languages
+     * @param {string} statistic - metric that will be drawed and it filters languageStats and allStats too
+     */
 
     let metricName = lookupNiceVariableNames[statistic];
 
@@ -145,6 +152,14 @@ function drawMetrics(languageStats, allStats, statistic) {
 
 
 function drawGeralMetrics(geralStatistcs, statistic, language) {
+    /**
+     * Draw charts in side bar (this is almost the same this that in `drawMetrics` but it was split in a different
+     * function due to the schema of the files are different and it would require a change in package `grab_data` )
+     *
+     * @param {array} geralStatistics - array with PR and common actors of all languages
+     * @param {string} statistic - metric that will be drawed
+     * @param {string} language - selected language
+     */
 
     let metricName = lookupNiceVariableNames[statistic];
 

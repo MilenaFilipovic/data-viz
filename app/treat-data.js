@@ -1,5 +1,12 @@
 function getMatrixCommonActors(data) {
-    // This function is a simplified version of https://gist.github.com/eesur/0e9820fb577370a13099#file-mapper-js-L4
+    /**
+     * Create matrix of unique common actors among the languages
+     * This function is a simplified version of https://gist.github.com/eesur/0e9820fb577370a13099#file-mapper-js-L4
+     *
+     * @param {array} data - array of dicionaries where it contains information of language1, language2
+     * and the number of unique common actors
+     */
+
     let mmap = {}, matrix = [], counter = 0;
     let values = _.uniq(_.pluck(data, "language1"));
 

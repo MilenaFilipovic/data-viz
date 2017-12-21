@@ -55,7 +55,7 @@ const aggMetrics = ["days_open_merged",
     "payload.pull_request.commits"];
 
 
-function drawChord(matrix, labels, stats, generalMetrics) { // try to improve those callings
+function drawChord(matrix, labels, stats, generalMetrics) { // try to improve those callings and refactor
     /**
      * Draw chord diagram where the connections are the the log of the number of common actors of two languages
      *
@@ -153,8 +153,12 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
 
     function fade(opacity, showInfos) {
         /**
-         * @param {very_long_type} name Description
+         * Show information of the selected language when the mouse is on and hide other languages
+         *
+         * @param {number} opacity - degree of visibility of other languages not related with the select one
+         * @param {boolean} showInfos - true to show informations about PR's, # actors and language paradigm
          */
+
         return function (g, i) {
             svg.selectAll("g.chord path")
                 .filter(function (d) {
@@ -177,7 +181,7 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
 
                 var p = document.createElement('p');
                 p.className = "title-geral-metrics-box";
-                p.innerHTML = language
+                p.innerHTML = language;
                 p.style.color = lookupColorLanguage[paradigm];
                 document.getElementById('geral-metrics-box').appendChild(p);
 
@@ -197,6 +201,13 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
     }
 
     function showMetrics(d, containerIdToAppend) {
+        /**
+         * Show information of the selected language when the mouse is on and hide other languages
+         *
+         * @param {Object} d - chord element of the selected language
+         * @param {integer} containerIdToAppend - container ID to append the informations about the selected language
+         */
+
         let language = labels[d.index]['language'],
             paradigm = labels[d.index]['paradigm'];
 
