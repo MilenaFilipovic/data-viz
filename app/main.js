@@ -54,7 +54,17 @@ const aggMetrics = ["days_open_merged",
     "payload.pull_request.changed_files",
     "payload.pull_request.commits"];
 
+
 function drawChord(matrix, labels, stats, generalMetrics) { // try to improve those callings
+    /**
+     * Draw chord diagram where the connections are the the log of the number of common actors of two languages
+     *
+     * @param {2d array} matrix - i,j element is the lof of number of common actor between 2 languages
+     * @param {array} labels - array containing languages' names
+     * @param {array} stats - array where each element is a dicionary containing aggregated informations about each language
+     * @param {array} generalMetrics - array where each element is a dicionary containing informations about each language
+     */
+
     let chord = d3.chord().padAngle(paddingChord);
 
     let metricsBox = d3.select("#chord")
@@ -142,6 +152,9 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
 
 
     function fade(opacity, showInfos) {
+        /**
+         * @param {very_long_type} name Description
+         */
         return function (g, i) {
             svg.selectAll("g.chord path")
                 .filter(function (d) {
@@ -250,6 +263,9 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
 }
 
 function closeSlideBar() {
+    /**
+     * Close slide bar when it is activated
+     */
     document.getElementById("main").style.marginLeft = "0px";
     let list = document.getElementById("side-menu");
     if (list.hasChildNodes()) {
@@ -266,7 +282,9 @@ d3.queue()
     .defer(d3.csv, geralDataFile)
     .defer(d3.csv, statisticsDataFile)
     .await(function (error, languages, network, geralStats, stats) {
-
+        /***
+         * Function treats and reads the data, call functions to build the network matrix and draw the Chord diagram
+         */
         network = network.map(rowConverterNetwork);
         stats = stats.map(rowConverterStatistics);
         geralStats = geralStats.map(rowConverterStatGeral);

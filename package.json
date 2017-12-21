@@ -12,7 +12,8 @@
   "dependencies": {
     "babel-runtime": "latest",
     "d3": "latest",
-    "lodash": "latest"
+    "lodash": "latest",
+    "standard": "^10.0.3"
   },
   "devDependencies": {
     "babel-core": "latest",
