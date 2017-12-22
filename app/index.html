@@ -37,8 +37,8 @@
 
       <div class="masthead" style="text-align: center;">
         <h3 class="masthead-title">
-                <a href="/" title="Home">Data Visualization</a>
-                <small>Programmers' knowledge network</small>
+                <a href="/" title="Home">Data Visualization</a><br/>
+                <small>Analyzing Programmers' knowledge network</small>
 
                 <div class="masthead-links">
 
@@ -80,6 +80,16 @@
         By hovering over an arc belonging to a specific language, you can see some general statistics for that language, such as the average number of Pull Requests per month, average number of actors that used that language per month,
         as well as the average number of Pull Requests per actor. Also, you will be shown the connection strength of that language with all the others on the diagram, designated by the thickness of the ribbons that connect them.
       </p>
+      <p>
+        Additionally, by clicking on the arc belonging to a specific language, more detailed information about the language will be shown, including the programming paradigm it belongs to, the languages with which it is correlated the most,
+        and some more statistics about the language itself, and how it compares to the mean value across all languages.
+      </p>
+      <p>
+        By dragging the slider below the diagram, the statistics of the language usage will change, to reflect the selected month.
+      </p>
+      <p>
+        If the name of the language is clicked it is removed from the diagram, and can be returned back to the diagram by selecting it in the filter list.
+      </p>
 
       <div id="side-menu" class="slide-bar">
         <span class="btn-close" onclick="closeSlideBar()" style="cursor: pointer;">&times;</span>
@@ -98,8 +108,6 @@
       </div>
       <div id="slider" style="text-align:left;"></div>
       <div id="chord" style="text-align:center;"></div>
-
-
 
       <div class="row">
         <div class="col-md-6">
@@ -120,7 +128,8 @@
       </div>
 
       <p>
-        The data was collected from <a href="http://data.githubarchive.org/">github archive</a>. The datasets are divided by hour and the initial time window that is considered in this analysis is between 2017-08-01 until 2017-10-31. Only the <i>PullRequest</i>        events are considered and the programming language of the repository was extracted from the <i>payload.pull_request.base.repo.language</i> field.
+        The data was collected from the <a href="http://www.githubarchive.org/">GitHub archive</a>. The datasets are divided by hour and the initial time window that is considered in this analysis is between 2017-07-01 until 2017-11-30. Only the <i>PullRequest</i>
+        events are considered and the programming language of the repository was extracted from the <i>payload.pull_request.base.repo.language</i> field.
       </p>
 
       <p>
