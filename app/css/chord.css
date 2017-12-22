@@ -122,3 +122,11 @@ p.title-general-metrics-box {
     stroke: red;
     font-size: 12px;
 }
+
+.labels {
+  cursor: pointer;
+}
+
+.group path{
+  cursor: pointer;
+}

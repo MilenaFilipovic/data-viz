@@ -31,7 +31,7 @@ const marginChord = {top: 20, right: 20, bottom: 20, left: 20},
 
 const lookupLegendColors = {
     'Mean of the selected language': '#000080',
-    'Mean of all Languages': '#FF4500'
+    'Mean of all languages': '#FF4500'
 };
 
 const lookupNiceParadigmNames = {
@@ -62,14 +62,14 @@ const aggMetrics = ["days_open_merged",
     "payload.pull_request.commits"];
 
 
-function drawChord(matrix, labels, stats, generalMetrics) { // try to improve those callings and refactor
+function drawChord(matrix, labels, stats, genMetrics) { // try to improve those callings and refactor
     /**
      * Draw chord diagram where the connections are the the log of the number of common actors of two languages
      *
      * @param {2d array} matrix - i,j element is the lof of number of common actor between 2 languages
      * @param {array} labels - array containing languages' names
      * @param {array} stats - array where each element is a dicionary containing aggregated informations about each language
-     * @param {array} generalMetrics - array where each element is a dicionary containing informations about each language
+     * @param {array} genMetrics - array where each element is a dicionary containing informations about each language
      */
 
     labels = labels.filter( function(el) {
@@ -206,7 +206,7 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
             if (showInfos == "visible") {
                 let language = labels[i]['language'];
                 let paradigm = labels[i]['paradigm'];
-                let generalMetrics = avgPrsAndActors(generalMetrics.filter(x => x['language'] == language));
+                let generalMetrics = avgPrsAndActors(genMetrics.filter(x => x['language'] == language));
 
                 var list = document.getElementById("general-metrics-box");
                 if (list.hasChildNodes()) {
@@ -223,10 +223,9 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
 
                 var p = document.createElement('div');
                 p.className = "title-general-metrics-box";
-                p.innerHTML = "Avg PRs/mois: " + generalMetrics['meanPrs'] +
-                    "<br/>Avg Actors/mois: " + generalMetrics['meanActors'] +
-                    "<br/>PRs/Actors: " + math.round(generalMetrics['meanPrs'] / generalMetrics['meanActors']) +
-                    "<br/> <br/> Click to see more about";
+                p.innerHTML = "Avg PRs/month: " + generalMetrics['meanPrs'] +
+                    "<br/>Avg Actors/month: " + generalMetrics['meanActors'] +
+                    "<br/>Avg PRs/Actor: " + math.round(generalMetrics['meanPrs'] / generalMetrics['meanActors'])  ;
                 document.getElementById('general-metrics-box').appendChild(p);
             }
             metricsBox
@@ -283,8 +282,8 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
             allStats = stats.filter(x => x['language'] == 'all');
 
 
-        drawgeneralMetrics(generalMetrics, 'number_prs', language);
-        drawgeneralMetrics(generalMetrics, 'number_actors', language);
+        drawgeneralMetrics(genMetrics, 'number_prs', language);
+        drawgeneralMetrics(genMetrics, 'number_actors', language);
         aggMetrics.map(x => drawMetrics(filteredStats, allStats, x))
     }
 
