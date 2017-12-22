@@ -91,49 +91,87 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
           .attr("transform", "translate(" + widthChord / 2 + "," + heightChord / 2 + ")");
       firstCall = 0;
       }
-/*
-    let gGroups = svg.append("svg:g")
-        .selectAll("path")
+    let groupG = svg.selectAll("g.group")
         .data(chord(matrix).groups);
 
-    gGroups.enter()
-        .append("svg:path")
-        .style("fill", function (d) {
-            return lookupColorLanguage[labels[d.index]['paradigm']];
-        });
-
-    gGroups.exit()
-        .transition()
-            .duration(1000)
-            .attr("opacity", 0)
-            .remove();
-*/
-  let groupG = svg.selectAll("g.group")
-        .data(chord(matrix).groups);
-
-  let newGroups = groupG.enter().append("g")
+    let newGroups = groupG.enter().append("g")
       .attr("class", "group");
 
-  groupG.exit()
+    groupG.exit()
       .transition()
           .duration(3000)
           .attr("opacity", 0)
           .remove();
-
-          /***********************/
-    svg.append("svg:g")
-        .attr("class", "chord")
-        .selectAll("path")
-        .data(chord(matrix))
-        .enter()
-        .append("svg:path")
+/*
+    let chordPaths = svg.selectAll("path.chord")
+          .data(chord(matrix), chordKey );
+    let newChordPaths = chordPaths.enter()
+        .append("path")
         .filter(function (d) {
             return d.source.index != d.target.index;
         })
-        .style("fill", colorConextions)
-        .attr("d", d3.ribbon().radius(rOut))
-        .style("opacity", 1);
+        .attr("class", "chord");
+    newChordPaths.append("title");
+    // Update all chord title texts
+    chordPaths.select("title")
+        .text(function(d) {
+                return "sdfsfd";
+        });
+    chordPaths.exit().transition()
+          .duration(500)
+          .attr("opacity", 0)
+          .remove();
 
+    //update the path shape
+    newChordPaths.transition()
+        .duration(1500)
+        .style("fill", colorConextions)
+        .attr("opacity", 1) //optional, just to observe the transition
+        .attrTween("d", chordTween(lastLayout))
+        .transition()
+          .duration(500)
+          .attr("d", d3.ribbon().radius(rOut))
+              .style("opacity", 1); //reset opacity
+    */
+    let chordPaths =  svg.append("svg:g")
+        .attr("class", "chord")
+        .selectAll("path")
+        .data(chord(matrix), chordKey);
+
+    let newChords = chordPaths.enter()
+        .append("svg:path")
+        .filter(function (d) {
+            return d.source.index != d.target.index;
+        });
+        //.style("fill", colorConextions)
+        //.attr("d", d3.ribbon().radius(rOut))
+        //.style("opacity", 1);
+        //update the path shape
+
+    // Add title tooltip for each new chord.
+    newChords.append("title");
+
+    // Update all chord title texts
+    chordPaths.select("title")
+        .text(function(d) {
+                return "sdfsfd";
+        });
+    newChords.transition()
+        .duration(1500)
+        .style("fill", colorConextions)
+        .attr("opacity", 1) //optional, just to observe the transition
+        .attrTween("d", chordTween(lastLayout))
+        .transition()
+          .duration(500)
+          .attr("d", d3.ribbon().radius(rOut))
+              .style("opacity", 1); //reset opacity
+
+    chordPaths.exit().transition()
+          .duration(500)
+          .attr("opacity", 0)
+          .remove();
+
+          
     let wrapper = svg.append("g").attr("class", "chordWrapper");
 
     let g = wrapper.selectAll("g.group")
@@ -353,12 +391,58 @@ function loadChords(){
       });
 }
 
-function removeLanguage(d, i, labels) {
-        d3.event.preventDefault();
-        d3.event.stopPropagation();
-        filteredLanguages.push(labels[i]['language']);
-        updateFilters();
-        loadChords();
+
+function chordTween(oldLayout) {
+    //this function will be called once per update cycle
+
+    //Create a key:value version of the old layout's chords array
+    //so we can easily find the matching chord
+    //(which may not have a matching index)
+
+    let oldChords = {};
+
+    if (oldLayout) {
+        oldLayout.forEach( function(chordData) {
+            oldChords[ chordKey(chordData) ] = chordData;
+        });
+    }
+
+    return function (d, i) {
+        //this function will be called for each active chord
+        let tween;
+        let old = oldChords[ chordKey(d) ];
+        if (old) {
+            if (d.source.index != old.source.index ){
+                old = {
+                    source: old.target,
+                    target: old.source
+                };
+            }
+
+            tween = d3.interpolate(old, d);
+        }
+        else {
+            //create a zero-width chord object
+            let emptyChord = {
+                source: { startAngle: d.source.startAngle,
+                         endAngle: d.source.startAngle},
+                target: { startAngle: d.target.startAngle,
+                         endAngle: d.target.startAngle}
+            };
+            tween = d3.interpolate( emptyChord, d );
+        }
+        return function (t) {
+            //this function calculates the intermediary shapes
+            let path = d3.ribbon().radius(rOut);
+            return path(tween(t));
+        };
+    };
+}
+
+function chordKey(data) {
+    return (data.source.index < data.target.index) ?
+        data.source.index  + "-" + data.target.index:
+        data.target.index  + "-" + data.source.index;
 }
 
 function arcTween(oldLayout) {
@@ -390,6 +474,15 @@ function arcTween(oldLayout) {
             return arc( tween(t) );
         };
     };
+}
+
+
+function removeLanguage(d, i, labels) {
+        d3.event.preventDefault();
+        d3.event.stopPropagation();
+        filteredLanguages.push(labels[i]['language']);
+        updateFilters();
+        loadChords();
 }
 
 function returnLanguage(language, i){
