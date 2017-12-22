@@ -1,300 +1,358 @@
-const lookupNiceVariableNames = {'days_open_merged': 'Mean of days between open and merged',
-                                 'payload.pull_request.base.repo.open_issues_count': 'Mean of open issues per repo',
-                                 'payload.pull_request.changed_files': 'Mean of Changed files per PR',
-                                 'payload.pull_request.comments': 'Mean of comments per PR',
-                                 'payload.pull_request.number': "Mean of PR's number",
-                                 'payload.pull_request.commits': 'Mean of commits per PR',
-                                 'number_prs': 'Total of open PRs',
-                                 'number_actors': 'Total de unique Actors',
-//    PUT NUMBER OF CLOSED / MERGED PRS
+const lookupNiceVariableNames = {
+  'days_open_merged': 'Mean of days between open and merged',
+  'payload.pull_request.base.repo.open_issues_count': 'Mean of open issues per repo',
+  'payload.pull_request.changed_files': 'Mean of Changed files per PR',
+  'payload.pull_request.comments': 'Mean of comments per PR',
+  'payload.pull_request.number': "Mean of PR's number",
+  'payload.pull_request.commits': 'Mean of commits per PR',
+  'number_prs': 'Total of open PRs',
+  'number_actors': 'Total de unique Actors',
+  //    PUT NUMBER OF CLOSED / MERGED PRS
 };
 
 
-function drawMetrics(languageStats, allStats, statistic) {
-    /**
-     * Draw charts in side bar
-     *
-     * @param {array} languageStats - array with aggregate statistics for a specify language
-     * @param {array} allStats - array with aggregate statistics of all languages
-     * @param {string} statistic - metric that will be drawed and it filters languageStats and allStats too
-     */
+function drawGraphs(metricName, filteredStats, geralMean) {
+  let yMax = 1.2 * math.max(filteredStats.concat(geralMean).map(x => x[1])),
+    yMin = 0.8 * math.max(math.min(filteredStats.concat(geralMean).map(x => x[1])), 0);
 
-    let metricName = lookupNiceVariableNames[statistic];
+  let svg = d3.select("#side-menu")
+    .append("svg:svg")
+    .attr("width", wMetrics)
+    .attr("height", hMetrics)
+    .append("svg:g");
 
-    let filteredStats = languageStats
-        .filter(x => x['statistic'] == statistic & x['metric'] == 'mean')
-        .map(x => [x['cohort'], x['value']]);
+  g = svg.append("g")
+    .attr("transform", "translate(" + marginMetrics.left + "," + marginMetrics.top + ")");
 
-    let geralMean = allStats
-        .filter(x => x['statistic'] == statistic & x['metric'] == 'mean')
-        .map(x => [x['cohort'], x['value']]);
+  let x = d3.scaleTime()
+    .rangeRound([0, widthMetrics]);
 
-    let yMax = 1.2*math.max(filteredStats.concat(geralMean).map(x => x[1])),
-        yMin = 0.8*math.max(math.min(filteredStats.concat(geralMean).map(x => x[1])), 0);
+  let y = d3.scaleLinear()
+    .domain([yMin, yMax])
+    .rangeRound([heightMetrics, 0]);
 
-    let svg = d3.select("#side-menu")
-        .append("svg:svg")
-        .attr("width", wMetrics)
-        .attr("height", hMetrics)
-        .append("svg:g");
+  x.domain(d3.extent(filteredStats, function(d) {
+    return d[0];
+  }));
 
-    g = svg.append("g")
-        .attr("transform", "translate(" + marginMetrics.left + "," + marginMetrics.top + ")");
+  let nObs = filteredStats.length;
+  g.append("g")
+    .attr("transform", "translate(0," + heightMetrics + ")")
+    .call(d3.axisBottom(x)
+      .ticks(nObs + 1)
+      .tickFormat(d3.timeFormat("%b"))
+    );
 
-    let x = d3.scaleTime()
-        .rangeRound([0, widthMetrics]);
+  let line = d3.line()
+    .x(function(d) {
+      return x(d[0]);
+    })
+    .y(function(d) {
+      return y(d[1]);
+    });
 
-    let y = d3.scaleLinear()
-        .domain([yMin, yMax])
-        .rangeRound([heightMetrics, 0]);
+  g.append("g")
+    .call(d3.axisLeft(y).ticks(nObs + 2))
+    .append("text")
+    .attr("fill", "#000")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 10)
+    .attr("dy", "0.71em");
 
-    x.domain(d3.extent(filteredStats, function (d) {
-        return d[0];
-    }));
+  g.append("path")
+    .datum(filteredStats)
+    .attr("fill", "none")
+    .attr("stroke", lookupLegendColors['Mean of Language'])
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-linecap", "round")
+    .attr("stroke-width", 1.5)
+    .attr("d", line);
 
-    let nObs = filteredStats.length;
-    g.append("g")
-        .attr("transform", "translate(0," + heightMetrics + ")")
-        .call(d3.axisBottom(x)
-            .ticks(nObs + 1)
-            .tickFormat(d3.timeFormat("%b"))
-        );
+  g.append("path")
+    .datum(geralMean)
+    .attr("fill", "none")
+    .attr("stroke", lookupLegendColors['Mean of all Languages'])
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-linecap", "round")
+    .style("stroke-dasharray", ("3, 3"))
+    .attr("stroke-width", 1.2)
+    .attr("d", line);
 
-    let line = d3.line()
-        .x(function (d) {
-            return x(d[0]);
-        })
-        .y(function (d) {
-            return y(d[1]);
-        });
+  g.append("text")
+    .attr("x", (widthMetrics / 2))
+    .attr("y", 0 - (marginMetrics.top / 2))
+    .attr("text-anchor", "middle")
+    .style("font-size", "14px")
+    .style("font-weight", "bold")
+    .text(metricName);
 
-    g.append("g")
-        .call(d3.axisLeft(y).ticks(nObs + 2))
-        .append("text")
-        .attr("fill", "#000")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 10)
-        .attr("dy", "0.71em");
 
-    g.append("path")
-        .datum(filteredStats)
-        .attr("fill", "none")
-        .attr("stroke", lookupLegendColors['Mean of Language'])
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 1.5)
-        .attr("d", line);
 
-    g.append("path")
-        .datum(geralMean)
-        .attr("fill", "none")
-        .attr("stroke", lookupLegendColors['Mean of all Languages'])
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .style("stroke-dasharray", ("3, 3"))
-        .attr("stroke-width", 1.2)
-        .attr("d", line);
+  let focus_lang = g.append("g")
+    .attr("class", "focus")
+    .style("display", "none");
 
-    g.append("text")
-        .attr("x", (widthMetrics / 2))
-        .attr("y", 0 - (marginMetrics.top / 2))
-        .attr("text-anchor", "middle")
-        .style("font-size", "14px")
-        .style("font-weight", "bold")
-        .text(metricName);
+  let focus_mean = g.append("g")
+    .attr("class", "focus")
+    .style("display", "none");
 
-    let focus = g.append("g")
-        .attr("class", "focus")
-        .style("display", "none");
+  let focus = [];
+  focus[0] = focus_lang;
+  focus[1] = focus_mean;
 
-    focus.append("line")
-        .attr("class", "x-hover-line hover-line")
-        .attr("y1", 0)
-        .attr("y2", heightMetrics);
+  for (i = 0; i < 2; i++) {
 
-    focus.append("line")
-        .attr("class", "y-hover-line hover-line")
-        .attr("x1", widthMetrics)
-        .attr("x2", widthMetrics);
 
-    focus.append("circle")
-        .attr("r", 3);
+    focus[i].append("line")
+      .attr("class", "y-hover-line hover-line")
+      .attr("y1", 0)
+      .attr("y2", heightMetrics);
 
-    focus.append("text")
-        .attr("x", 15)
-        .attr("dy", "-.45em")
-        .attr("font-size", "12px")
-        .attr('font-weight', 'bold');
+    focus[i].append("line")
+      .attr("class", "x-hover-line hover-line")
+      .attr("x1", widthMetrics)
+      .attr("x2", widthMetrics);
 
-    let bisectDate = d3.bisector(function(d) { return d[0]; }).left;
+    focus[i].append("circle")
+      .attr("r", 3)
+      .style("stroke", "red") // set the line colour
+      .style("fill", "none"); // set the fill colour
 
-    svg.append("rect")
-        .attr("transform", "translate(" + marginMetrics.left + "," + marginMetrics.top + ")")
-        .attr("class", "overlay")
-        .attr("width", widthMetrics)
-        .attr("height", heightMetrics)
-        .on("mouseover", function() { focus.style("display", null); })
-        .on("mouseout", function() { focus.style("display", "none"); })
-        .on("mousemove", mousemove);
+    focus[i].append("text")
+      .attr("x", 15)
+      .attr("dy", "-.45em")
+      .attr("font-size", "12px")
+      .attr('font-weight', 'bold');
+  }
 
-    function mousemove() {
-        var x0 = x.invert(d3.mouse(this)[0]),
-            i = bisectDate(filteredStats, x0, 1),
-            d0 = filteredStats[i - 1],
-            d1 = filteredStats[i],
-            d = x0 - d0.year > d1.year - x0 ? d1 : d0;
-        focus.attr("transform", "translate(" + x(d[0]) + "," + y(d[1]) + ")");
-        focus.select("text").text(function() { return math.round(d[1], 1); });
-        focus.select(".x-hover-line").attr("y2", heightMetrics - y(d[1]));
-        focus.select(".y-hover-line").attr("x2", widthMetrics + widthMetrics);
+  svg.append("rect")
+    .attr("transform", "translate(" + marginMetrics.left + "," + marginMetrics.top + ")")
+    .attr("class", "overlay")
+    .attr("width", widthMetrics)
+    .attr("height", heightMetrics)
+    .on("mouseover", function() {
+      for (i = 0; i < 2; i++) {
+        focus[i].style("display", null);
+      }
+    })
+    .on("mouseout", function() {
+      for (i = 0; i < 2; i++) {
+        focus[i].style("display", "none");
+      }
+    })
+    .on("mousemove", mousemove);
+
+    let bisectDate = d3.bisector(function(d) {
+      return d[0];
+    }).left;
+
+  function mousemove() {
+    var x0 = x.invert(d3.mouse(this)[0]),
+      i = bisectDate(filteredStats, x0, 1),
+      d0 = filteredStats[i - 1],
+      d1 = filteredStats[i],
+      g0 = geralMean[i - 1],
+      g1 = geralMean[i];
+
+    var met = [];
+    met[0] = x0 - d0.year > d1.year - x0 ? d1 : d0;
+    met[1] = x0 - g0.year > g1.year - x0 ? g1 : g0;
+
+    for (i = 0; i < 2; i++) {
+      focus[i].attr("transform", "translate(" + x(met[i][0]) + "," + y(met[i][1]) + ")");
+      focus[i].select("text").text(function() {
+        return math.round(met[i][1], 1);
+      });
+      focus[i].select(".x-hover-line").attr("x2", widthMetrics + widthMetrics);
+      focus[i].select(".y-hover-line").attr("y2", heightMetrics - y(met[i][1]));
     }
+  }
+}
+
+function drawMetrics(languageStats, allStats, statistic) {
+  /**
+   * Draw charts in side bar
+   *
+   * @param {array} languageStats - array with aggregate statistics for a specify language
+   * @param {array} allStats - array with aggregate statistics of all languages
+   * @param {string} statistic - metric that will be drawed and it filters languageStats and allStats too
+   */
+
+  let metricName = lookupNiceVariableNames[statistic];
+
+  let filteredStats = languageStats
+    .filter(x => x['statistic'] == statistic & x['metric'] == 'mean')
+    .map(x => [x['cohort'], x['value']]);
+
+  let geralMean = allStats
+    .filter(x => x['statistic'] == statistic & x['metric'] == 'mean')
+    .map(x => [x['cohort'], x['value']]);
+
+  drawGraphs(metricName, filteredStats, geralMean);
 }
 
 
 function drawGeralMetrics(geralStatistcs, statistic, language) {
-    /**
-     * Draw charts in side bar (this is almost the same this that in `drawMetrics` but it was split in a different
-     * function due to the schema of the files are different and it would require a change in package `grab_data` )
-     *
-     * @param {array} geralStatistics - array with PR and common actors of all languages
-     * @param {string} statistic - metric that will be drawed
-     * @param {string} language - selected language
-     */
+  /**
+   * Draw charts in side bar (this is almost the same this that in `drawMetrics` but it was split in a different
+   * function due to the schema of the files are different and it would require a change in package `grab_data` )
+   *
+   * @param {array} geralStatistics - array with PR and common actors of all languages
+   * @param {string} statistic - metric that will be drawed
+   * @param {string} language - selected language
+   */
 
-    let metricName = lookupNiceVariableNames[statistic];
+  let metricName = lookupNiceVariableNames[statistic];
 
-    let filteredStats = geralStatistcs
-        .filter(x => x['language'] == language)
-        .map(x => [x['cohort'], x[statistic]]);
+  let filteredStats = geralStatistcs
+    .filter(x => x['language'] == language)
+    .map(x => [x['cohort'], x[statistic]]);
 
-    let geralMean = geralStatistcs
-        .filter(x => x['language'] == 'all')
-        .map(x => [x['cohort'], x[statistic]]);
+  let geralMean = geralStatistcs
+    .filter(x => x['language'] == 'all')
+    .map(x => [x['cohort'], x[statistic]]);
 
-    let yMax = 1.2*math.max(filteredStats.concat(geralMean).map(x => x[1])),
-        yMin = 0.8*math.max(0, math.min(filteredStats.concat(geralMean).map(x => x[1])) - 1000);
+  drawGraphs(metricName, filteredStats, geralMean);
+  /**
 
-    let svg = d3.select("#side-menu")
-        .append("svg:svg")
-        .attr("width", wMetrics)
-        .attr("height", hMetrics)
-        .append("svg:g");
+  let yMax = 1.2*math.max(filteredStats.concat(geralMean).map(x => x[1])),
+      yMin = 0.8*math.max(0, math.min(filteredStats.concat(geralMean).map(x => x[1])) - 1000);
 
-    g = svg.append("g")
-        .attr("transform", "translate(" + marginMetrics.left + "," + marginMetrics.top + ")");
+  let svg = d3.select("#side-menu")
+      .append("svg:svg")
+      .attr("width", wMetrics)
+      .attr("height", hMetrics)
+      .append("svg:g");
 
-    let x = d3.scaleTime()
-        .rangeRound([0, widthMetrics]);
+  g = svg.append("g")
+      .attr("transform", "translate(" + marginMetrics.left + "," + marginMetrics.top + ")");
 
-    let y = d3.scaleLinear()
-        .domain([yMin, yMax])
-        .rangeRound([heightMetrics, 0]);
+  let x = d3.scaleTime()
+      .rangeRound([0, widthMetrics]);
 
-    x.domain(d3.extent(filteredStats, function (d) {
-        return d[0];
-    }));
+  let y = d3.scaleLinear()
+      .domain([yMin, yMax])
+      .rangeRound([heightMetrics, 0]);
 
-    let nObs = filteredStats.length;
-    g.append("g")
-        .attr("transform", "translate(0," + heightMetrics + ")")
-        .call(d3.axisBottom(x)
-            .ticks(nObs + 1)
-            .tickFormat(d3.timeFormat("%b"))
-        );
+  x.domain(d3.extent(filteredStats, function (d) {
+      return d[0];
+  }));
 
-    let line = d3.line()
-        .x(function (d) {
-            return x(d[0]);
-        })
-        .y(function (d) {
-            return y(d[1]);
-        });
+  let nObs = filteredStats.length;
+  g.append("g")
+      .attr("transform", "translate(0," + heightMetrics + ")")
+      .call(d3.axisBottom(x)
+          .ticks(nObs + 1)
+          .tickFormat(d3.timeFormat("%b"))
+      );
 
-    g.append("g")
-        .call(d3.axisLeft(y).ticks(nObs + 2))
-        .append("text")
-        .attr("fill", "#000")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 10)
-        .attr("dy", "0.71em");
+  let line = d3.line()
+      .x(function (d) {
+          return x(d[0]);
+      })
+      .y(function (d) {
+          return y(d[1]);
+      });
 
-    g.append("path")
-        .datum(filteredStats)
-        .attr("fill", "none")
-        .attr("stroke", lookupLegendColors['Mean of Language'])
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 1.5)
-        .attr("d", line);
+  g.append("g")
+      .call(d3.axisLeft(y).ticks(nObs + 2))
+      .append("text")
+      .attr("fill", "#000")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 10)
+      .attr("dy", "0.71em");
 
-    g.append("path")
-        .datum(geralMean)
-        .attr("fill", "none")
-        .attr("stroke", lookupLegendColors['Mean of all Languages'])
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .style("stroke-dasharray", ("3, 3"))
-        .attr("stroke-width", 1.2)
-        .attr("d", line);
+  g.append("path")
+      .datum(filteredStats)
+      .attr("fill", "none")
+      .attr("stroke", lookupLegendColors['Mean of Language'])
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
 
-    g.append("text")
-        .attr("x", (widthMetrics / 2))
-        .attr("y", 0 - (marginMetrics.top / 2))
-        .attr("text-anchor", "middle")
-        .style("font-size", "14px")
-        .style("font-weight", "bold")
-        .text(metricName);
+  g.append("path")
+      .datum(geralMean)
+      .attr("fill", "none")
+      .attr("stroke", lookupLegendColors['Mean of all Languages'])
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .style("stroke-dasharray", ("3, 3"))
+      .attr("stroke-width", 1.2)
+      .attr("d", line);
 
-    let focus = g.append("g")
-        .attr("class", "focus")
-        .style("display", "none");
+  g.append("text")
+      .attr("x", (widthMetrics / 2))
+      .attr("y", 0 - (marginMetrics.top / 2))
+      .attr("text-anchor", "middle")
+      .style("font-size", "14px")
+      .style("font-weight", "bold")
+      .text(metricName);
 
-    focus.append("line")
-        .attr("class", "x-hover-line hover-line")
-        .attr("y1", 0)
-        .attr("y2", heightMetrics);
+  let focus = g.append("g")
+      .attr("class", "focus")
+      .style("display", "none");
 
-    focus.append("line")
-        .attr("class", "y-hover-line hover-line")
-        .attr("x1", widthMetrics)
-        .attr("x2", widthMetrics);
+  focus.append("line")
+      .attr("class", "x-hover-line hover-line")
+      .attr("y1", 0)
+      .attr("y2", heightMetrics);
 
-    focus.append("circle")
-        .attr("r", 3);
+  focus.append("line")
+      .attr("class", "y-hover-line hover-line")
+      .attr("x1", widthMetrics)
+      .attr("x2", widthMetrics);
 
-    focus.append("text")
-        .attr("x", 15)
-        .attr("dy", "-.45em")
-        .attr("font-size", "12px")
-        .attr('font-weight', 'bold');
+  focus.append("circle")
+      .attr("class", "mean-circle")
+      .attr("y1", 0)
+      .attr("y2", heightMetrics)
+      .attr("r", 3);
 
-    let bisectDate = d3.bisector(function(d) { return d[0]; }).left;
+  focus.append("circle")
+      .attr("class", "lang-circle")
+      .attr("x1", widthMetrics)
+      .attr("x2", widthMetrics)
+      .attr("r", 5);
 
-    svg.append("rect")
-        .attr("transform", "translate(" + marginMetrics.left + "," + marginMetrics.top + ")")
-        .attr("class", "overlay")
-        .attr("width", widthMetrics)
-        .attr("height", heightMetrics)
-        .on("mouseover", function() { focus.style("display", null); })
-        .on("mouseout", function() { focus.style("display", "none"); })
-        .on("mousemove", mousemove);
+  focus.append("circle")
+      .attr("r", 3);
 
-    function mousemove() {
-        var x0 = x.invert(d3.mouse(this)[0]),
-            i = bisectDate(filteredStats, x0, 1),
-            d0 = filteredStats[i - 1],
-            d1 = filteredStats[i],
-            g0 = geralMean[i-1],
-            g1 = geralMean[i],
-            d = x0 - d0.year > d1.year - x0 ? d1 : d0,
-            g = x0 - d0.year > d1.year - x0 ? g1 : g0;
-        focus.attr("transform", "translate(" + x(d[0]) + "," + y(d[1]) + ")");
-        focus.attr("transform", "translate(" + x(g[0]) + "," + y(g[1]) + ")");
-        focus.select("text").text(function() { return math.round(d[1], 1); });
-        focus.select("text").text(function() { return math.round(g[1], 1); });
-        focus.select(".x-hover-line").attr("y2", heightMetrics - y(d[1]));
-        focus.select(".y-hover-line").attr("x2", widthMetrics + widthMetrics);
-        focus.select(".x-hover-line").attr("y2", heightMetrics - y(g[1]));
-        focus.select(".y-hover-line").attr("x2", widthMetrics + widthMetrics);
-    }
+  focus.append("text")
+      .attr("x", 15)
+      .attr("dy", "-.45em")
+      .attr("font-size", "12px")
+      .attr('font-weight', 'bold');
+
+  let bisectDate = d3.bisector(function(d) { return d[0]; }).left;
+
+  svg.append("rect")
+      .attr("transform", "translate(" + marginMetrics.left + "," + marginMetrics.top + ")")
+      .attr("class", "overlay")
+      .attr("width", widthMetrics)
+      .attr("height", heightMetrics)
+      .on("mouseover", function() { focus.style("display", null); })
+      .on("mouseout", function() { focus.style("display", "none"); })
+      .on("mousemove", mousemove);
+
+  function mousemove() {
+      var x0 = x.invert(d3.mouse(this)[0]),
+          i = bisectDate(filteredStats, x0, 1),
+          d0 = filteredStats[i - 1],
+          d1 = filteredStats[i],
+          g0 = geralMean[i - 1],
+          g1 = geralMean[i],
+          d = x0 - d0.year > d1.year - x0 ? d1 : d0;
+          g = x0 - g0.year > g1.year - x0 ? g1 : g0;
+      focus.attr("transform", "translate(" + x(d[0]) + "," + y(d[1]) + ")");
+      focus.select("text").text(function() { return math.round(d[1], 1); });
+      focus.select(".lang-circle").attr("y2", heightMetrics - y(d[1]));
+      focus.select(".lang-circle").attr("x2", widthMetrics + widthMetrics);
+      focus.select(".mean-circle").attr("y2", heightMetrics - y(g[1]));
+      focus.select(".mean-circle").attr("x2", widthMetrics + widthMetrics);
+      focus.select(".bottom_circle").text(function() { return math.round(g[1], 1); });
+  }
+
+  *
+  */
 }

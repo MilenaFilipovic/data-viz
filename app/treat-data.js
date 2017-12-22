@@ -1,15 +1,18 @@
-function getMatrixCommonActors(data) {
+function getMatrixCommonActors(data, filteredLanguages) {
     /**
      * Create matrix of unique common actors among the languages
      * This function is a simplified version of https://gist.github.com/eesur/0e9820fb577370a13099#file-mapper-js-L4
      *
      * @param {array} data - array of dicionaries where it contains information of language1, language2
      * and the number of unique common actors
+     *@param {array} filteredLanguages - array of languages that should be excluded from the visualization
      */
 
     let mmap = {}, matrix = [], counter = 0;
     let values = _.uniq(_.pluck(data, "language1"));
-
+    values = values.filter( function(el) {
+             return !filteredLanguages.includes(el);
+           } );
     values.map(function (v) {
         if (!mmap[v]) {
             mmap[v] = {name: v, id: counter++, data: data}
