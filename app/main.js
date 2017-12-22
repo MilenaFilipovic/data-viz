@@ -104,8 +104,9 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
           .attr("height", heightChord)
           .append("svg:g")
           .attr("transform", "translate(" + widthChord / 2 + "," + heightChord / 2 + ")");
+
       firstCall = 0;
-      }
+    }
     let groupG = svg.selectAll("g.group")
         .data(chord(matrix).groups);
 
@@ -148,6 +149,8 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
           .attr("d", d3.ribbon().radius(rOut))
               .style("opacity", 1); //reset opacity
     */
+
+    svg.selectAll("g.chord").remove();
     let chordPaths =  svg.append("svg:g")
         .attr("class", "chord")
         .selectAll("path")
@@ -162,29 +165,21 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
         //.attr("d", d3.ribbon().radius(rOut))
         //.style("opacity", 1);
         //update the path shape
-
-    // Add title tooltip for each new chord.
-    newChords.append("title");
-
-    // Update all chord title texts
-    chordPaths.select("title")
-        .text(function(d) {
-                return "sdfsfd";
-        });
+    chordPaths.exit().transition()
+          .duration(500)
+          .attr("opacity", 0)
+          .remove();
     newChords.transition()
-        .duration(1500)
-        .style("fill", colorConextions)
-        .attr("opacity", 1) //optional, just to observe the transition
+          .duration(1500)
+          .style("fill", colorConextions)
+          .attr("opacity", 1) //optional, just to observe the transition
         .attrTween("d", chordTween(lastLayout))
         .transition()
           .duration(500)
           .attr("d", d3.ribbon().radius(rOut))
               .style("opacity", 1); //reset opacity
 
-    chordPaths.exit().transition()
-          .duration(500)
-          .attr("opacity", 0)
-          .remove();
+
 
 
     let wrapper = svg.append("g").attr("class", "chordWrapper");
@@ -500,10 +495,14 @@ function removeLanguage(d, i, labels) {
         loadChords();
 }
 
+function regex_escape(str) {
+    return str.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]', 'g'), '\\$&');
+}
+
 function returnLanguage(language, i){
     let index = filteredLanguages.indexOf(language);
     filteredLanguages.splice(index, 1);
-    d3.select('#'+language).remove();
+    d3.select('#'+regex_escape(language)).remove();
     updateFilters();
     loadChords();
     console.log(filteredLanguages)
