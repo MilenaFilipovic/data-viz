@@ -103,37 +103,6 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
           .attr("opacity", 0)
           .remove();
 
-    /*
-    let chordPathsWrapper =  svg.append("svg:g")
-        .attr("class", "chord");
-    let chordPaths =chordPathsWrapper.selectAll("path")
-        .data(chord(matrix), chordKey);
-
-    let newChords = chordPaths.enter()
-        .append("svg:path")
-        .filter(function (d) {
-            return d.source.index != d.target.index;
-        });
-        //.style("fill", colorConextions)
-        //.attr("d", d3.ribbon().radius(rOut))
-        //.style("opacity", 1);
-        //update the path shape
-    chordPathsWrapper.exit().transition()
-          .duration(500)
-          .attr("opacity", 0)
-          .remove();
-    newChords.transition()
-        .duration(1500)
-        .style("fill", colorConextions)
-        .attr("opacity", 1) //optional, just to observe the transition
-        .attrTween("d", chordTween(lastLayout))
-        .transition()
-          .duration(500)
-          .attr("d", d3.ribbon().radius(rOut))
-              .style("fill", colorConextions)
-              .style("opacity", 1); //reset opacity
-*/
-
     let chordPaths = svg.selectAll("path.chord")
             .data(chord(matrix), chordKey );
     let newChordPaths = chordPaths.enter()
