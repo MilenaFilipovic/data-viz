@@ -14,8 +14,8 @@ let svg;
 let metricsBox;
 let lastLayout; //store layout between updates
 
-const wChord = 800,
-    hChord = 800,
+const wChord = 880,
+    hChord = 880,
     rInner = hChord / 2.6,
     rOut = rInner - 30,
     paddingChord = 0.02;
