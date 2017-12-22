@@ -1,11 +1,14 @@
-const languagesDataFile = 'data/langues_50_2017-11-01_2017-11-30__processedat_2017-12-15.csv';
-const networkDataFile = 'data/network_50_2017-11-01_2017-11-30__processedat_2017-12-15.csv';
+let languagesDataFile = 'data/langues_50_2017-11-01_2017-11-30__processedat_2017-12-15.csv';
+let networkDataFile = 'data/network_50_2017-11-01_2017-11-30__processedat_2017-12-15.csv';
 const statisticsDataFile = 'data/agg_stats_2017-07-01_2017-11-30__processedat_2017-12-18.csv';
 const geralDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-18.csv';
 
 const colorConextions = "#F0F0F0";
 const slidBar = "700px";
 const shiftMain = "375px";
+
+let filteredLanguages = [];
+let firstCall = 1;
 
 const wChord = 900,
     hChord = 900,
@@ -65,6 +68,10 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
      * @param {array} generalMetrics - array where each element is a dicionary containing informations about each language
      */
 
+    labels = labels.filter( function(el) {
+           return !filteredLanguages.includes(el['language']);
+           } );
+    console.log(labels);
     let chord = d3.chord().padAngle(paddingChord);
 
     let metricsBox = d3.select("#chord")
@@ -148,7 +155,8 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         })
         .text(function (d, i) {
             return labels[i]['language'];
-        });
+        })
+        .on("click", function (d, i) {removeLanguage(d, i, labels)});
 
 
     function fade(opacity, showInfos) {
@@ -287,20 +295,75 @@ function closeSlideBar() {
     document.getElementById("side-menu").style.width = 0;
 }
 
-d3.queue()
-    .defer(d3.csv, languagesDataFile)
-    .defer(d3.csv, networkDataFile)
-    .defer(d3.csv, geralDataFile)
-    .defer(d3.csv, statisticsDataFile)
-    .await(function (error, languages, network, geralStats, stats) {
-        /***
-         * Function treats and reads the data, call functions to build the network matrix and draw the Chord diagram
-         */
-        network = network.map(rowConverterNetwork);
-        stats = stats.map(rowConverterStatistics);
-        geralStats = geralStats.map(rowConverterStatGeral);
 
-        let matrix = getMatrixCommonActors(network);
-        let logMatrix = matrix.map(row => row.map(x => x > 30 ? Math.log(x) : 0));
-        drawChord(logMatrix, languages, stats, geralStats);
-    });
+function loadChords(){
+  d3.queue()
+      .defer(d3.csv, languagesDataFile)
+      .defer(d3.csv, networkDataFile)
+      .defer(d3.csv, geralDataFile)
+      .defer(d3.csv, statisticsDataFile)
+      .await(function (error, languages, network, geralStats, stats) {
+          /***
+           * Function treats and reads the data, call functions to build the network matrix and draw the Chord diagram
+           */
+          network = network.map(rowConverterNetwork);
+          stats = stats.map(rowConverterStatistics);
+          geralStats = geralStats.map(rowConverterStatGeral);
+
+          let matrix = getMatrixCommonActors(network, filteredLanguages);
+          let logMatrix = matrix.map(row => row.map(x => x > 30 ? Math.log(x) : 0));
+          drawChord(logMatrix, languages, stats, geralStats);
+      });
+}
+
+function removeLanguage(d, i, labels) {
+        d3.event.preventDefault();
+        d3.event.stopPropagation();
+        filteredLanguages.push(labels[i]['language']);
+        updateFilters();
+        loadChords();
+}
+
+function returnLanguage(language, i){
+    let index = filteredLanguages.indexOf(language);
+    filteredLanguages.splice(index, 1);
+    d3.select('#'+language).remove();
+    updateFilters();
+    loadChords();
+    console.log(filteredLanguages)
+  }
+
+function updateFilters(){
+  if (filteredLanguages.length > 0){
+    d3.select("#clear_button").style("opacity", 1);
+  }else{
+    d3.select("#clear_button").style("opacity", 0);
+  }
+  let filters = d3.select('#filtered_languages')
+            .selectAll('li')
+            .data(filteredLanguages);
+  // Enter
+  filters.enter()
+          .append('li')
+          .attr('class', 'list-group-item')
+          .attr("id", function(d,i) { return d; })
+          .on("click", function(d, i){
+                        returnLanguage(d);
+                      })
+          .text(function(d) { return d; });
+  // Exit
+  filters.exit().remove();
+}
+function returnAllLanguages(){
+    filteredLanguages.length = 0;
+    d3.select('#filtered_languages')
+              .selectAll('li')
+              .remove();
+    d3.select("#clear_button").style("opacity", 0);
+    loadChords();
+  }
+
+  loadChords();
+  d3.select("#clear_button")
+    .style("opacity", 0)
+    .on("click", returnAllLanguages);
