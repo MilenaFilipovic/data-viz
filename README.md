@@ -5,6 +5,8 @@ You can access the visualization [here](https://milenafilipovic.github.io/data-v
 
 You can access the screencast  [here](https://youtu.be/leMp6A_hgWI)
 
+You can access the Process book [here](https://github.com/MilenaFilipovic/data-viz/blob/master/Process%20Book.pdf)
+
 ## Overview
 The goal of this project is to analyze the GitHub users’ behavior, explore relations among overall programming language usage and the overlaps in the different languages that programmers use. We also want to show how this changes over time, taking into account monthly activity from February 2011 to the present day.  
 For this project just PRs will be analysed.
