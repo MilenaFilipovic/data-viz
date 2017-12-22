@@ -133,4 +133,5 @@ p.title-general-metrics-box {
 
 .list-group li{
   margin-bottom:10px;
+  display:inline;
 }
