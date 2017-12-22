@@ -34,10 +34,10 @@
 
     <div class="post" id="main">
 
-      <div class="masthead">
+      <div class="masthead" style="text-align: center;">
         <h3 class="masthead-title">
                 <a href="/" title="Home">Data Visualization</a>
-                <small>Analyzing programmer knowledge network</small>
+                <small>Programmers' knowledge network</small>
 
                 <div class="masthead-links">
 
@@ -46,35 +46,38 @@
       </div>
 
 
-      <h3>
-            Project Summary
-        </h3>
-
-      <p>
-        The GitHub repository of this visualization can be found <a href="https://github.com/MilenaFilipovic/data-viz">here</a>.<br/> The Process Book for this visualization can be found <a href="">here</a>.<br/> The screencast of this visualization can
-        seen <a href="">here</a>.
-      </p>
+      <h4>Project Summary</h4>
 
       <p>
         The goal of this project is to analyze the GitHub users’ behavior, explore relations among overall programming language usage and the overlaps in the different languages that programmers use.
       </p>
 
       <p>
-        The data was collected from <a href="http://data.githubarchive.org/">github archive</a>. The datasets are divided by hour and the initial time window that is considered in this analysis is between 2017-08-01 until 2017-10-31. Only the <i>PullRequest</i>        events are considered and the programming language of the repository was extracted from the <i>payload.pull_request.base.repo.language</i> field.
+        This analysis considers the 50 most frequently used programming languages on GitHub based on the amount of opened pull requests.
       </p>
 
       <p>
-        The code to extract and aggregate the data is available
-        <a href="https://github.com/MilenaFilipovic/data-viz/tree/master/grab_data">here</a> and more information about this dataset's metadata can be found <a href="https://developer.github.com/v3/pulls/">here</a>.
+        The GitHub repository of this visualization can be found <a href="https://github.com/MilenaFilipovic/data-viz">here</a>.<br/> The Process Book for this visualization can be found <a href="">here</a>.<br/> The screencast of this visualization can
+        be seen <a href="">here</a>.
       </p>
 
+      <h4>How to use the visualization</h4>
+
       <p>
-        As we have around 250 different languages in the dataset, for our initial analysis we will just consider the 15 most frequently used ones based on the amount of opened pull requests. This decision was taken due to the type of visualization that we would
-        like to explore and it will be demonstrated in this stage of the project.
+      The visualization below shows the interdependance between users of multiple programming languages.
       </p>
 
       <p>
         The amount of space that each language occupies in the chart is proportional to the number of unique contributors and the edges represents the number of common unique contributors.
+      </p>
+
+      <p>
+        The languages on the diagram are sorted by the programming paradigm they belong to, designated by the different arc colors. If you wish to change the sorting, you can do that by clicking on the <i>Ascending</i> or <i>Descending</i> buttons.
+        Of course, if you wish to revert to the original sorting, you can always do so by clicking the <i>Paradigm</i> button.
+      </p>
+      <p>
+        By hovering over an arc belonging to a specific language, you can see some general statistics for that language, such as the average number of Pull Requests per month, average number of actors that used that language per month,
+        as well as the average number of Pull Requests per actor. Also, you will be shown the connection strength of that language with all the others on the diagram, designated by the thickness of the ribbons that connect them.
       </p>
 
       <div id="side-menu" class="slide-bar">
@@ -82,18 +85,21 @@
       </div>
 
       <div class="btn-group float right" data-toggle="buttons">
-        <label class="btn btn-primary active">
-          <input type="radio" name="options" id="option1" autocomplete="off" checked> Paradigm
+        <label class="btn btn-primary active" id="paradigm" onclick="setSortingMethod(id)">
+          <input type="radio" name="options"  autocomplete="off"  checked> Paradigm
         </label>
-              <label class="btn btn-primary">
-          <input type="radio" name="options" id="option2" autocomplete="off"> Ascending
+        <label class="btn btn-primary" id="ascending" onclick="setSortingMethod(id)">
+          <input type="radio" name="options"  autocomplete="off" > Ascending
         </label>
-              <label class="btn btn-primary">
-          <input type="radio" name="options" id="option3" autocomplete="off"> Descending
+        <label class="btn btn-primary" id="descending" onclick="setSortingMethod(id)">
+          <input type="radio" name="options"  autocomplete="off" > Descending
         </label>
       </div>
 
       <div id="chord" style="text-align:center;"></div>
+
+
+
       <div class="row">
         <div class="col-md-6">
           <p>Remove languages from the graph by simply clicking on them! If you want to return a language that is found in the filtered list, just uncheck the checkbox next to it.
@@ -110,8 +116,16 @@
             </div>
           </div>
         </div>
-
       </div>
+
+      <p>
+        The data was collected from <a href="http://data.githubarchive.org/">github archive</a>. The datasets are divided by hour and the initial time window that is considered in this analysis is between 2017-08-01 until 2017-10-31. Only the <i>PullRequest</i>        events are considered and the programming language of the repository was extracted from the <i>payload.pull_request.base.repo.language</i> field.
+      </p>
+
+      <p>
+        The code to extract and aggregate the data is available
+        <a href="https://github.com/MilenaFilipovic/data-viz/tree/master/grab_data">here</a> and more information about this dataset's metadata can be found <a href="https://developer.github.com/v3/pulls/">here</a>.
+      </p>
 
       <!--<script type="text/javascript" src="bundle.js"></script>-->
       <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
@@ -122,9 +136,7 @@
       <script src="metrics-helpers.js"></script>
       <script src="main.js"></script>
 
-      <h3>
-            Next Iteration
-        </h3>
+      <h4>Next Iteration</h4>
 
       <p>For the next iteration of this project, we will consider the following improvements:</p>
       <ul>

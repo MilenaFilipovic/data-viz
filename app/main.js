@@ -51,7 +51,7 @@ const lookupColorLanguage = {
     'scripted': "#238443",
     'procedural': "#b10026",
     'imperative': "#386cb0",
-    'undefined': "#f7f7f7",
+    'undefined': "#40f3ff",
     'functional': "#f03b20",
     'declarative': "#fa9fb5"
 };
@@ -61,6 +61,13 @@ const aggMetrics = ["days_open_merged",
     "payload.pull_request.changed_files",
     "payload.pull_request.commits"];
 
+
+let sortingMethod = 'paradigm';
+
+function setSortingMethod(method){
+    sortingMethod = method;
+    loadChords();
+}
 
 function drawChord(matrix, labels, stats, genMetrics) { // try to improve those callings and refactor
     /**
@@ -72,10 +79,18 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
      * @param {array} genMetrics - array where each element is a dicionary containing informations about each language
      */
 
+     d3.selectAll().remove();
+
     labels = labels.filter( function(el) {
            return !filteredLanguages.includes(el['language']);
            } );
-    let chord = d3.chord().padAngle(paddingChord);//.sortGroups(d3.descending);
+       let chord;
+     switch (sortingMethod) {
+       case 'paradigm': chord = d3.chord().padAngle(paddingChord); break;
+       case 'ascending': chord = d3.chord().padAngle(paddingChord).sortGroups(d3.ascending).sortChords(d3.ascending); break;
+       case 'descending': chord = d3.chord().padAngle(paddingChord).sortGroups(d3.descending).sortChords(d3.descending); break;
+     }
+
     if(firstCall){
       metricsBox = d3.select("#chord")
           .append("div")
@@ -102,33 +117,75 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
           .duration(3000)
           .attr("opacity", 0)
           .remove();
-
+/*
     let chordPaths = svg.selectAll("path.chord")
-            .data(chord(matrix), chordKey );
+          .data(chord(matrix), chordKey );
     let newChordPaths = chordPaths.enter()
-      .append("path")
-      .filter(function (d) {
-          return d.source.index != d.target.index;
-      })
-      .attr("class", "chord");
-    //handle exiting paths:
+        .append("path")
+        .filter(function (d) {
+            return d.source.index != d.target.index;
+        })
+        .attr("class", "chord");
+    newChordPaths.append("title");
+    // Update all chord title texts
+    chordPaths.select("title")
+        .text(function(d) {
+                return "sdfsfd";
+        });
     chordPaths.exit().transition()
-        .duration(500)
-        .attr("opacity", 0)
-        .remove();
+          .duration(500)
+          .attr("opacity", 0)
+          .remove();
 
     //update the path shape
     newChordPaths.transition()
         .duration(1500)
-        .style("fill", function (d) {
-            return "lightgray";
-        })
-        .attr("opacity", 0.5) //optional, just to observe the transition
+        .style("fill", colorConextions)
+        .attr("opacity", 1) //optional, just to observe the transition
         .attrTween("d", chordTween(lastLayout))
         .transition()
           .duration(500)
           .attr("d", d3.ribbon().radius(rOut))
               .style("opacity", 1); //reset opacity
+    */
+    let chordPaths =  svg.append("svg:g")
+        .attr("class", "chord")
+        .selectAll("path")
+        .data(chord(matrix), chordKey);
+
+    let newChords = chordPaths.enter()
+        .append("svg:path")
+        .filter(function (d) {
+            return d.source.index != d.target.index;
+        });
+        //.style("fill", colorConextions)
+        //.attr("d", d3.ribbon().radius(rOut))
+        //.style("opacity", 1);
+        //update the path shape
+
+    // Add title tooltip for each new chord.
+    newChords.append("title");
+
+    // Update all chord title texts
+    chordPaths.select("title")
+        .text(function(d) {
+                return "sdfsfd";
+        });
+    newChords.transition()
+        .duration(1500)
+        .style("fill", colorConextions)
+        .attr("opacity", 1) //optional, just to observe the transition
+        .attrTween("d", chordTween(lastLayout))
+        .transition()
+          .duration(500)
+          .attr("d", d3.ribbon().radius(rOut))
+              .style("opacity", 1); //reset opacity
+
+    chordPaths.exit().transition()
+          .duration(500)
+          .attr("opacity", 0)
+          .remove();
+
 
     let wrapper = svg.append("g").attr("class", "chordWrapper");
 
@@ -154,7 +211,7 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
             closeSlideBar();
             document.getElementById("main").style.marginLeft = shiftMain;
             document.getElementById("side-menu").style.width = slidBar;
-            showMetrics(d, "side-menu")
+            showMetrics(d, "side-menu");
         });
 
 
@@ -262,7 +319,7 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
         for (i in top5Languages) {
             let lang = top5Languages[i];
             let param = labels.filter(x => x['language'] == lang).map(x => x['paradigm']);
-            languagesHTML += "<span style=\"color:" + lookupColorLanguage[param] + "\">" + lang + ", </span>"
+            languagesHTML += "<span style=\"color:" + lookupColorLanguage[param] + ";cursor: pointer;\">" + lang + ", </span>"
         }
         languagesHTML = languagesHTML.slice(0, -9); // works, but it is not good!
         languagesCorr.innerHTML = languagesHTML;
