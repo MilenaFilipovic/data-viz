@@ -284,13 +284,17 @@ function drawGeralMetrics(geralStatistcs, statistic, language) {
             i = bisectDate(filteredStats, x0, 1),
             d0 = filteredStats[i - 1],
             d1 = filteredStats[i],
-            d = x0 - d0.year > d1.year - x0 ? d1 : d0;
+            g0 = geralMean[i-1],
+            g1 = geralMean[i],
+            d = x0 - d0.year > d1.year - x0 ? d1 : d0,
+            g = x0 - d0.year > d1.year - x0 ? g1 : g0;
         focus.attr("transform", "translate(" + x(d[0]) + "," + y(d[1]) + ")");
+        focus.attr("transform", "translate(" + x(g[0]) + "," + y(g[1]) + ")");
         focus.select("text").text(function() { return math.round(d[1], 1); });
+        focus.select("text").text(function() { return math.round(g[1], 1); });
         focus.select(".x-hover-line").attr("y2", heightMetrics - y(d[1]));
+        focus.select(".y-hover-line").attr("x2", widthMetrics + widthMetrics);
+        focus.select(".x-hover-line").attr("y2", heightMetrics - y(g[1]));
         focus.select(".y-hover-line").attr("x2", widthMetrics + widthMetrics);
     }
 }
-
-
-
