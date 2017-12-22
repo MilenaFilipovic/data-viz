@@ -14,8 +14,8 @@ let svg;
 let metricsBox;
 let lastLayout; //store layout between updates
 
-const wChord = 880,
-    hChord = 880,
+const wChord = 860,
+    hChord = 860,
     rInner = hChord / 2.6,
     rOut = rInner - 30,
     paddingChord = 0.02;
@@ -75,7 +75,7 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
     labels = labels.filter( function(el) {
            return !filteredLanguages.includes(el['language']);
            } );
-    let chord = d3.chord().padAngle(paddingChord);
+    let chord = d3.chord().padAngle(paddingChord);//.sortGroups(d3.descending);
     if(firstCall){
       metricsBox = d3.select("#chord")
           .append("div")
@@ -273,11 +273,12 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
         document.getElementById(containerIdToAppend).appendChild(languagesCorr);
 
         for (var key in lookupLegendColors) {
-            var boxContainer = document.createElement("div");
-            var box = document.createElement("div");
+            var boxContainer = document.createElement("span");
+            boxContainer.style.marginRight = "50px";
+            var box = document.createElement("span");
             var label = document.createElement("span");
             label.className = "legend-text";
-            label.innerHTML = "     " + key;
+            label.innerHTML = "\t" + key;
             box.className = "legend-box";
             box.style.backgroundColor = lookupLegendColors[key];
             boxContainer.appendChild(box);
