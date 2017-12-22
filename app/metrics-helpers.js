@@ -1,10 +1,10 @@
 const lookupNiceVariableNames = {
-  'days_open_merged': 'Mean of days between open and merged',
-  'payload.pull_request.base.repo.open_issues_count': 'Mean of open issues per repository',
-  'payload.pull_request.changed_files': 'Mean number of changed files per Pull Request',
-  'payload.pull_request.comments': 'Mean number of comments per Pull Request',
-  'payload.pull_request.number': "Mean number of Pull Requests",
-  'payload.pull_request.commits': 'Mean of commits per Pull Request',
+  'days_open_merged': 'Average # of days between open and merged',
+  'payload.pull_request.base.repo.open_issues_count': 'Average # of open issues per repository',
+  'payload.pull_request.changed_files': 'Average # of changed files per Pull Request',
+  'payload.pull_request.comments': 'Average # of comments per Pull Request',
+  'payload.pull_request.number': 'Average # of Pull Requests',
+  'payload.pull_request.commits': 'Average # of commits per Pull Request',
   'number_prs': 'Total number of opened pull requests',
   'number_actors': 'Total number of unique actors',
   //    PUT NUMBER OF CLOSED / MERGED PRS
@@ -62,7 +62,7 @@ function drawGraphs(metricName, filteredStats, generalMean) {
   g.append("path")
     .datum(filteredStats)
     .attr("fill", "none")
-    .attr("stroke", lookupLegendColors['Mean of the selected language'])
+    .attr("stroke", lookupLegendColors['Selected language'])
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 1.5)
@@ -71,7 +71,7 @@ function drawGraphs(metricName, filteredStats, generalMean) {
   g.append("path")
     .datum(generalMean)
     .attr("fill", "none")
-    .attr("stroke", lookupLegendColors['Mean of all languages'])
+    .attr("stroke", lookupLegendColors['Average across all languages'])
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .style("stroke-dasharray", ("3, 3"))

@@ -30,8 +30,8 @@ const marginChord = {top: 20, right: 20, bottom: 20, left: 20},
     heightChord = hChord - marginChord.top - marginChord.bottom;
 
 const lookupLegendColors = {
-    'Mean of the selected language': '#000080',
-    'Mean of all languages': '#FF4500'
+    'Selected language': '#000080',
+    'Average across all languages': '#FF4500'
 };
 
 const lookupNiceParadigmNames = {
