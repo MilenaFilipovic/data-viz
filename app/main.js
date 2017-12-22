@@ -67,10 +67,15 @@ const months = {
   9 : 'September',
   10 : 'October',
   11 : 'November'
-}
+};
 
+let applyLog = 1;
 let sortingMethod = 'paradigm';
 
+function applyLogarithm(value){
+    applyLog = value;
+    loadChords();
+}
 function setSortingMethod(method){
     sortingMethod = method;
     loadChords();
@@ -403,8 +408,10 @@ function loadChords(){
           generalStats = generalStats.map(rowConverterStatgeneral);
 
           let matrix = getMatrixCommonActors(network, filteredLanguages);
-          let logMatrix = matrix.map(row => row.map(x => x > 30 ? Math.log(x) : 0));
-          drawChord(logMatrix, languages, stats, generalStats);
+          if (applyLog){
+              matrix = matrix.map(row => row.map(x => x > 30 ? Math.log(x) : 0));
+          }
+          drawChord(matrix, languages, stats, generalStats);
       });
 }
 
