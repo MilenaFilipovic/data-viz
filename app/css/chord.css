@@ -28,7 +28,7 @@ p.title-general-metrics-box {
 }
 
 .metrics-title {
-    font: 30px sans-serif;
+    font: 24px sans-serif;
     font-weight: bold;
 }
 
@@ -96,7 +96,7 @@ p.title-general-metrics-box {
 
 #main {
     transition: margin-left 0.5s;
-    padding: 40px;
+    padding: 80px;
     overflow: visible;
     width: 100%;
 }
