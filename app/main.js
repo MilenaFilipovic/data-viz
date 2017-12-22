@@ -10,6 +10,10 @@ const shiftMain = "375px";
 let filteredLanguages = [];
 let firstCall = 1;
 
+let svg;
+let metricsBox;
+let lastLayout; //store layout between updates
+
 const wChord = 900,
     hChord = 900,
     rInner = hChord / 2.6,
@@ -71,32 +75,38 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
     labels = labels.filter( function(el) {
            return !filteredLanguages.includes(el['language']);
            } );
-    console.log(labels);
     let chord = d3.chord().padAngle(paddingChord);
+    if(firstCall){
+      metricsBox = d3.select("#chord")
+          .append("div")
+          .attr("class", "geral-metrics-box")
+          .attr("id", "geral-metrics-box")
+          .style("visibility", "hidden");
 
-    let metricsBox = d3.select("#chord")
-        .append("div")
-        .attr("class", "geral-metrics-box")
-        .attr("id", "geral-metrics-box")
-        .style("visibility", "hidden");
+      svg = d3.select("#chord")
+          .append("svg:svg")
+          .attr("width", widthChord)
+          .attr("height", heightChord)
+          .append("svg:g")
+          .attr("transform", "translate(" + widthChord / 2 + "," + heightChord / 2 + ")");
+      firstCall = 0;
+      }
 
-    let svg = d3.select("#chord")
-        .append("svg:svg")
-        .attr("width", widthChord)
-        .attr("height", heightChord)
-        .append("svg:g")
-        .attr("transform", "translate(" + widthChord / 2 + "," + heightChord / 2 + ")");
-
-
-    svg.append("svg:g")
+    let gGroups = svg.append("svg:g")
         .selectAll("path")
-        .data(chord(matrix).groups)
-        .enter()
+        .data(chord(matrix).groups);
+
+    gGroups.enter()
         .append("svg:path")
         .style("fill", function (d) {
             return lookupColorLanguage[labels[d.index]['paradigm']];
         });
 
+    gGroups.exit()
+        .transition()
+            .duration(1000)
+            .attr("opacity", 0)
+            .remove();
 
     svg.append("svg:g")
         .attr("class", "chord")
@@ -118,7 +128,7 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         .enter().append("g")
         .attr("class", "group");
 
-    g.append("path")
+    let paths = g.append("path")
         .style("stroke", function (d) {
             return lookupColorLanguage[labels[d.index]['paradigm']];
         })
@@ -139,7 +149,7 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         });
 
 
-    g.append("text")
+    let pathLabels = g.append("text")
         .each(function (d) {
             d.angle = (d.startAngle + d.endAngle) / 2;
         })
@@ -158,6 +168,24 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         })
         .on("click", function (d, i) {removeLanguage(d, i, labels)});
 
+    g.exit()
+        .transition()
+            .duration(1000)
+            .attr("opacity", 0)
+        .remove();
+
+    paths.transition()
+            .duration(1500)
+            .attr("opacity", 0)
+            .remove()
+        .attrTween("d", arcTween(lastLayout))
+            .transition().duration(100).attr("opacity", 1);
+
+    pathLabels.transition()
+            .duration(1500)
+            .attr("opacity", 0)
+            .remove()
+        .transition().duration(100).attr("opacity", 1);
 
     function fade(opacity, showInfos) {
         /**
@@ -279,6 +307,8 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
 
         return metrics
     }
+
+    lastLayout = chord(matrix);
 }
 
 function closeSlideBar() {
@@ -322,6 +352,37 @@ function removeLanguage(d, i, labels) {
         filteredLanguages.push(labels[i]['language']);
         updateFilters();
         loadChords();
+}
+
+function arcTween(oldLayout) {
+    //this function will be called once per update cycle
+    let arc = d3.arc()
+        .innerRadius(rOut)
+        .outerRadius(rInner);
+    let oldGroups = {};
+    if (oldLayout) {
+        oldLayout.groups.forEach( function(groupData) {
+            oldGroups[ groupData.index ] = groupData;
+        });
+    }
+
+    return function (d, i) {
+        let tween;
+        let old = oldGroups[d.index];
+        if (old) { //there's a matching old group
+            tween = d3.interpolate(old, d);
+        }
+        else {
+            //create a zero-width arc object
+            let emptyArc = {startAngle:d.startAngle,
+                            endAngle:d.startAngle};
+            tween = d3.interpolate(emptyArc, d);
+        }
+
+        return function (t) {
+            return arc( tween(t) );
+        };
+    };
 }
 
 function returnLanguage(language, i){
