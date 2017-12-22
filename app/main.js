@@ -548,7 +548,7 @@ function returnAllLanguages(){
 
 function getMonthlyChord(year_picked, month_picked){
   let date = ((month_picked < 10)?'0'+ month_picked:month_picked) + year_picked ;
-  d3.select("#date_picker-value").text('Data for '+months[month_picked] + ' of 20' + year_picked);
+  d3.select("#date-picker-value").text('Data for '+months[month_picked] + ' of 20' + year_picked);
   languagesDataFile = 'data/languages_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv';
   networkDataFile = 'data/network_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv';
   loadChords();

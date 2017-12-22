@@ -113,25 +113,29 @@
           <div class="container" id="month_picker" style="text-align: center;">
             <label for="date_picker"
               style="display: inline-block; width: 100%;">
-              <span id="date_picker-value">…</span>
+              <span id="date-picker-value">…</span>
             </label>
-            <input type="range" min="1" max="150" class = 'slider' id="date_picker">
+            <input type="range" min="1" max="10" class = 'slider' id="date_picker">
           </div>
       </div>
 
-      <div class="row">
-        <div class="jumbotron col-md-12" style="padding-top:3px; margin-top:3px;">
-          <div class="row">
-            <div class="col-sm-6">
-              <h5 class="display-5">Filters</h5>
-              <ul class="list-group" id="filtered_languages"></ul>
+
+        <div class="col-sm-12 text-center">
+            <h5 class="display-5 text-center">Removed Languages</h5>
+        </div>
+        <div class="row">
+        <div class="jumbotron col-md-12" style="padding-top:3px; margin-top:3px; padding-bottom:10px;">
+            <div class="row"  style="padding-top:5px;">
+              <div class="col-sm-12 text-center">
+                <button type="button" id="clear_button" class="btn btn-info">Clear</button>
+              </div>
             </div>
-            <div class="col-sm-6">
-              <button type="button" id="clear_button" class="btn btn-info">Clear</button>
+            <div class="row" style="padding-top:20px;">
+              <ul class="list-inline" id="filtered_languages"></ul>
             </div>
           </div>
         </div>
-      </div>
+
 
       <p>
         The data was collected from the <a href="http://www.githubarchive.org/">GitHub archive</a>. The datasets are divided by hour and the initial time window that is considered in this analysis is between 2017-07-01 until 2017-11-30. Only the <i>PullRequest</i>

@@ -131,7 +131,8 @@ p.title-general-metrics-box {
   cursor: pointer;
 }
 
-.list-group li{
+.list-group-item{
   margin-bottom:10px;
-  display:inline;
+  margin-right:5px;
+  display:inline-block;
 }
