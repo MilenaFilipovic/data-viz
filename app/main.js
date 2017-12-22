@@ -14,8 +14,8 @@ let svg;
 let metricsBox;
 let lastLayout; //store layout between updates
 
-const wChord = 860,
-    hChord = 860,
+const wChord = 900,
+    hChord = 900,
     rInner = hChord / 2.6,
     rOut = rInner - 30,
     paddingChord = 0.02;
@@ -503,7 +503,7 @@ function removeLanguage(d, i, labels) {
 }
 
 function regex_escape(str) {
-    return str.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]', 'g'), '\\$&');
+    return str.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-\#]', 'g'), '\\$&');
 }
 
 function returnLanguage(language, i){
@@ -548,7 +548,7 @@ function returnAllLanguages(){
 
 function getMonthlyChord(year_picked, month_picked){
   let date = ((month_picked < 10)?'0'+ month_picked:month_picked) + year_picked ;
-  d3.select("#date_picker-value").text('Retreiving data for '+months[month_picked] + ' of 20' + year_picked);
+  d3.select("#date_picker-value").text('Data for '+months[month_picked] + ' of 20' + year_picked);
   languagesDataFile = 'data/languages_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv';
   networkDataFile = 'data/network_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv';
   loadChords();

@@ -31,7 +31,7 @@
 
 <body>
 
-  <div id="surrounding_div" class="container content">
+  <div id="surrounding_div" class="container">
 
     <div class="post" id="main">
 
@@ -50,7 +50,7 @@
       <h4>Project Summary</h4>
 
       <p>
-        The goal of this project is to analyze the GitHub users’ behavior, explore relations among overall programming language usage and the overlaps in the different languages that programmers use.
+        The goal of this project was to analyze the GitHub users’ behavior, explore relations among overall programming language usage and the overlaps in the different languages that programmers use.
       </p>
 
       <p>
@@ -95,22 +95,29 @@
         <span class="btn-close" onclick="closeSlideBar()" style="cursor: pointer;">&times;</span>
       </div>
 
-      <div class="btn-group float right" data-toggle="buttons">
-        <label class="btn btn-primary active" id="paradigm" onclick="setSortingMethod(id)">
-          <input type="radio" name="options"  autocomplete="off"  checked> Paradigm
-        </label>
-        <label class="btn btn-primary" id="ascending" onclick="setSortingMethod(id)">
-          <input type="radio" name="options"  autocomplete="off" > Ascending
-        </label>
-        <label class="btn btn-primary" id="descending" onclick="setSortingMethod(id)">
-          <input type="radio" name="options"  autocomplete="off" > Descending
-        </label>
-      </div>
+          <div class="btn-group float right" data-toggle="buttons">
+            <label class="btn btn-primary active" id="paradigm" onclick="setSortingMethod(id)">
+              <input type="radio" name="options"  autocomplete="off"  checked> Paradigm
+            </label>
+            <label class="btn btn-primary" id="ascending" onclick="setSortingMethod(id)">
+              <input type="radio" name="options"  autocomplete="off" > Ascending
+            </label>
+            <label class="btn btn-primary" id="descending" onclick="setSortingMethod(id)">
+              <input type="radio" name="options"  autocomplete="off" > Descending
+            </label>
+    </div>
 
-      <div id="chord" style="text-align:center;"></div>
+    <div class="row">
+      <div id="chord" style="text-align:center;" class="col-sm-10"></div>
+      <div class="col-sm-2"style="border:1px solid black;border-radius: 25px;">
+        <h5 class="display-5">Filters</h5>
+        <button type="button" id="clear_button" class="btn btn-info" style="margin-bottom:10px">Clear</button>
+        <ul class="list-group" id="filtered_languages"></ul>
+      </div>
+    </div>
 
       <div class="row">
-          <div class="container" id="month_picker">
+          <div class="container" id="month_picker" style="text-align: center;">
             <label for="date_picker"
               style="display: inline-block; width: 100%;">
               <span id="date_picker-value">…</span>
@@ -128,7 +135,7 @@
           <div class="row">
             <div class="col-sm-9">
               <h5 class="display-5">Filters</h5>
-              <ul class="list-group" id="filtered_languages"></ul>
+              <ul class="list-group" id="filtered_languages" ></ul>
             </div>
             <div class="col-sm-3">
               <button type="button" id="clear_button" class="btn btn-info">Clear</button>

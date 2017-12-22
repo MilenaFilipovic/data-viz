@@ -130,3 +130,7 @@ p.title-general-metrics-box {
 .group path{
   cursor: pointer;
 }
+
+.list-group li{
+  margin-bottom:10px;
+}
