@@ -29,7 +29,7 @@
 
 <body>
 
-<div class="container content">
+<div id = "surrounding_div" class="container content">
 
     <div class="post" id="main">
 
@@ -81,8 +81,13 @@
             <span class="btn-close" onclick="closeSlideBar()" style="cursor: pointer;">&times;</span>
         </div>
 
-        <div id="chord"></div>
+        <div id="chord" style="text-align:center;"></div>
         <div class="row">
+          <div class="col-md-6">
+            <p>Remove languages from the graph by simply clicking on them!
+              If you want to return a language that is found in the filtered list, just uncheck the checkbox next to it.
+            </p>
+          </div>
             <div class="jumbotron col-md-6">
               <div class="row">
                 <div class="col-sm-9">
@@ -94,11 +99,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <p>Remove languages from the graph by simply clicking on them!
-                If you want to return a language that is found in the filtered list, just uncheck the checkbox next to it.
-              </p>
-            </div>
+
         </div>
 
         <!--<script type="text/javascript" src="bundle.js"></script>-->

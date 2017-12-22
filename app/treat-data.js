@@ -60,7 +60,7 @@ function rowConverterStatistics(d) {
 }
 
 
-function rowConverterStatGeral(d) {
+function rowConverterStatgeneral(d) {
     return {
         cohort: parseTime(d.cohort),
         language: d.language,

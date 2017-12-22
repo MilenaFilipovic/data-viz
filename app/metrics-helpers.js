@@ -1,19 +1,19 @@
 const lookupNiceVariableNames = {
   'days_open_merged': 'Mean of days between open and merged',
-  'payload.pull_request.base.repo.open_issues_count': 'Mean of open issues per repo',
-  'payload.pull_request.changed_files': 'Mean of Changed files per PR',
-  'payload.pull_request.comments': 'Mean of comments per PR',
-  'payload.pull_request.number': "Mean of PR's number",
-  'payload.pull_request.commits': 'Mean of commits per PR',
-  'number_prs': 'Total of open PRs',
-  'number_actors': 'Total de unique Actors',
+  'payload.pull_request.base.repo.open_issues_count': 'Mean of open issues per repository',
+  'payload.pull_request.changed_files': 'Mean number of changed files per Pull Request',
+  'payload.pull_request.comments': 'Mean number of comments per Pull Request',
+  'payload.pull_request.number': "Mean number of Pull Requests",
+  'payload.pull_request.commits': 'Mean of commits per Pull Request',
+  'number_prs': 'Total number of opened pull requests',
+  'number_actors': 'Total number of unique actors',
   //    PUT NUMBER OF CLOSED / MERGED PRS
 };
 
 
-function drawGraphs(metricName, filteredStats, geralMean) {
-  let yMax = 1.2 * math.max(filteredStats.concat(geralMean).map(x => x[1])),
-    yMin = 0.8 * math.max(math.min(filteredStats.concat(geralMean).map(x => x[1])), 0);
+function drawGraphs(metricName, filteredStats, generalMean) {
+  let yMax = 1.2 * math.max(filteredStats.concat(generalMean).map(x => x[1])),
+    yMin = 0.8 * math.max(math.min(filteredStats.concat(generalMean).map(x => x[1])), 0);
 
   let svg = d3.select("#side-menu")
     .append("svg:svg")
@@ -62,14 +62,14 @@ function drawGraphs(metricName, filteredStats, geralMean) {
   g.append("path")
     .datum(filteredStats)
     .attr("fill", "none")
-    .attr("stroke", lookupLegendColors['Mean of Language'])
+    .attr("stroke", lookupLegendColors['Mean of the selected language'])
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 1.5)
     .attr("d", line);
 
   g.append("path")
-    .datum(geralMean)
+    .datum(generalMean)
     .attr("fill", "none")
     .attr("stroke", lookupLegendColors['Mean of all Languages'])
     .attr("stroke-linejoin", "round")
@@ -114,9 +114,7 @@ function drawGraphs(metricName, filteredStats, geralMean) {
       .attr("x2", widthMetrics);
 
     focus[i].append("circle")
-      .attr("r", 3)
-      .style("stroke", "red") // set the line colour
-      .style("fill", "none"); // set the fill colour
+      .attr("r", 3);
 
     focus[i].append("text")
       .attr("x", 15)
@@ -151,8 +149,8 @@ function drawGraphs(metricName, filteredStats, geralMean) {
       i = bisectDate(filteredStats, x0, 1),
       d0 = filteredStats[i - 1],
       d1 = filteredStats[i],
-      g0 = geralMean[i - 1],
-      g1 = geralMean[i];
+      g0 = generalMean[i - 1],
+      g1 = generalMean[i];
 
     var met = [];
     met[0] = x0 - d0.year > d1.year - x0 ? d1 : d0;
@@ -184,39 +182,39 @@ function drawMetrics(languageStats, allStats, statistic) {
     .filter(x => x['statistic'] == statistic & x['metric'] == 'mean')
     .map(x => [x['cohort'], x['value']]);
 
-  let geralMean = allStats
+  let generalMean = allStats
     .filter(x => x['statistic'] == statistic & x['metric'] == 'mean')
     .map(x => [x['cohort'], x['value']]);
 
-  drawGraphs(metricName, filteredStats, geralMean);
+  drawGraphs(metricName, filteredStats, generalMean);
 }
 
 
-function drawGeralMetrics(geralStatistcs, statistic, language) {
+function drawgeneralMetrics(generalStatistcs, statistic, language) {
   /**
    * Draw charts in side bar (this is almost the same this that in `drawMetrics` but it was split in a different
    * function due to the schema of the files are different and it would require a change in package `grab_data` )
    *
-   * @param {array} geralStatistics - array with PR and common actors of all languages
+   * @param {array} generalStatistics - array with PR and common actors of all languages
    * @param {string} statistic - metric that will be drawed
    * @param {string} language - selected language
    */
 
   let metricName = lookupNiceVariableNames[statistic];
 
-  let filteredStats = geralStatistcs
+  let filteredStats = generalStatistcs
     .filter(x => x['language'] == language)
     .map(x => [x['cohort'], x[statistic]]);
 
-  let geralMean = geralStatistcs
+  let generalMean = generalStatistcs
     .filter(x => x['language'] == 'all')
     .map(x => [x['cohort'], x[statistic]]);
 
-  drawGraphs(metricName, filteredStats, geralMean);
+  drawGraphs(metricName, filteredStats, generalMean);
   /**
 
-  let yMax = 1.2*math.max(filteredStats.concat(geralMean).map(x => x[1])),
-      yMin = 0.8*math.max(0, math.min(filteredStats.concat(geralMean).map(x => x[1])) - 1000);
+  let yMax = 1.2*math.max(filteredStats.concat(generalMean).map(x => x[1])),
+      yMin = 0.8*math.max(0, math.min(filteredStats.concat(generalMean).map(x => x[1])) - 1000);
 
   let svg = d3.select("#side-menu")
       .append("svg:svg")
@@ -265,14 +263,14 @@ function drawGeralMetrics(geralStatistcs, statistic, language) {
   g.append("path")
       .datum(filteredStats)
       .attr("fill", "none")
-      .attr("stroke", lookupLegendColors['Mean of Language'])
+      .attr("stroke", lookupLegendColors['Mean of the selected language'])
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 1.5)
       .attr("d", line);
 
   g.append("path")
-      .datum(geralMean)
+      .datum(generalMean)
       .attr("fill", "none")
       .attr("stroke", lookupLegendColors['Mean of all Languages'])
       .attr("stroke-linejoin", "round")
@@ -340,8 +338,8 @@ function drawGeralMetrics(geralStatistcs, statistic, language) {
           i = bisectDate(filteredStats, x0, 1),
           d0 = filteredStats[i - 1],
           d1 = filteredStats[i],
-          g0 = geralMean[i - 1],
-          g1 = geralMean[i],
+          g0 = generalMean[i - 1],
+          g1 = generalMean[i],
           d = x0 - d0.year > d1.year - x0 ? d1 : d0;
           g = x0 - g0.year > g1.year - x0 ? g1 : g0;
       focus.attr("transform", "translate(" + x(d[0]) + "," + y(d[1]) + ")");

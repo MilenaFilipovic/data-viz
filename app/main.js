@@ -1,10 +1,10 @@
 let languagesDataFile = 'data/langues_50_2017-11-01_2017-11-30__processedat_2017-12-15.csv';
 let networkDataFile = 'data/network_50_2017-11-01_2017-11-30__processedat_2017-12-15.csv';
 const statisticsDataFile = 'data/agg_stats_2017-07-01_2017-11-30__processedat_2017-12-18.csv';
-const geralDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-18.csv';
+const generalDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-18.csv';
 
 const colorConextions = "#F0F0F0";
-const slidBar = "700px";
+const slidBar = "675px";
 const shiftMain = "375px";
 
 let filteredLanguages = [];
@@ -14,8 +14,8 @@ let svg;
 let metricsBox;
 let lastLayout; //store layout between updates
 
-const wChord = 900,
-    hChord = 900,
+const wChord = 880,
+    hChord = 880,
     rInner = hChord / 2.6,
     rOut = rInner - 30,
     paddingChord = 0.02;
@@ -30,7 +30,7 @@ const marginChord = {top: 20, right: 20, bottom: 20, left: 20},
     heightChord = hChord - marginChord.top - marginChord.bottom;
 
 const lookupLegendColors = {
-    'Mean of Language': '#000080',
+    'Mean of the selected language': '#000080',
     'Mean of all Languages': '#FF4500'
 };
 
@@ -79,8 +79,8 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
     if(firstCall){
       metricsBox = d3.select("#chord")
           .append("div")
-          .attr("class", "geral-metrics-box")
-          .attr("id", "geral-metrics-box")
+          .attr("class", "general-metrics-box")
+          .attr("id", "general-metrics-box")
           .style("visibility", "hidden");
 
       svg = d3.select("#chord")
@@ -206,9 +206,9 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
             if (showInfos == "visible") {
                 let language = labels[i]['language'];
                 let paradigm = labels[i]['paradigm'];
-                let geralMetrics = avgPrsAndActors(generalMetrics.filter(x => x['language'] == language));
+                let generalMetrics = avgPrsAndActors(generalMetrics.filter(x => x['language'] == language));
 
-                var list = document.getElementById("geral-metrics-box");
+                var list = document.getElementById("general-metrics-box");
                 if (list.hasChildNodes()) {
                     while (list.hasChildNodes()) {
                         list.removeChild(list.firstChild);
@@ -216,18 +216,18 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
                 }
 
                 var p = document.createElement('p');
-                p.className = "title-geral-metrics-box";
+                p.className = "title-general-metrics-box";
                 p.innerHTML = language;
                 p.style.color = lookupColorLanguage[paradigm];
-                document.getElementById('geral-metrics-box').appendChild(p);
+                document.getElementById('general-metrics-box').appendChild(p);
 
                 var p = document.createElement('div');
-                p.className = "title-geral-metrics-box";
-                p.innerHTML = "Avg PRs/mois: " + geralMetrics['meanPrs'] +
-                    "<br/>Avg Actors/mois: " + geralMetrics['meanActors'] +
-                    "<br/>PRs/Actors: " + math.round(geralMetrics['meanPrs'] / geralMetrics['meanActors']) +
+                p.className = "title-general-metrics-box";
+                p.innerHTML = "Avg PRs/mois: " + generalMetrics['meanPrs'] +
+                    "<br/>Avg Actors/mois: " + generalMetrics['meanActors'] +
+                    "<br/>PRs/Actors: " + math.round(generalMetrics['meanPrs'] / generalMetrics['meanActors']) +
                     "<br/> <br/> Click to see more about";
-                document.getElementById('geral-metrics-box').appendChild(p);
+                document.getElementById('general-metrics-box').appendChild(p);
             }
             metricsBox
                 .style("left", (d3.event.pageX) + "px")
@@ -283,8 +283,8 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
             allStats = stats.filter(x => x['language'] == 'all');
 
 
-        drawGeralMetrics(generalMetrics, 'number_prs', language);
-        drawGeralMetrics(generalMetrics, 'number_actors', language);
+        drawgeneralMetrics(generalMetrics, 'number_prs', language);
+        drawgeneralMetrics(generalMetrics, 'number_actors', language);
         aggMetrics.map(x => drawMetrics(filteredStats, allStats, x))
     }
 
@@ -300,10 +300,10 @@ function drawChord(matrix, labels, stats, generalMetrics) { // try to improve th
         return topLanguages
     }
 
-    function avgPrsAndActors(geralLanguage) {
+    function avgPrsAndActors(generalLanguage) {
         metrics = {};
-        metrics['meanPrs'] = math.round(math.mean(geralLanguage.map(x => x['number_prs'])));
-        metrics['meanActors'] = math.round(math.mean(geralLanguage.map(x => x['number_actors'])));
+        metrics['meanPrs'] = math.round(math.mean(generalLanguage.map(x => x['number_prs'])));
+        metrics['meanActors'] = math.round(math.mean(generalLanguage.map(x => x['number_actors'])));
 
         return metrics
     }
@@ -330,19 +330,19 @@ function loadChords(){
   d3.queue()
       .defer(d3.csv, languagesDataFile)
       .defer(d3.csv, networkDataFile)
-      .defer(d3.csv, geralDataFile)
+      .defer(d3.csv, generalDataFile)
       .defer(d3.csv, statisticsDataFile)
-      .await(function (error, languages, network, geralStats, stats) {
+      .await(function (error, languages, network, generalStats, stats) {
           /***
            * Function treats and reads the data, call functions to build the network matrix and draw the Chord diagram
            */
           network = network.map(rowConverterNetwork);
           stats = stats.map(rowConverterStatistics);
-          geralStats = geralStats.map(rowConverterStatGeral);
+          generalStats = generalStats.map(rowConverterStatgeneral);
 
           let matrix = getMatrixCommonActors(network, filteredLanguages);
           let logMatrix = matrix.map(row => row.map(x => x > 30 ? Math.log(x) : 0));
-          drawChord(logMatrix, languages, stats, geralStats);
+          drawChord(logMatrix, languages, stats, generalStats);
       });
 }
 
