@@ -1,5 +1,5 @@
-let languagesDataFile = 'data/langues_50_2017-11-01_2017-11-30__processedat_2017-12-15.csv';
-let networkDataFile = 'data/network_50_2017-11-01_2017-11-30__processedat_2017-12-15.csv';
+let languagesDataFile = 'data/languages_50_2017-07.csv';
+let networkDataFile = 'data/network_50_2017-07.csv';
 const statisticsDataFile = 'data/agg_stats_2017-07-01_2017-11-30__processedat_2017-12-18.csv';
 const generalDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-18.csv';
 
@@ -61,6 +61,13 @@ const aggMetrics = ["days_open_merged",
     "payload.pull_request.changed_files",
     "payload.pull_request.commits"];
 
+const months = {
+  7 : 'July',
+  8 : 'August',
+  9 : 'September',
+  10 : 'October',
+  11 : 'November'
+}
 
 let sortingMethod = 'paradigm';
 
@@ -506,7 +513,7 @@ function returnLanguage(language, i){
     updateFilters();
     loadChords();
     console.log(filteredLanguages)
-  }
+}
 
 function updateFilters(){
   if (filteredLanguages.length > 0){
@@ -529,6 +536,7 @@ function updateFilters(){
   // Exit
   filters.exit().remove();
 }
+
 function returnAllLanguages(){
     filteredLanguages.length = 0;
     d3.select('#filtered_languages')
@@ -536,9 +544,25 @@ function returnAllLanguages(){
               .remove();
     d3.select("#clear_button").style("opacity", 0);
     loadChords();
-  }
+}
+
+function getMonthlyChord(year_picked, month_picked){
+  let date = ((month_picked < 10)?'0'+ month_picked:month_picked) + year_picked ;
+  d3.select("#date_picker-value").text('Retreiving data for '+months[month_picked] + ' of 20' + year_picked);
+  languagesDataFile = 'data/languages_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv';
+  networkDataFile = 'data/network_50_20' + date.substring(2,4) +'-' + date.substring(0,2) + '.csv';
+  loadChords();
+}
 
   loadChords();
   d3.select("#clear_button")
     .style("opacity", 0)
     .on("click", returnAllLanguages);
+  d3.select("#date_picker")
+        .attr("min", 7)
+        .attr("max", 11)
+        .attr("step", 1).on("input", function() {
+        getMonthlyChord(17, this.value);
+  });
+  d3.select("#date_picker").attr("value", 7);
+  getMonthlyChord(17,7);
