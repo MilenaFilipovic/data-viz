@@ -130,37 +130,6 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
           .duration(3000)
           .attr("opacity", 0)
           .remove();
-/*
-    let chordPaths = svg.selectAll("path.chord")
-          .data(chord(matrix), chordKey );
-    let newChordPaths = chordPaths.enter()
-        .append("path")
-        .filter(function (d) {
-            return d.source.index != d.target.index;
-        })
-        .attr("class", "chord");
-    newChordPaths.append("title");
-    // Update all chord title texts
-    chordPaths.select("title")
-        .text(function(d) {
-                return "sdfsfd";
-        });
-    chordPaths.exit().transition()
-          .duration(500)
-          .attr("opacity", 0)
-          .remove();
-
-    //update the path shape
-    newChordPaths.transition()
-        .duration(1500)
-        .style("fill", colorConextions)
-        .attr("opacity", 1) //optional, just to observe the transition
-        .attrTween("d", chordTween(lastLayout))
-        .transition()
-          .duration(500)
-          .attr("d", d3.ribbon().radius(rOut))
-              .style("opacity", 1); //reset opacity
-    */
 
     svg.selectAll("g.chord").remove();
     let chordPaths =  svg.append("svg:g")
@@ -173,10 +142,7 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
         .filter(function (d) {
             return d.source.index != d.target.index;
         });
-        //.style("fill", colorConextions)
-        //.attr("d", d3.ribbon().radius(rOut))
-        //.style("opacity", 1);
-        //update the path shape
+
     chordPaths.exit().transition()
           .duration(500)
           .attr("opacity", 0)
@@ -519,7 +485,6 @@ function returnLanguage(language, i){
     d3.select('#'+regex_escape(language)).remove();
     updateFilters();
     loadChords();
-    console.log(filteredLanguages)
 }
 
 function updateFilters(){
@@ -545,7 +510,7 @@ function updateFilters(){
 }
 
 function returnAllLanguages(){
-    filteredLanguages.length = 0;
+    filteredLanguages = [];
     d3.select('#filtered_languages')
               .selectAll('li')
               .remove();
