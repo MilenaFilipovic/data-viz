@@ -3,7 +3,7 @@ let networkDataFile = 'data/network_50_2017-11-01_2017-11-30__processedat_2017-1
 const statisticsDataFile = 'data/agg_stats_2017-07-01_2017-11-30__processedat_2017-12-18.csv';
 const generalDataFile = 'data/agg_general_2017-07-01_2017-11-30__processedat_2017-12-18.csv';
 
-const colorConextions = "#F0F0F0";
+const colorConextions = "#E0E0E0";
 const slidBar = "675px";
 const shiftMain = "375px";
 
@@ -91,7 +91,7 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
           .attr("transform", "translate(" + widthChord / 2 + "," + heightChord / 2 + ")");
       firstCall = 0;
       }
-
+/*
     let gGroups = svg.append("svg:g")
         .selectAll("path")
         .data(chord(matrix).groups);
@@ -107,7 +107,20 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
             .duration(1000)
             .attr("opacity", 0)
             .remove();
+*/
+  let groupG = svg.selectAll("g.group")
+        .data(chord(matrix).groups);
 
+  let newGroups = groupG.enter().append("g")
+      .attr("class", "group");
+
+  groupG.exit()
+      .transition()
+          .duration(3000)
+          .attr("opacity", 0)
+          .remove();
+
+          /***********************/
     svg.append("svg:g")
         .attr("class", "chord")
         .selectAll("path")
@@ -167,12 +180,6 @@ function drawChord(matrix, labels, stats, genMetrics) { // try to improve those 
             return labels[i]['language'];
         })
         .on("click", function (d, i) {removeLanguage(d, i, labels)});
-
-    g.exit()
-        .transition()
-            .duration(1000)
-            .attr("opacity", 0)
-        .remove();
 
     paths.transition()
             .duration(1500)
